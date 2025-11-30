@@ -1,0 +1,11 @@
+[package]
+name = "quite-elegant-typ"
+version = "0.2.0"
+categories = ["book"]
+compiler = "0.13.0"
+entrypoint = "lib.typ"
+
+[template]
+entrypoint = "main.typ"
+path = "template"
+thumbnail = "thumbnail.png"
