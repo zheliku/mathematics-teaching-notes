@@ -228,7 +228,7 @@
     已知集合 $M = \{1,2,3,4\}, P = \{(x,y) | x in M, y in M, x - y in M\}$。则 $P$ 的非空子集的个数为 #blank()。
   ],
   answer: [
-    *63* 
+    *63*
 
     解析：集合 $M$ 有 4 个元素，则集合 $P$ 为 ${(4,3), (4,2), (4,1), (3,2), (3,1), (2,1)}$。因此集合 $P$ 有 6 个元素，其非空子集的个数为 $2^6-1=63$。
   ],
@@ -247,40 +247,39 @@
   canvas({
     // 绘制数轴
     draw.line((-2, 0), (6, 0), mark: (end: "stealth"))
-    
+
     // 绘制刻度和标签
     for i in (-1, 0, 1, 2, 3, 4, 5) {
       draw.line((i, -0.1), (i, 0.1))
       draw.content((i, -0.4), text(size: 10pt, str(i)))
     }
-    
+
     // 绘制区间 (-1, 5]
     draw.line((-1, 0.5), (5, 0.5), stroke: (thickness: 2pt, paint: blue))
     draw.line((-1, 0), (-1, 0.5), stroke: (thickness: 2pt, paint: blue))
     draw.line((5, 0), (5, 0.5), stroke: (thickness: 2pt, paint: blue))
-    draw.circle((-1, 0), radius: 0.1, fill: white, stroke: blue)  // 空心点
-    draw.circle((5, 0), radius: 0.1, fill: blue)  // 实心点
-    
+    draw.circle((-1, 0), radius: 0.1, fill: white, stroke: blue) // 空心点
+    draw.circle((5, 0), radius: 0.1, fill: blue) // 实心点
+
     draw.content((2, -1), text(size: 11pt, $(-1, 5]$))
   }),
-  
+
   // 右图：区间[3,+∞)
   canvas({
-    
     // 绘制数轴
     draw.line((-1, 0), (7, 0), mark: (end: "stealth"))
-    
+
     // 绘制刻度和标签
     for i in (0, 1, 2, 3, 4, 5, 6) {
       draw.line((i, -0.1), (i, 0.1))
       draw.content((i, -0.4), text(size: 10pt, str(i)))
     }
-    
+
     // 绘制区间 [3, +∞)
     draw.line((3, 0.5), (6.8, 0.5), stroke: (thickness: 2pt, paint: blue))
     draw.line((3, 0), (3, 0.5), stroke: (thickness: 2pt, paint: blue))
-    draw.circle((3, 0), radius: 0.1, fill: blue)  // 实心点
-    
+    draw.circle((3, 0), radius: 0.1, fill: blue) // 实心点
+
     draw.content((3, -1), text(size: 11pt, $[3, +infinity)$))
   }),
 )
@@ -296,23 +295,23 @@
   canvas({
     // 绘制数轴
     draw.line((-1, 0), (7, 0), mark: (end: "stealth"))
-    
+
     // 绘制刻度和标签
     for i in (0, 1, 2, 3, 4, 5, 6) {
       draw.line((i, -0.1), (i, 0.1))
       draw.content((i, -0.4), text(size: 10pt, str(i)))
     }
-    
+
     // 绘制区间 (-∞, 3] (上方)
     draw.line((0.2, 1), (3, 1), stroke: (thickness: 2pt, paint: red))
     draw.line((3, 0), (3, 1), stroke: (thickness: 2pt, paint: red))
-    draw.circle((3, 0), radius: 0.1, fill: red)  // 实心点
+    draw.circle((3, 0), radius: 0.1, fill: red) // 实心点
     draw.content((2, 1.4), text(size: 11pt, fill: red, $(-infinity, 3]$))
-    
+
     // 绘制区间 (-∞, 5] (下方)
     draw.line((0.2, 0.5), (5, 0.5), stroke: (thickness: 2pt, paint: blue))
     draw.line((5, 0), (5, 0.5), stroke: (thickness: 2pt, paint: blue))
-    draw.circle((5, 0), radius: 0.1, fill: blue)  // 实心点
+    draw.circle((5, 0), radius: 0.1, fill: blue) // 实心点
     draw.content((4.5, 1), text(size: 11pt, fill: blue, $(-infinity, 5]$))
   }),
 )
@@ -329,7 +328,7 @@
     table.hline(),
     table.header([集合], [读法], [符号], [数轴表示]),
     table.hline(stroke: 0.5pt),
-    [${x|a<x<b}$], [开区间], [$(a,b)$], 
+    [${x|a<x<b}$], [开区间], [$(a,b)$],
     canvas({
       draw.line((-0.5, 0), (2.5, 0), mark: (end: "stealth"))
       draw.line((0, 0.3), (2, 0.3), stroke: (thickness: 2pt, paint: blue))
@@ -436,8 +435,96 @@
 #pagebreak()
 
 = 集合的基本运算
+#introduction[交集与并集][全集与补集][德 $bullet$ 摩根定律][容斥原理]
 
+== 交集与并集
+#align(center)[
+  #table(
+    columns: (1fr, 2fr, 1fr, 1.2fr),
+    stroke: none,
+    align: horizon,
+    inset: 0.5em,
+    table.hline(),
+    table.header([运算], [描述], [符号], [图示]),
+    table.hline(stroke: 0.5pt),
+    [交集],
+    [由所有属于集合 $A$ 且属于集合 $B$ 的元素组成的集合],
+    [$A inter B$],
+    canvas({
+      // 绘制矩形 (全集)
+      draw.rect((0, 0), (3, 2), stroke: gray)
 
+      // 绘制两个相交的圆
+      draw.circle((1, 1), radius: (0.8, 0.6), name: "A", fill: rgb(173, 216, 230, 100))
+      draw.compound-path(
+        {
+          draw.circle((1, 1), radius: (0.8, 0.6), name: "A")
+          draw.circle((2, 1), radius: (0.8, 0.6), name: "B")
+        },
+        fill-rule: "even-odd",
+        // fill-rule: "non-zero",
+        fill: white,
+        stroke: blue,
+      )
+
+      // 标注集合名称
+      draw.content((0.7, 1), text(size: 10pt, $A$))
+      draw.content((2.3, 1), text(size: 10pt, $B$))
+
+      // 标注交集区域
+      draw.content((1.5, 1), text(size: 9pt, fill: red, $A inter B$))
+    }),
+
+    [并集],
+    [由所有属于集合 $A$ 或属于集合 $B$ 的元素组成的集合],
+    [$A union B$],
+    canvas({
+      // 绘制矩形 (全集)
+      draw.rect((0, 0), (3, 2), stroke: gray)
+
+      // 绘制两个相交的圆
+      draw.circle((1, 1), radius: (0.8, 0.6), stroke: blue, fill: rgb(173, 216, 230, 100), name: "A")
+      draw.circle((2, 1), radius: (0.8, 0.6), stroke: blue, fill: rgb(173, 216, 230, 100), name: "B")
+
+      // 标注集合名称
+      draw.content((0.7, 1), text(size: 10pt, $A$))
+      draw.content((2.3, 1), text(size: 10pt, $B$))
+
+      // 标注并集区域
+      draw.content((1.5, 0.2), text(size: 10pt, fill: red, $A union B$))
+    }),
+
+    table.hline(stroke: 0.5pt),
+  )
+]
+
+== 全集与补集
+#grid(
+  columns: (4fr, 1fr),
+  column-gutter: 1em,
+  align: (left, right),
+  [
+    - 全集U：研究问题中涉及的所有元素的集合。
+    - 集合A的补集：全集U中不属于集合A的元素组成的集合，符号表示为：
+  ],
+  canvas({
+    // 绘制矩形 U (全集)
+    draw.rect((0, 0), (3, 1.8), stroke: gray, fill: rgb(173, 216, 230, 100), name: "U")
+    
+    // 绘制圆 A
+    draw.circle((1.5, 1), radius: (0.7, 0.5), stroke: blue, fill: white, name: "A")
+    
+    // 标注全集 U
+    draw.content((2.7, 1.5), text(size: 10pt, $U$))
+    
+    // 标注集合 A
+    draw.content((1.5, 1), text(size: 10pt, $A$))
+    
+    // 标注补集区域
+    draw.content((0.5, 0.3), text(size: 9pt, fill: red, $complement_U A$))
+  }),
+)
+$ complement_U A = {x|x in U, x in.not A} $
 
 
 // ==================== 在文档末尾显示所有答案 ====================
