@@ -528,5 +528,188 @@
 $ complement_U A = {x|x in U, x in.not A} $
 
 
+#example(
+  question: [
+    【2017课标全国Ⅰ】已知集合 $A = {x | x < 1}, B = {x | 3^x < 1}$。则（#h(3em)）
+  ],
+  choices: choices22(
+    [$A inter B = {x | x < 0}$],
+    [$A union B = bb(R)$],
+    [$A union B = {x | x > 1}$],
+    [$A inter B = emptyset$],
+  ),
+  answer: [
+    *A*
+
+    解析：$3^x < 1 => x < 0$，所以 $B = {x | x < 0}$。因为 $A = {x | x < 1}$，所以 $A inter B = {x | x < 0}$。
+  ],
+)
+
+#example(
+  question: [
+    【2018课标全国Ⅰ】已知集合 $A = {x | x^2 - x - 2 > 0}$。则 $complement_bb(R) A = $（#h(3em)）
+  ],
+  choices: choices22(
+    [${x | -1 < x < 2}$],
+    [${x | -1 lt.eq x lt.eq 2}$],
+    [${x | x < -1} union {x | x > 2}$],
+    [${x | x lt.eq -1} union {x | x gt.eq 2}$],
+  ),
+  answer: [
+    *B*
+
+    解析：$x^2 - x - 2 > 0 => (x-2)(x+1) > 0 => x < -1$ 或 $x > 2$，所以 $A = {x | x < -1} union {x | x > 2}$。因此 $complement_bb(R) A = {x | -1 lt.eq x lt.eq 2}$。
+  ],
+)
+
+== 德 $bullet$ 摩根定律
+#definition[（德 $bullet$ 摩根定律）][设 $A$ 和 $B$ 是全集 $U$ 的子集，则有：
+$
+complement_U (A inter B) = complement_U A union complement_U B
+$
+$
+complement_U (A union B) = complement_U A inter complement_U B
+$
+]
+
+#grid(
+  columns: (1fr, 1fr),
+  column-gutter: 2em,
+  align: center,
+  row-gutter: 1em,
+  
+  // 第一个公式的图示
+  canvas({
+    // 绘制矩形 U (全集)
+    draw.rect((0, 0), (3, 2), stroke: gray, name: "U")
+    
+    // 绘制两个相交的圆 (A ∩ B 的补集，即 A ∩ B 外的区域填充)
+    draw.compound-path(
+      {
+        draw.rect((0, 0), (3, 2))
+        draw.circle((1, 1), radius: (0.7, 0.5))
+        draw.circle((2, 1), radius: (0.7, 0.5))
+        draw.compound-path(
+          {
+            draw.circle((1, 1), radius: (0.7, 0.5))
+            draw.circle((2, 1), radius: (0.7, 0.5))
+          },
+          fill-rule: "non-zero",
+        )
+      },
+      fill-rule: "even-odd",
+      fill: rgb(173, 216, 230, 100),
+    )
+    
+    draw.circle((1, 1), radius: (0.7, 0.5), stroke: blue)
+    draw.circle((2, 1), radius: (0.7, 0.5), stroke: blue)
+    
+    // 标注
+    draw.content((2.7, 1.7), text(size: 10pt, $U$))
+    draw.content((0.7, 1), text(size: 10pt, $A$))
+    draw.content((2.3, 1), text(size: 10pt, $B$))
+  }),
+  
+  canvas({
+    // 绘制矩形 U (全集)
+    draw.rect((0, 0), (3, 2), stroke: gray)
+    
+    // 绘制 ∁_U A (A 的补集)
+    draw.compound-path(
+      {
+        draw.rect((0, 0), (3, 2))
+        draw.circle((1, 1), radius: (0.7, 0.5))
+      },
+      fill-rule: "even-odd",
+      fill: rgb(173, 216, 230, 100),
+    )
+    
+    // 绘制 ∁_U B (B 的补集) - 叠加填充
+    draw.compound-path(
+      {
+        draw.rect((0, 0), (3, 2))
+        draw.circle((2, 1), radius: (0.7, 0.5))
+      },
+      fill-rule: "even-odd",
+      fill: rgb(255, 182, 193, 100),
+    )
+    
+    draw.circle((1, 1), radius: (0.7, 0.5), stroke: blue)
+    draw.circle((2, 1), radius: (0.7, 0.5), stroke: blue)
+    
+    // 标注
+    draw.content((2.7, 1.7), text(size: 10pt, $U$))
+    draw.content((0.7, 1), text(size: 10pt, $A$))
+    draw.content((2.3, 1), text(size: 10pt, $B$))
+  }),
+  
+  text(size: 10pt, $complement_U (A inter B)$),
+  text(size: 10pt, $complement_U A union complement_U B$),
+  
+  // 第二个公式的图示
+  canvas({
+    // 绘制矩形 U (全集)
+    draw.rect((0, 0), (3, 2), stroke: gray, name: "U")
+    
+    // 绘制 A ∪ B 的补集
+    draw.compound-path(
+      {
+        draw.rect((0, 0), (3, 2))
+        draw.circle((1, 1), radius: (0.7, 0.5))
+        draw.circle((2, 1), radius: (0.7, 0.5))
+      },
+      fill-rule: "even-odd",
+      fill: rgb(173, 216, 230, 100),
+    )
+    
+    draw.circle((1, 1), radius: (0.7, 0.5), stroke: blue)
+    draw.circle((2, 1), radius: (0.7, 0.5), stroke: blue)
+    
+    // 标注
+    draw.content((2.7, 1.7), text(size: 10pt, $U$))
+    draw.content((0.7, 1), text(size: 10pt, $A$))
+    draw.content((2.3, 1), text(size: 10pt, $B$))
+  }),
+  
+  canvas({
+    // 绘制矩形 U (全集)
+    draw.rect((0, 0), (3, 2), stroke: gray)
+    
+    // 绘制 ∁_U A ∩ ∁_U B (两个补集的交集)
+    draw.compound-path(
+      {
+        draw.compound-path(
+          {
+            draw.rect((0, 0), (3, 2))
+            draw.circle((1, 1), radius: (0.7, 0.5))
+          },
+          fill-rule: "even-odd",
+        )
+        draw.compound-path(
+          {
+            draw.rect((0, 0), (3, 2))
+            draw.circle((2, 1), radius: (0.7, 0.5))
+          },
+          fill-rule: "even-odd",
+        )
+      },
+      fill-rule: "non-zero",
+      fill: rgb(173, 216, 230, 100),
+    )
+    
+    draw.circle((1, 1), radius: (0.7, 0.5), stroke: blue)
+    draw.circle((2, 1), radius: (0.7, 0.5), stroke: blue)
+    
+    // 标注
+    draw.content((2.7, 1.7), text(size: 10pt, $U$))
+    draw.content((0.7, 1), text(size: 10pt, $A$))
+    draw.content((2.3, 1), text(size: 10pt, $B$))
+  }),
+  
+  text(size: 10pt, $complement_U (A union B)$),
+  text(size: 10pt, $complement_U A inter complement_U B$),
+)
+
+
 // ==================== 在文档末尾显示所有答案 ====================
 #show-answers()
