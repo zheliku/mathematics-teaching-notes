@@ -1,5 +1,6 @@
 #import "template/lib.typ": *
 #import "@preview/cetz:0.4.2": canvas, draw
+// #import "@preview/cetz-venn:0.1.4": venn2, venn3
 #import "@preview/cuti:0.3.0": show-cn-fakebold
 #show: show-cn-fakebold
 
@@ -141,22 +142,16 @@
     - A表示全集，包含所有其他集合。
     - 集合B和集合C的共有部分为集合D。
   ],
+
+  // venn2()
+
   canvas({
-    // import draw: *
-    // 绘制矩形 A (全集)
-    draw.rect((0, 0), (4, 2), name: "A")
-    draw.content((3.7, 1.7), [A])
-
-    // 绘制椭圆 B
-    draw.circle((1.3, 1), radius: (1, 0.6), name: "B")
-    draw.content((1.2, 1), [B])
-
-    // 绘制椭圆 C
-    draw.circle((2.7, 1), radius: (1, 0.6), name: "C")
-    draw.content((2.8, 1), [C])
-
-    // 标注相交区域 D
-    draw.content((2, 1), [D])
+    import draw: *
+    scale(y: 0.7)
+    venn2(
+      ab-text: text(size: 12pt, [C]),
+      rect-text: text(size: 12pt, [D]),
+    )
   }),
 )
 
@@ -511,16 +506,16 @@
   canvas({
     // 绘制矩形 U (全集)
     draw.rect((0, 0), (3, 1.8), stroke: gray, fill: rgb(173, 216, 230, 100), name: "U")
-    
+
     // 绘制圆 A
     draw.circle((1.5, 1), radius: (0.7, 0.5), stroke: blue, fill: white, name: "A")
-    
+
     // 标注全集 U
     draw.content((2.7, 1.5), text(size: 10pt, $U$))
-    
+
     // 标注集合 A
     draw.content((1.5, 1), text(size: 10pt, $A$))
-    
+
     // 标注补集区域
     draw.content((0.5, 0.3), text(size: 9pt, fill: red, $complement_U A$))
   }),
@@ -547,7 +542,7 @@ $ complement_U A = {x|x in U, x in.not A} $
 
 #example(
   question: [
-    【2018课标全国Ⅰ】已知集合 $A = {x | x^2 - x - 2 > 0}$。则 $complement_bb(R) A = $（#h(3em)）
+    【2018课标全国Ⅰ】已知集合 $A = {x | x^2 - x - 2 > 0}$。则 $complement_bb(R) A =$（#h(3em)）
   ],
   choices: choices22(
     [${x | -1 < x < 2}$],
@@ -564,12 +559,12 @@ $ complement_U A = {x|x in U, x in.not A} $
 
 == 德 $bullet$ 摩根定律
 #definition[（德 $bullet$ 摩根定律）][设 $A$ 和 $B$ 是全集 $U$ 的子集，则有：
-$
-complement_U (A inter B) = complement_U A union complement_U B
-$
-$
-complement_U (A union B) = complement_U A inter complement_U B
-$
+  $
+    complement_U (A inter B) = complement_U A union complement_U B
+  $
+  $
+    complement_U (A union B) = complement_U A inter complement_U B
+  $
 ]
 
 #grid(
@@ -577,12 +572,12 @@ $
   column-gutter: 2em,
   align: center,
   row-gutter: 1em,
-  
+
   // 第一个公式的图示
   canvas({
     // 绘制矩形 U (全集)
     draw.rect((0, 0), (3, 2), stroke: gray, name: "U")
-    
+
     // 绘制两个相交的圆 (A ∩ B 的补集，即 A ∩ B 外的区域填充)
     draw.compound-path(
       {
@@ -600,20 +595,20 @@ $
       fill-rule: "even-odd",
       fill: rgb(173, 216, 230, 100),
     )
-    
+
     draw.circle((1, 1), radius: (0.7, 0.5), stroke: blue)
     draw.circle((2, 1), radius: (0.7, 0.5), stroke: blue)
-    
+
     // 标注
     draw.content((2.7, 1.7), text(size: 10pt, $U$))
     draw.content((0.7, 1), text(size: 10pt, $A$))
     draw.content((2.3, 1), text(size: 10pt, $B$))
   }),
-  
+
   canvas({
     // 绘制矩形 U (全集)
     draw.rect((0, 0), (3, 2), stroke: gray)
-    
+
     // 绘制 ∁_U A (A 的补集)
     draw.compound-path(
       {
@@ -623,7 +618,7 @@ $
       fill-rule: "even-odd",
       fill: rgb(173, 216, 230, 100),
     )
-    
+
     // 绘制 ∁_U B (B 的补集) - 叠加填充
     draw.compound-path(
       {
@@ -633,24 +628,23 @@ $
       fill-rule: "even-odd",
       fill: rgb(255, 182, 193, 100),
     )
-    
+
     draw.circle((1, 1), radius: (0.7, 0.5), stroke: blue)
     draw.circle((2, 1), radius: (0.7, 0.5), stroke: blue)
-    
+
     // 标注
     draw.content((2.7, 1.7), text(size: 10pt, $U$))
     draw.content((0.7, 1), text(size: 10pt, $A$))
     draw.content((2.3, 1), text(size: 10pt, $B$))
   }),
-  
-  text(size: 10pt, $complement_U (A inter B)$),
-  text(size: 10pt, $complement_U A union complement_U B$),
-  
+
+  text(size: 10pt, $complement_U (A inter B)$), text(size: 10pt, $complement_U A union complement_U B$),
+
   // 第二个公式的图示
   canvas({
     // 绘制矩形 U (全集)
     draw.rect((0, 0), (3, 2), stroke: gray, name: "U")
-    
+
     // 绘制 A ∪ B 的补集
     draw.compound-path(
       {
@@ -661,20 +655,20 @@ $
       fill-rule: "even-odd",
       fill: rgb(173, 216, 230, 100),
     )
-    
+
     draw.circle((1, 1), radius: (0.7, 0.5), stroke: blue)
     draw.circle((2, 1), radius: (0.7, 0.5), stroke: blue)
-    
+
     // 标注
     draw.content((2.7, 1.7), text(size: 10pt, $U$))
     draw.content((0.7, 1), text(size: 10pt, $A$))
     draw.content((2.3, 1), text(size: 10pt, $B$))
   }),
-  
+
   canvas({
     // 绘制矩形 U (全集)
     draw.rect((0, 0), (3, 2), stroke: gray)
-    
+
     // 绘制 ∁_U A ∩ ∁_U B (两个补集的交集)
     draw.compound-path(
       {
@@ -696,18 +690,17 @@ $
       fill-rule: "non-zero",
       fill: rgb(173, 216, 230, 100),
     )
-    
+
     draw.circle((1, 1), radius: (0.7, 0.5), stroke: blue)
     draw.circle((2, 1), radius: (0.7, 0.5), stroke: blue)
-    
+
     // 标注
     draw.content((2.7, 1.7), text(size: 10pt, $U$))
     draw.content((0.7, 1), text(size: 10pt, $A$))
     draw.content((2.3, 1), text(size: 10pt, $B$))
   }),
-  
-  text(size: 10pt, $complement_U (A union B)$),
-  text(size: 10pt, $complement_U A inter complement_U B$),
+
+  text(size: 10pt, $complement_U (A union B)$), text(size: 10pt, $complement_U A inter complement_U B$),
 )
 
 

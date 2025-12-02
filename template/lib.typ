@@ -28,5 +28,6 @@
 
 #import "util/problemset.typ": problemset
 #import "util/introduction.typ": introduction
+#import "util/venn.typ": venn2
 
 // #import "util/choice.typ": choices14, choices22, choices41
