@@ -1,6 +1,5 @@
 #import "template/lib.typ": *
 #import "@preview/cetz:0.4.2": canvas, draw
-// #import "@preview/cetz-venn:0.1.4": venn2, venn3
 #import "@preview/cuti:0.3.0": show-cn-fakebold
 #show: show-cn-fakebold
 
@@ -502,7 +501,6 @@
       venn2(
         xy-scale: (0.8, 0.6),
         rect-fill: white,
-        ab-text: none,
         rect-text: none,
       )
 
@@ -589,6 +587,96 @@ $ complement_U A = {x|x in U, x in.not A} $
 ]
 
 #grid(
+  columns: (1fr, 2fr),
+  column-gutter: 2em,
+  align: center,
+  row-gutter: 1em,
+
+  // 第一个公式的图示
+  canvas({
+    import draw: *
+
+    venn2(
+      xy-scale: (1, 0.7),
+      a-fill: none,
+      b-fill: none,
+      ab-fill: blue.lighten(80%),
+    )
+
+    draw.content((0, -1.5), text(size: 12pt, $A inter B$))
+    draw.content((0, -2.2), text(size: 18pt, $arrow.b.double$))
+
+    translate(x: 0, y: -3.8)
+
+    venn2(
+      xy-scale: (1, 0.7),
+      a-fill: blue.lighten(80%),
+      b-fill: blue.lighten(80%),
+      ab-fill: white,
+      rect-fill: blue.lighten(80%),
+    )
+
+    draw.content((0, -1.5), text(size: 12pt, $complement_U (A inter B)$))
+  }),
+
+  canvas({
+    import draw: *
+
+    translate(x: 0, y: 0)
+
+    venn2(
+      xy-scale: (1, 0.7),
+      a-fill: white,
+      b-fill: blue.lighten(80%),
+      ab-fill: white,
+      rect-fill: blue.lighten(80%),
+    )
+
+    draw.content((0, -1.5), text(size: 12pt, $complement_U A$))
+
+    translate(x: 4.5, y: 0)
+
+    venn2(
+      xy-scale: (1, 0.7),
+      a-fill: blue.lighten(80%),
+      b-fill: white,
+      ab-fill: white,
+      rect-fill: blue.lighten(80%),
+    )
+
+    draw.content((0, -1.5), text(size: 12pt, $complement_U B$))
+
+    translate(x: -2.25, y: 0)
+
+    draw.content((0, -2.2), text(size: 18pt, $arrow.b.double$))
+
+    translate(x: 0, y: -3.8)
+
+    venn2(
+      xy-scale: (1, 0.7),
+      a-fill: blue.lighten(80%),
+      b-fill: blue.lighten(80%),
+      ab-fill: white,
+      rect-fill: blue.lighten(80%),
+    )
+
+    draw.content((0, -1.5), text(size: 12pt, $(complement_U A) union (complement_U B)$))
+  }),
+)
+
+== 容斥原理
+#definition[（容斥原理）][设 $A$ 和 $B$ 是全集 $U$ 的子集，$|A|$ 表示集合 $A$ 的元素个数，则有：
+  $
+    |A union B| = |A| + |B| - |A inter B|
+  $
+  $
+    |A union B union C| = & |A| + |B| + |C| \
+                          & - |A inter B| - |A inter C| - |B inter C| \
+                          & + |A inter B inter C|
+  $
+]
+
+#grid(
   columns: (1fr, 1fr),
   column-gutter: 2em,
   align: center,
@@ -596,134 +684,76 @@ $ complement_U A = {x|x in U, x in.not A} $
 
   // 第一个公式的图示
   canvas({
-    // 绘制矩形 U (全集)
-    draw.rect((0, 0), (3, 2), stroke: gray, name: "U")
-
-    // 绘制两个相交的圆 (A ∩ B 的补集，即 A ∩ B 外的区域填充)
-    draw.compound-path(
-      {
-        draw.rect((0, 0), (3, 2))
-        draw.circle((1, 1), radius: (0.7, 0.5))
-        draw.circle((2, 1), radius: (0.7, 0.5))
-        draw.compound-path(
-          {
-            draw.circle((1, 1), radius: (0.7, 0.5))
-            draw.circle((2, 1), radius: (0.7, 0.5))
-          },
-          fill-rule: "non-zero",
-        )
-      },
-      fill-rule: "even-odd",
-      fill: rgb(173, 216, 230, 100),
+    venn2(
+      xy-scale: (1.5, 1),
+      a-fill: none,
+      b-fill: none,
+      rect-style: none,
+      rect-text: none,
+      ab-text: text(size: 12pt, [A $inter$ B]),
     )
 
-    draw.circle((1, 1), radius: (0.7, 0.5), stroke: blue)
-    draw.circle((2, 1), radius: (0.7, 0.5), stroke: blue)
-
-    // 标注
-    draw.content((2.7, 1.7), text(size: 10pt, $U$))
-    draw.content((0.7, 1), text(size: 10pt, $A$))
-    draw.content((2.3, 1), text(size: 10pt, $B$))
+    draw.content((0, -2.8), text(size: 12pt, [(3.4)]))
   }),
 
   canvas({
-    // 绘制矩形 U (全集)
-    draw.rect((0, 0), (3, 2), stroke: gray)
+    import "@preview/cetz-venn:0.1.4": venn3
 
-    // 绘制 ∁_U A (A 的补集)
-    draw.compound-path(
-      {
-        draw.rect((0, 0), (3, 2))
-        draw.circle((1, 1), radius: (0.7, 0.5))
-      },
-      fill-rule: "even-odd",
-      fill: rgb(173, 216, 230, 100),
+    draw.scale(1.2)
+
+    draw.translate(x:0, y: 0)
+
+    venn3(
+      name: "venn3",
+      not-abc-stroke: none,
+      padding: (0.0, 0.0)
     )
 
-    // 绘制 ∁_U B (B 的补集) - 叠加填充
-    draw.compound-path(
-      {
-        draw.rect((0, 0), (3, 2))
-        draw.circle((2, 1), radius: (0.7, 0.5))
-      },
-      fill-rule: "even-odd",
-      fill: rgb(255, 182, 193, 100),
-    )
+    draw.content("venn3.a", text(size: 12pt, [A]))
+    draw.content("venn3.b", text(size: 12pt, [B]))
+    draw.content("venn3.c", text(size: 12pt, [C]))
+    draw.content("venn3.ab", text(size: 10pt, [A $inter$ B]))
+    draw.content("venn3.ac", text(size: 10pt, [A $inter$ C]))
+    draw.content("venn3.bc", text(size: 10pt, [B $inter$ C]))
+    draw.content("venn3.abc", text(size: 8pt, [A $inter$ B $inter$ C]))
 
-    draw.circle((1, 1), radius: (0.7, 0.5), stroke: blue)
-    draw.circle((2, 1), radius: (0.7, 0.5), stroke: blue)
 
-    // 标注
-    draw.content((2.7, 1.7), text(size: 10pt, $U$))
-    draw.content((0.7, 1), text(size: 10pt, $A$))
-    draw.content((2.3, 1), text(size: 10pt, $B$))
+    draw.content((0, -2.2), text(size: 12pt, [(3.5)]))
   }),
-
-  text(size: 10pt, $complement_U (A inter B)$), text(size: 10pt, $complement_U A union complement_U B$),
-
-  // 第二个公式的图示
-  canvas({
-    // 绘制矩形 U (全集)
-    draw.rect((0, 0), (3, 2), stroke: gray, name: "U")
-
-    // 绘制 A ∪ B 的补集
-    draw.compound-path(
-      {
-        draw.rect((0, 0), (3, 2))
-        draw.circle((1, 1), radius: (0.7, 0.5))
-        draw.circle((2, 1), radius: (0.7, 0.5))
-      },
-      fill-rule: "even-odd",
-      fill: rgb(173, 216, 230, 100),
-    )
-
-    draw.circle((1, 1), radius: (0.7, 0.5), stroke: blue)
-    draw.circle((2, 1), radius: (0.7, 0.5), stroke: blue)
-
-    // 标注
-    draw.content((2.7, 1.7), text(size: 10pt, $U$))
-    draw.content((0.7, 1), text(size: 10pt, $A$))
-    draw.content((2.3, 1), text(size: 10pt, $B$))
-  }),
-
-  canvas({
-    // 绘制矩形 U (全集)
-    draw.rect((0, 0), (3, 2), stroke: gray)
-
-    // 绘制 ∁_U A ∩ ∁_U B (两个补集的交集)
-    draw.compound-path(
-      {
-        draw.compound-path(
-          {
-            draw.rect((0, 0), (3, 2))
-            draw.circle((1, 1), radius: (0.7, 0.5))
-          },
-          fill-rule: "even-odd",
-        )
-        draw.compound-path(
-          {
-            draw.rect((0, 0), (3, 2))
-            draw.circle((2, 1), radius: (0.7, 0.5))
-          },
-          fill-rule: "even-odd",
-        )
-      },
-      fill-rule: "non-zero",
-      fill: rgb(173, 216, 230, 100),
-    )
-
-    draw.circle((1, 1), radius: (0.7, 0.5), stroke: blue)
-    draw.circle((2, 1), radius: (0.7, 0.5), stroke: blue)
-
-    // 标注
-    draw.content((2.7, 1.7), text(size: 10pt, $U$))
-    draw.content((0.7, 1), text(size: 10pt, $A$))
-    draw.content((2.3, 1), text(size: 10pt, $B$))
-  }),
-
-  text(size: 10pt, $complement_U (A union B)$), text(size: 10pt, $complement_U A inter complement_U B$),
 )
 
+#example(
+  question: [
+    【2023辽宁省实验中学高一月考】（多选）某校高一年级组织趣味运动会，有跳远、球类、跑步三项比赛，一共有 28 人参加比赛，其中有 16 人参加跳远比赛，有 8 人参加球类比赛，有 14 人参加跑步比赛，同时参加跳远和球类比赛的有 3 人，同时参加球类和跑步比赛的有 3 人，没有人同时参加三项比赛，则（#h(3em)）
+  ],
+  choices: choices22(
+    [同时参加跳远和跑步比赛的有 4 人],
+    [仅参加跳远比赛的有 8 人],
+    [仅参加跑步比赛的有 7 人],
+    [同时参加两项比赛的有 10 人],
+  ),
+  answer: [
+    *ACD*
+
+    解析：设同时参加跳远和跑步比赛的有 $x$ 人。根据容斥原理：
+    $
+      |A union B union C| = |A| + |B| + |C| - |A inter B| - |A inter C| - |B inter C| + |A inter B inter C|
+    $
+    代入数据：
+    $
+      28 = 16 + 8 + 14 - 3 - x - 3 + 0
+    $
+    解得 $x = 4$，即同时参加跳远和跑步比赛的有 4 人，A 正确。
+
+    仅参加跳远比赛的人数为：$16 - 3 - 4 = 9$ 人，B 错误。
+
+    仅参加跑步比赛的人数为：$14 - 4 - 3 = 7$ 人，C 正确。
+
+    同时参加两项比赛的人数为：$3 + 4 + 3 = 10$ 人，D 正确。
+
+    因此选择 C。
+  ],
+)
 
 // ==================== 在文档末尾显示所有答案 ====================
 #show-answers()

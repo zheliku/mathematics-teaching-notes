@@ -6,14 +6,14 @@
   a-fill: blue.lighten(80%),
   b-fill: blue.lighten(80%),
   ab-fill: none,
-  rect-fill: blue.lighten(95%),
+  rect-fill: none,
   a-pos: (-0.5, 0),
   b-pos: (0.5, 0),
   a-radius: 1,
   b-radius: 1,
   a-text: text(size: 12pt, [A]),
   b-text: text(size: 12pt, [B]),
-  ab-text: text(size: 12pt, [A $inter$ B]),
+  ab-text: none,
   rect-text: text(size: 12pt, [U]),
   rect-text-offset: (0.5, -0.4),
   circle-style: (thickness: 0.5pt, paint: black),
@@ -41,7 +41,7 @@
   }
 
   // 绘制集合A（左侧椭圆）
-  let set-a = circle(
+  circle(
     a-pos,
     radius: a-radius,
     stroke: circle-style,
@@ -50,7 +50,7 @@
   )
 
   // 绘制集合B（右侧椭圆）
-  let set-b = circle(
+  circle(
     b-pos,
     radius: b-radius,
     stroke: circle-style,
@@ -61,9 +61,6 @@
   let text-a-pos = a-pos
   let text-b-pos = b-pos
   let text-ab-pos = center-pos
-
-  set-a
-  set-b
 
   // 计算两圆相交点
   let d = calc.sqrt(calc.pow(b-pos.at(0) - a-pos.at(0), 2) + calc.pow(b-pos.at(1) - a-pos.at(1), 2))
@@ -126,7 +123,8 @@
   // 添加文字标签
   content(text-a-pos, anchor: "center", a-text)
   content(text-b-pos, anchor: "center", b-text)
-  // })
+
+  scale(x: 1 / xy-scale.at(0), y: 1 / xy-scale.at(1))
 }
 
 #let interval-line(
