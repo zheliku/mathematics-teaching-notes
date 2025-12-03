@@ -241,42 +241,24 @@
   align: center,
   // 左图：区间(-1,5]
   canvas({
-    // 绘制数轴
-    draw.line((-2, 0), (6, 0), mark: (end: "stealth"))
-
-    // 绘制刻度和标签
-    for i in (-1, 0, 1, 2, 3, 4, 5) {
-      draw.line((i, -0.1), (i, 0.1))
-      draw.content((i, -0.4), text(size: 10pt, str(i)))
-    }
-
-    // 绘制区间 (-1, 5]
-    draw.line((-1, 0.5), (5, 0.5), stroke: (thickness: 2pt, paint: blue))
-    draw.line((-1, 0), (-1, 0.5), stroke: (thickness: 2pt, paint: blue))
-    draw.line((5, 0), (5, 0.5), stroke: (thickness: 2pt, paint: blue))
-    draw.circle((-1, 0), radius: 0.1, fill: white, stroke: blue) // 空心点
-    draw.circle((5, 0), radius: 0.1, fill: blue) // 实心点
-
-    draw.content((2, -1), text(size: 11pt, $(-1, 5]$))
+    interval-line(start: -1, end: 5, lines: (
+      (
+        start: (index: -1, open: true, inf: false),
+        end: (index: 5, open: false, inf: false),
+        stroke: (thickness: 1pt, paint: blue),
+      ),
+    ))
   }),
 
   // 右图：区间[3,+∞)
   canvas({
-    // 绘制数轴
-    draw.line((-1, 0), (7, 0), mark: (end: "stealth"))
-
-    // 绘制刻度和标签
-    for i in (0, 1, 2, 3, 4, 5, 6) {
-      draw.line((i, -0.1), (i, 0.1))
-      draw.content((i, -0.4), text(size: 10pt, str(i)))
-    }
-
-    // 绘制区间 [3, +∞)
-    draw.line((3, 0.5), (6.8, 0.5), stroke: (thickness: 2pt, paint: blue))
-    draw.line((3, 0), (3, 0.5), stroke: (thickness: 2pt, paint: blue))
-    draw.circle((3, 0), radius: 0.1, fill: blue) // 实心点
-
-    draw.content((3, -1), text(size: 11pt, $[3, +infinity)$))
+    interval-line(start: 3, end: 8, lines: (
+      (
+        start: (index: 3, open: false, inf: false),
+        end: (index: 9, open: true, inf: true),
+        stroke: (thickness: 1pt, paint: blue),
+      ),
+    ))
   }),
 )
 
@@ -289,26 +271,18 @@
   columns: (1fr,),
   align: center,
   canvas({
-    // 绘制数轴
-    draw.line((-1, 0), (7, 0), mark: (end: "stealth"))
-
-    // 绘制刻度和标签
-    for i in (0, 1, 2, 3, 4, 5, 6) {
-      draw.line((i, -0.1), (i, 0.1))
-      draw.content((i, -0.4), text(size: 10pt, str(i)))
-    }
-
-    // 绘制区间 (-∞, 3] (上方)
-    draw.line((0.2, 1), (3, 1), stroke: (thickness: 2pt, paint: red))
-    draw.line((3, 0), (3, 1), stroke: (thickness: 2pt, paint: red))
-    draw.circle((3, 0), radius: 0.1, fill: red) // 实心点
-    draw.content((2, 1.4), text(size: 11pt, fill: red, $(-infinity, 3]$))
-
-    // 绘制区间 (-∞, 5] (下方)
-    draw.line((0.2, 0.5), (5, 0.5), stroke: (thickness: 2pt, paint: blue))
-    draw.line((5, 0), (5, 0.5), stroke: (thickness: 2pt, paint: blue))
-    draw.circle((5, 0), radius: 0.1, fill: blue) // 实心点
-    draw.content((4.5, 1), text(size: 11pt, fill: blue, $(-infinity, 5]$))
+    interval-line(start: 0, end: 6, lines: (
+      (
+        start: (index: 0, open: true, inf: true),
+        end: (index: 3, open: false, inf: false),
+        stroke: (thickness: 1pt, paint: red),
+      ),
+      (
+        start: (index: 0, open: true, inf: true),
+        end: (index: 5, open: false, inf: false),
+        stroke: (thickness: 1pt, paint: blue),
+      ),
+    ))
   }),
 )
 
@@ -326,47 +300,67 @@
     table.hline(stroke: 0.5pt),
     [${x|a<x<b}$], [开区间], [$(a,b)$],
     canvas({
-      draw.line((-0.5, 0), (2.5, 0), mark: (end: "stealth"))
-      draw.line((0, 0.3), (2, 0.3), stroke: (thickness: 2pt, paint: blue))
-      draw.line((0, 0), (0, 0.3), stroke: (thickness: 2pt, paint: blue))
-      draw.line((2, 0), (2, 0.3), stroke: (thickness: 2pt, paint: blue))
-      draw.circle((0, 0), radius: 0.08, fill: white, stroke: blue)
-      draw.circle((2, 0), radius: 0.08, fill: white, stroke: blue)
-      draw.content((0, -0.3), text(size: 10pt, $a$))
-      draw.content((2, -0.3), text(size: 10pt, $b$))
+      interval-line(
+        height: 0.3cm,
+        show-interval-labels: false,
+        lines: (
+          (
+            start: (index: 0, open: true, inf: false),
+            end: (index: 1, open: true, inf: false),
+            stroke: (thickness: 1pt, paint: blue),
+          ),
+        ),
+        unit-scale: 2,
+        axis-labels: ($a$, $b$),
+      )
     }),
-    [${x|a lt.eq x lt.eq b}$], [闭区间], [${[a,b]}$],
+    [${x|a lt.eq x lt.eq b}$], [闭区间], [$[a,b]$],
     canvas({
-      draw.line((-0.5, 0), (2.5, 0), mark: (end: "stealth"))
-      draw.line((0, 0.3), (2, 0.3), stroke: (thickness: 2pt, paint: blue))
-      draw.line((0, 0), (0, 0.3), stroke: (thickness: 2pt, paint: blue))
-      draw.line((2, 0), (2, 0.3), stroke: (thickness: 2pt, paint: blue))
-      draw.circle((0, 0), radius: 0.08, fill: blue)
-      draw.circle((2, 0), radius: 0.08, fill: blue)
-      draw.content((0, -0.3), text(size: 10pt, $a$))
-      draw.content((2, -0.3), text(size: 10pt, $b$))
+      interval-line(
+        height: 0.3cm,
+        show-interval-labels: false,
+        lines: (
+          (
+            start: (index: 0, open: false, inf: false),
+            end: (index: 1, open: false, inf: false),
+            stroke: (thickness: 1pt, paint: blue),
+          ),
+        ),
+        unit-scale: 2,
+        axis-labels: ($a$, $b$),
+      )
     }),
     [${x|a<x lt.eq b}$], [左开右闭区间], [$(a,b]$],
     canvas({
-      draw.line((-0.5, 0), (2.5, 0), mark: (end: "stealth"))
-      draw.line((0, 0.3), (2, 0.3), stroke: (thickness: 2pt, paint: blue))
-      draw.line((0, 0), (0, 0.3), stroke: (thickness: 2pt, paint: blue))
-      draw.line((2, 0), (2, 0.3), stroke: (thickness: 2pt, paint: blue))
-      draw.circle((0, 0), radius: 0.08, fill: white, stroke: blue)
-      draw.circle((2, 0), radius: 0.08, fill: blue)
-      draw.content((0, -0.3), text(size: 10pt, $a$))
-      draw.content((2, -0.3), text(size: 10pt, $b$))
+      interval-line(
+        height: 0.3cm,
+        show-interval-labels: false,
+        lines: (
+          (
+            start: (index: 0, open: true, inf: false),
+            end: (index: 1, open: false, inf: false),
+            stroke: (thickness: 1pt, paint: blue),
+          ),
+        ),
+        unit-scale: 2,
+        axis-labels: ($a$, $b$),
+      )
     }),
-    [${x|a lt.eq x<b}$], [左闭右开区间], [${[a,b)}$],
+    [${x|a lt.eq x<b}$], [左闭右开区间], [$[a,b)$],
     canvas({
-      draw.line((-0.5, 0), (2.5, 0), mark: (end: "stealth"))
-      draw.line((0, 0.3), (2, 0.3), stroke: (thickness: 2pt, paint: blue))
-      draw.line((0, 0), (0, 0.3), stroke: (thickness: 2pt, paint: blue))
-      draw.line((2, 0), (2, 0.3), stroke: (thickness: 2pt, paint: blue))
-      draw.circle((0, 0), radius: 0.08, fill: blue)
-      draw.circle((2, 0), radius: 0.08, fill: white, stroke: blue)
-      draw.content((0, -0.3), text(size: 10pt, $a$))
-      draw.content((2, -0.3), text(size: 10pt, $b$))
+      interval-line(
+        height: 0.3cm,
+        show-interval-labels: false,
+        lines: (
+          (
+            start: (index: 0, open: false, inf: false),
+            end: (index: 1, open: true, inf: false),
+            stroke: (thickness: 1pt, paint: blue),
+          ),
+        ),
+        unit-scale: 2,
+        axis-labels: ($a$, $b$),
+      )
     }),
     table.hline(stroke: 0.5pt),
   )
@@ -388,41 +382,84 @@
     table.hline(stroke: 0.5pt),
     [${x|x in bb(R)}$], [$(−∞,+∞)$],
     canvas({
-      draw.line((-0.5, 0), (2.5, 0), mark: (end: "stealth"))
-      draw.line((0, 0.3), (2.2, 0.3), stroke: (thickness: 2pt, paint: blue))
-      draw.content((1.1, -0.3), text(size: 10pt, $bb(R)$))
+      interval-line(
+        height: 0.3cm,
+        show-interval-labels: false,
+        lines: (
+          (
+            start: (index: 0, open: true, inf: true),
+            end: (index: 1, open: true, inf: true),
+            stroke: (thickness: 1pt, paint: blue),
+          ),
+        ),
+        unit-scale: 2,
+        axis-labels: ("", ""),
+      )
+      draw.content((1.5, -0.3), text(size: 12pt, $bb(R)$))
     }),
     [${x|x gt.eq a}$], [$[a,+∞)$],
     canvas({
-      draw.line((-0.5, 0), (2.5, 0), mark: (end: "stealth"))
-      draw.line((0.5, 0.3), (2.2, 0.3), stroke: (thickness: 2pt, paint: blue))
-      draw.line((0.5, 0), (0.5, 0.3), stroke: (thickness: 2pt, paint: blue))
-      draw.circle((0.5, 0), radius: 0.08, fill: blue)
-      draw.content((0.5, -0.3), text(size: 10pt, $a$))
+      interval-line(
+        height: 0.3cm,
+        show-interval-labels: false,
+        lines: (
+          (
+            start: (index: 0, open: false, inf: false),
+            end: (index: 1, open: true, inf: true),
+            stroke: (thickness: 1pt, paint: blue),
+          ),
+        ),
+        unit-scale: 2,
+        axis-labels: ($a$, ""),
+      )
     }),
     [${x|x>a}$], [$(a,+∞)$],
     canvas({
-      draw.line((-0.5, 0), (2.5, 0), mark: (end: "stealth"))
-      draw.line((0.5, 0.3), (2.2, 0.3), stroke: (thickness: 2pt, paint: blue))
-      draw.line((0.5, 0), (0.5, 0.3), stroke: (thickness: 2pt, paint: blue))
-      draw.circle((0.5, 0), radius: 0.08, fill: white, stroke: blue)
-      draw.content((0.5, -0.3), text(size: 10pt, $a$))
+      interval-line(
+        height: 0.3cm,
+        show-interval-labels: false,
+        lines: (
+          (
+            start: (index: 0, open: true, inf: false),
+            end: (index: 1, open: true, inf: true),
+            stroke: (thickness: 1pt, paint: blue),
+          ),
+        ),
+        unit-scale: 2,
+        axis-labels: ($a$, ""),
+      )
     }),
     [${x|x lt.eq b}$], [$(−∞,b]$],
     canvas({
-      draw.line((-0.5, 0), (2.5, 0), mark: (end: "stealth"))
-      draw.line((0.2, 0.3), (1.5, 0.3), stroke: (thickness: 2pt, paint: blue))
-      draw.line((1.5, 0), (1.5, 0.3), stroke: (thickness: 2pt, paint: blue))
-      draw.circle((1.5, 0), radius: 0.08, fill: blue)
-      draw.content((1.5, -0.3), text(size: 10pt, $b$))
+      interval-line(
+        height: 0.3cm,
+        show-interval-labels: false,
+        lines: (
+          (
+            start: (index: 0, open: true, inf: true),
+            end: (index: 1, open: false, inf: false),
+            stroke: (thickness: 1pt, paint: blue),
+          ),
+        ),
+        unit-scale: 2,
+        axis-labels: ("", $b$),
+      )
     }),
     [${x|x<b}$], [$(−∞,b)$],
     canvas({
-      draw.line((-0.5, 0), (2.5, 0), mark: (end: "stealth"))
-      draw.line((0.2, 0.3), (1.5, 0.3), stroke: (thickness: 2pt, paint: blue))
-      draw.line((1.5, 0), (1.5, 0.3), stroke: (thickness: 2pt, paint: blue))
-      draw.circle((1.5, 0), radius: 0.08, fill: white, stroke: blue)
-      draw.content((1.5, -0.3), text(size: 10pt, $b$))
+      interval-line(
+        height: 0.3cm,
+        show-interval-labels: false,
+        lines: (
+          (
+            start: (index: 0, open: true, inf: true),
+            end: (index: 1, open: true, inf: false),
+            stroke: (thickness: 1pt, paint: blue),
+          ),
+        ),
+        unit-scale: 2,
+        axis-labels: ("", $b$),
+      )
     }),
     table.hline(stroke: 0.5pt),
   )

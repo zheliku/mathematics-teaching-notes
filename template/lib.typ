@@ -13,7 +13,7 @@
 // 示例类环境
 #import "math/math-fun-exam.typ": example, exercise, problem
 // #import "math/math-fun-exam.typ": set-answer-mode, show-answers
-#import "math/math-fun-exam.typ": choices14, choices22, choices41, show-answers, blank
+#import "math/math-fun-exam.typ": blank, choices14, choices22, choices41, show-answers
 
 // 提示类环境
 #import "math/math-fun-note.typ": note
@@ -28,6 +28,6 @@
 
 #import "util/problemset.typ": problemset
 #import "util/introduction.typ": introduction
-#import "util/venn.typ": venn2
+#import "util/plot.typ": interval-line, venn2
 
 // #import "util/choice.typ": choices14, choices22, choices41
