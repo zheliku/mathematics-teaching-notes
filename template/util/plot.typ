@@ -2,6 +2,7 @@
 
 #let venn2(
   padding: (0.5, 0.5),
+  xy-scale: (1, 1),
   a-fill: blue.lighten(80%),
   b-fill: blue.lighten(80%),
   ab-fill: none,
@@ -12,13 +13,15 @@
   b-radius: 1,
   a-text: text(size: 12pt, [A]),
   b-text: text(size: 12pt, [B]),
-  ab-text: none,
+  ab-text: text(size: 12pt, [A $inter$ B]),
   rect-text: text(size: 12pt, [U]),
   rect-text-offset: (0.5, -0.4),
   circle-style: (thickness: 0.5pt, paint: black),
   rect-style: (thickness: 0.5pt, paint: black),
 ) = {
   import draw: *
+
+  scale(x: xy-scale.at(0), y: xy-scale.at(1))
 
   let center-pos = ((a-pos.at(0) + b-pos.at(0)) / 2, (a-pos.at(1) + b-pos.at(1)) / 2)
 

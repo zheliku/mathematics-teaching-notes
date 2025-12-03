@@ -147,8 +147,8 @@
 
   canvas({
     import draw: *
-    scale(y: 0.7)
     venn2(
+      xy-scale: (1, 0.7),
       ab-text: text(size: 12pt, [C]),
       rect-text: text(size: 12pt, [D]),
     )
@@ -484,47 +484,30 @@
     [由所有属于集合 $A$ 且属于集合 $B$ 的元素组成的集合],
     [$A inter B$],
     canvas({
-      // 绘制矩形 (全集)
-      draw.rect((0, 0), (3, 2), stroke: gray)
-
-      // 绘制两个相交的圆
-      draw.circle((1, 1), radius: (0.8, 0.6), name: "A", fill: rgb(173, 216, 230, 100))
-      draw.compound-path(
-        {
-          draw.circle((1, 1), radius: (0.8, 0.6), name: "A")
-          draw.circle((2, 1), radius: (0.8, 0.6), name: "B")
-        },
-        fill-rule: "even-odd",
-        // fill-rule: "non-zero",
-        fill: white,
-        stroke: blue,
+      venn2(
+        xy-scale: (0.8, 0.6),
+        a-fill: white,
+        b-fill: white,
+        ab-fill: blue.lighten(80%),
+        rect-fill: white,
+        ab-text: text(size: 8pt, [A $inter$ B], fill: red),
+        rect-text: none,
       )
-
-      // 标注集合名称
-      draw.content((0.7, 1), text(size: 10pt, $A$))
-      draw.content((2.3, 1), text(size: 10pt, $B$))
-
-      // 标注交集区域
-      draw.content((1.5, 1), text(size: 9pt, fill: red, $A inter B$))
     }),
 
     [并集],
     [由所有属于集合 $A$ 或属于集合 $B$ 的元素组成的集合],
     [$A union B$],
     canvas({
-      // 绘制矩形 (全集)
-      draw.rect((0, 0), (3, 2), stroke: gray)
-
-      // 绘制两个相交的圆
-      draw.circle((1, 1), radius: (0.8, 0.6), stroke: blue, fill: rgb(173, 216, 230, 100), name: "A")
-      draw.circle((2, 1), radius: (0.8, 0.6), stroke: blue, fill: rgb(173, 216, 230, 100), name: "B")
-
-      // 标注集合名称
-      draw.content((0.7, 1), text(size: 10pt, $A$))
-      draw.content((2.3, 1), text(size: 10pt, $B$))
+      venn2(
+        xy-scale: (0.8, 0.6),
+        rect-fill: white,
+        ab-text: none,
+        rect-text: none,
+      )
 
       // 标注并集区域
-      draw.content((1.5, 0.2), text(size: 10pt, fill: red, $A union B$))
+      draw.content((0, -1.2), text(size: 8pt, fill: red, $A union B$))
     }),
 
     table.hline(stroke: 0.5pt),
@@ -542,6 +525,7 @@
   ],
   canvas({
     // 绘制矩形 U (全集)
+
     draw.rect((0, 0), (3, 1.8), stroke: gray, fill: rgb(173, 216, 230, 100), name: "U")
 
     // 绘制圆 A
