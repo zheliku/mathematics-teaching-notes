@@ -55,10 +55,16 @@
 ) = context {
   if number { dic-he-ma-update(kind) }
   let title = kind + " " + if number { f-numbering(kind) }
-  text(fill: main-color, weight: "bold", font: ("Times New Roman", "FZHei-B01S"))[#title] + " "
+  text(fill: main-color, weight: "bold", font: ("Times New Roman", "FZHei-B01S"))[#title]
+  " "
   let loc = here() // 获取当前位置，用于后续生成编号
-  if question != none { question }
-  if choices != none { choices }
+  // 直接输出 question 和 choices，确保它们受到全局 #show 规则影响
+  if question != none [
+    #question
+  ]
+  if choices != none [
+    #choices
+  ]
   let mode = answer-mode.get() // 4. 根据模式决定答案显示位置
   if answer != none {
     if mode == "inline" {

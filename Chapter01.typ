@@ -693,20 +693,20 @@ $ complement_U A = {x|x in U, x in.not A} $
       ab-text: text(size: 12pt, [A $inter$ B]),
     )
 
-    draw.content((0, -2.8), text(size: 12pt, [(3.4)]))
+    draw.content((0, -3.35), text(size: 12pt, [(3.4)]))
   }),
 
   canvas({
     import "@preview/cetz-venn:0.1.4": venn3
 
-    draw.scale(1.2)
+    draw.scale(1.35)
 
-    draw.translate(x:0, y: 0)
+    draw.translate(x: 0, y: 0)
 
     venn3(
       name: "venn3",
       not-abc-stroke: none,
-      padding: (0.0, 0.0)
+      padding: (0.0, 0.0),
     )
 
     draw.content("venn3.a", text(size: 12pt, [A]))
@@ -754,6 +754,433 @@ $ complement_U A = {x|x in U, x in.not A} $
     因此选择 C。
   ],
 )
+
+#pagebreak()
+
+= 命题与条件
+#introduction[命题的判断][充分条件与必要条件][四种命题]
+
+== 命题的判断
+
+#definition[（命题）][我们把可以判断真假的陈述句，叫做*命题*。其中判断为真的陈述句叫做*真命题*，判断为假的陈述句叫做*假命题*。]
+
++ 命题可以写成“若 $p$，则 $q$”、“如果 $p$，那么 $q$”的形式。
++ $p$ 为命题的条件，$q$ 为命题的结论。
+
+#think[
+  找出下列命题的 $p$ 和 $q$：
+  1. 小明吃过饭了。
+  2. 今天是星期五。
+  3. 这个苹果很好吃。
+]
+
+== 充分条件与必要条件
+
+如果“若 $p$，则 $q$"为真命题，则表示 $p$ 通过推理可以得出 $q$，记为
+$ p arrow.r.double q $
+此时，$p$ 是 $q$ 的充分条件。$q$ 是 $p$ 的必要条件。
+
+可将 $p$ 的取值集合记为 $A$，$q$ 的取值集合记为 $B$，用韦恩图表示:
+
+
+#align(center)[
+  #canvas({
+    venn2(
+      xy-scale: (1.5, 1),
+      a-pos: (0, 0),
+      b-pos: (0, 0),
+      a-radius: 0.5,
+      b-radius: 1,
+      a-fill: none,
+      b-fill: none,
+      rect-style: none,
+      rect-text: none,
+      b-text: none,
+    )
+
+    draw.content((1.1, 0), text(size: 12pt, [B]))
+  })
+]
+
+可利用韦恩图表示为下面 3 种情况：$p$ 的外延和 $q$ 的外延成包含关系。
+
+#align(center)[
+  #table(
+    columns: (1fr, 1fr, 1.5fr),
+    stroke: none,
+    align: horizon,
+    inset: 0.5em,
+    table.hline(),
+    table.header([关系], [韦恩图], [充分必要性]),
+    table.hline(stroke: 0.5pt),
+
+    [$p => q$],
+    canvas({
+      venn2(
+        xy-scale: (0.8, 0.6),
+        a-pos: (0, 0),
+        b-pos: (0, 0),
+        a-radius: 1.2,
+        b-radius: 0.7,
+        a-fill: blue.lighten(90%),
+        b-fill: red.lighten(80%),
+        ab-fill: red.lighten(80%),
+        rect-fill: none,
+        a-text: text(size: 10pt, $A$),
+        b-text: none,
+        rect-text: none,
+        rect-style: none,
+      )
+
+      draw.content((0.75, 0), text(size: 10pt, $B$))
+    }),
+    [
+      $p$ 是 $q$ 的充分不必要条件
+
+      $q$ 是 $p$ 的必要不充分条件
+    ],
+
+    [$p <==> q$],
+    canvas({
+      venn2(
+        xy-scale: (0.8, 0.6),
+        a-pos: (0, 0),
+        b-pos: (0, 0),
+        a-radius: 1,
+        b-radius: 1,
+        a-fill: purple.lighten(90%),
+        b-fill: purple.lighten(90%),
+        ab-fill: purple.lighten(90%),
+        rect-fill: none,
+        a-text: text(size: 10pt, $A(B)$),
+        b-text: none,
+        rect-text: none,
+        rect-style: none,
+      )
+    }),
+    [
+      $p$ 是 $q$ 的充要条件
+    ],
+
+    [$p arrow.r.not.double q$],
+    canvas({
+      venn2(
+        xy-scale: (0.8, 0.6),
+        a-pos: (-0.8, 0),
+        b-pos: (0.8, 0),
+        a-radius: 0.7,
+        b-radius: 0.7,
+        a-fill: red.lighten(80%),
+        b-fill: blue.lighten(90%),
+        rect-fill: none,
+        a-text: text(size: 10pt, $A$),
+        b-text: text(size: 10pt, $B$),
+        rect-text: none,
+      )
+    }),
+    [
+      $p$ 既不是 $q$ 的充分条件
+
+      也不是 $q$ 的必要条件
+    ],
+
+    [$p$ 是 $q$ 的非充分
+
+      非必要条件],
+    canvas({
+      venn2(
+        xy-scale: (0.8, 0.6),
+        a-pos: (-0.4, 0),
+        b-pos: (0.4, 0),
+        a-radius: 0.8,
+        b-radius: 0.8,
+        a-fill: red.lighten(80%),
+        b-fill: blue.lighten(90%),
+        ab-fill: purple.lighten(90%),
+        rect-fill: none,
+        a-text: text(size: 10pt, $A$),
+        b-text: text(size: 10pt, $B$),
+        rect-text: none,
+      )
+    }),
+    [
+      $p$ 与 $q$ 有交集但互不包含
+    ],
+
+    table.hline(stroke: 0.5pt),
+  )
+]
+
+#example(
+  question: [
+
+    (1) $x > 1$ 是 $x^2 > 1$ 的 #blank()。
+
+    (2) $a b > 0$ 是 $a > 0、b > 0$ 的 #blank()。
+
+    (3) $x^4 lt.eq 0$ 是 $x = 0$ 的 #blank()。
+  ],
+  answer: [
+    *(1) 充分不必要条件*
+
+    解析：$x > 1 => x^2 > 1$，但 $x^2 > 1$ 不能推出 $x > 1$（反例：$x = -2$），所以 "$x > 1$" 是 "$x^2 > 1$" 的充分不必要条件。
+
+    *(2) 必要不充分条件*
+
+    解析：$a > 0、b > 0 => a b > 0$，但 $a b > 0$ 不能推出 $a > 0、b > 0$（反例：$a = -1, b = -1$），所以 "$a b > 0$" 是 "$a > 0、b > 0$" 的必要不充分条件。
+
+    *(3) 充要条件*
+
+    解析：$x = 0 => x^4 = 0 lt.eq 0$，且 $x^4 lt.eq 0 => x^4 = 0 => x = 0$，所以 "$x^4 lt.eq 0$" 是 "$x = 0$" 的充要条件。
+  ],
+)
+
+== 四种命题
+
+#align(center)[
+  #table(
+    columns: (1fr, 1fr),
+    stroke: none,
+    align: (center, center),
+    inset: 0.5em,
+    table.hline(),
+    table.header([名称], [形式]),
+    table.hline(stroke: 0.5pt),
+    [原命题], [若 $p$，则 $q$],
+    [逆命题], [若 $q$，则 $p$],
+    [否命题], [若 $not p$，则 $not q$],
+    [逆否命题], [若 $not q$，则 $not p$],
+    table.hline(stroke: 0.5pt),
+  )
+]
+
++ $p$ 是原命题的条件，$q$ 是原命题的结论；
++ $not p$ 表示 $p$ 的否定；
++ 任意命题都有逆命题、否命题和逆否命题。
++ 原命题与逆否命题同真同假，互为逆否命题。
++ 否命题与原命题真假性没有关系。
++ 逆命题与原命题真假性没有关系。
+
+#grid(
+  columns: (1fr,),
+  align: center,
+  canvas({
+    import draw: *
+
+    // 绘制四个方框
+    let box-width = 3
+    let box-height = 1.5
+    let gap-x = 2
+    let gap-y = 1.5
+
+    let text-offset = (0.3, 0.3)
+    let line-offset = (0.1, 0.1)
+
+    // 计算各个方框的中心点
+    let left-x = -gap-x / 2
+    let right-x = gap-x / 2 + box-width / 2
+    let top-y = gap-y / 2 + box-height / 2
+    let bottom-y = -gap-y / 2 - box-height / 2
+
+    // 原命题（左上）
+    rect(
+      (-box-width - gap-x / 2, gap-y / 2 + box-height),
+      (-gap-x / 2, gap-y / 2),
+      stroke: blue,
+      fill: blue.lighten(95%),
+      name: "original",
+    )
+
+    content(
+      "original",
+      align(center, text(size: 10pt, [原命题 \ 若 $p$，则 $q$])),
+      anchor: "center",
+    )
+
+    // 逆命题（右上）
+    rect(
+      (gap-x / 2, gap-y / 2),
+      (gap-x / 2 + box-width, gap-y / 2 + box-height),
+      stroke: blue,
+      fill: blue.lighten(95%),
+      name: "inverse",
+    )
+    content(
+      "inverse",
+      align(center, text(size: 10pt, [逆命题 \ 若 $q$，则 $p$])),
+      anchor: "center",
+    )
+
+    // 否命题（左下）
+    rect(
+      (-box-width - gap-x / 2, -gap-y / 2 - box-height),
+      (-box-width - gap-x / 2 + box-width, -gap-y / 2),
+      stroke: blue,
+      fill: blue.lighten(95%),
+      name: "negation",
+    )
+    content(
+      "negation",
+      align(center, text(size: 10pt, [否命题 \ 若 $not p$，则 $not q$])),
+      anchor: "center",
+    )
+
+    // 逆否命题（右下）
+    rect(
+      (gap-x / 2, -gap-y / 2 - box-height),
+      (gap-x / 2 + box-width, -gap-y / 2),
+      stroke: blue,
+      fill: blue.lighten(95%),
+      name: "contrapositive",
+    )
+    content(
+      "contrapositive",
+      align(center, text(size: 10pt, [逆否命题 \ 若 $not q$，则 $not p$])),
+      anchor: "center",
+    )
+
+    // 绘制箭头和标注
+    // 原命题 <-> 逆命题（互逆）
+    line(
+      (-gap-x / 2 + line-offset.at(0), top-y),
+      (right-x - box-width / 2 - line-offset.at(0), top-y),
+      mark: (start: ">", end: ">"),
+      stroke: red,
+    )
+    content(
+      (0, top-y + text-offset.at(1)),
+      text(size: 9pt, fill: red, [互逆]),
+    )
+
+    // 否命题 <-> 逆否命题（互逆）
+    line(
+      (-gap-x / 2 + line-offset.at(0), -top-y),
+      (right-x - box-width / 2 - line-offset.at(0), -top-y),
+      mark: (start: ">", end: ">"),
+      stroke: red,
+      name: "negation-inverse",
+    )
+    content(
+      (0, bottom-y - text-offset.at(1)),
+      text(size: 9pt, fill: red, [互逆]),
+    )
+
+    // 原命题 <-> 否命题（互否）
+    line(
+      (-gap-x / 2 - box-width / 2, -gap-y / 2 + line-offset.at(1)),
+      (-gap-x / 2 - box-width / 2, gap-y / 2 - line-offset.at(1)),
+      mark: (start: ">", end: ">"),
+      stroke: green.darken(20%),
+    )
+    content(
+      (-gap-x / 2 - box-width / 2 - text-offset.at(0), 0),
+      text(size: 9pt, fill: green.darken(20%), [互否]),
+      anchor: "east",
+    )
+
+    // 逆命题 <-> 逆否命题（互否）
+    line(
+      (gap-x / 2 + box-width / 2, -gap-y / 2 + line-offset.at(1)),
+      (gap-x / 2 + box-width / 2, gap-y / 2 - line-offset.at(1)),
+      mark: (start: ">", end: ">"),
+      stroke: green.darken(20%),
+    )
+    content(
+      (gap-x / 2 + box-width / 2 + text-offset.at(0), 0),
+      text(size: 9pt, fill: green.darken(20%), [互否]),
+      anchor: "west",
+    )
+
+    // 原命题 <-> 逆否命题（互为逆否）
+    line(
+      (-gap-x / 2 + line-offset.at(0), -gap-y / 2 + line-offset.at(1)),
+      (gap-x / 2 - line-offset.at(0), gap-y / 2 - line-offset.at(1)),
+      mark: (start: ">", end: ">"),
+      stroke: purple,
+    )
+    content(
+      (0, line-offset.at(1) * 5),
+      text(size: 9pt, fill: purple, [逆否]),
+    )
+
+    // 逆命题 <-> 否命题（互为逆否）
+    line(
+      (gap-x / 2 - line-offset.at(0), -gap-y / 2 + line-offset.at(1)),
+      (-gap-x / 2 + line-offset.at(0), gap-y / 2 - line-offset.at(1)),
+      mark: (start: ">", end: ">"),
+      stroke: purple,
+    )
+    content(
+      (0, -line-offset.at(1) * 5),
+      text(size: 9pt, fill: purple, [逆否]),
+    )
+  }),
+)
+
+#think[
+  某食品的广告词为“幸福的人们都拥有”，那么不拥有的人们会不会幸福呢？
+
+  A. 不一定幸福。
+
+  B. 一定幸福。
+
+  C. 一定不幸福。
+
+  这说明了 #blank(width: 15em)。
+]
+
+#pagebreak()
+
+= 全称量词与存在量词
+#introduction[全称量词][存在量词][含有量词的命题的否定]
+
+== 全称量词命题
+
++ 短语"所有"、"对一切" "任意一个"等在逻辑中称为*全称量词*。
++ 符号表示：$forall x, p(x)$
++ 含有全称量词的命题称为*全称量词命题*。
+
+== 存在量词命题
+
++ 短语"存在"、"至少有一个"、"有些"等在逻辑中称为*存在量词*。
++ 符号表示：$exists x, p(x)$
++ 含有存在量词的命题称为*存在量词命题*。
+
+#align(center)[
+  #table(
+    columns: (1.2fr, 1.5fr, 1.5fr),
+    stroke: none,
+    align: horizon,
+    inset: 0.5em,
+    table.hline(),
+    table.header([命题类型], [全称量词命题], [存在量词命题]),
+    table.hline(stroke: 0.5pt),
+    [形式], [$forall x in M, p(x)$], [$exists x in M, p(x)$],
+    [否定形式], [$exists x in M, not p(x)$], [$forall x in M, not p(x)$],
+    table.hline(stroke: 0.5pt),
+  )
+]
+
+#example(
+  question: [
+    写出下列命题的否定，并判断其真假：
+
+    （1）"$forall x in bb(R), x^2 - 2 x + 1 > 0$" 的否定是：#blank(width: 15em)。
+
+    （2）"$exists c_0 > 0$，方程 $x^2 - x + c_0 = 0$" 的否定是：#blank(width: 15em)。
+  ],
+  answer: [
+    （1）*$exists x in bb(R), x^2 - 2 x + 1 lt.eq 0$*
+
+    解析：全称量词命题的否定是存在量词命题，且将结论否定。当 $x = 1$ 时，$x^2 - 2 x + 1 = 0$，所以否定命题为真。
+
+    （2）*$forall c_0 > 0$，方程 $x^2 - x + c_0 = 0$ 无解*
+
+    解析：存在量词命题的否定是全称量词命题，且将结论否定。原命题："存在 $c_0 > 0$，使得方程有解"，否定："对于所有 $c_0 > 0$，方程都无解"。
+  ],
+)
+
+// #pagebreak()
 
 // ==================== 在文档末尾显示所有答案 ====================
 #show-answers()
