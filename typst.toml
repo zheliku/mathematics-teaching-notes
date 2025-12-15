@@ -2,7 +2,7 @@
 name = "quite-elegant-typ"
 version = "0.2.0"
 categories = ["book"]
-compiler = "0.13.0"
+compiler = "0.14.2"
 entrypoint = "lib.typ"
 
 [template]
