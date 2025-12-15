@@ -54,11 +54,28 @@
   name,
   content,
 )
+// 方法类
+#let method(number: true, name, content) = math-fun-def(
+  main-color: color-themes.fifth,
+  kind: "方法",
+  number: number,
+  name,
+  content,
+)
 
 // 思考类
 #let think(number: true, content) = math-fun-def(
   main-color: color-themes.second,
   kind: "思考",
+  number: number,
+  none,
+  content,
+)
+
+// 扩展类
+#let extend(number: true, content) = math-fun-def(
+  main-color: color-themes.forth,
+  kind: "扩展",
   number: number,
   none,
   content,

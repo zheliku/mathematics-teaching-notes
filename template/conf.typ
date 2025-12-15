@@ -6,7 +6,7 @@
 
 #import "@preview/numbly:0.1.0": numbly
 
-#let indent = h(2em)
+#let tab = h(2em)
 
 #let conf(doc, color-theme: "blue", eq-level: 1, fig-image-level: 1, math-fun-level: 1) = {
   // 颜色
@@ -24,7 +24,7 @@
   )
 
   // 段落
-  set par(justify: true, leading: 1em, spacing: 1em)
+  set par(justify: true, leading: 1.2em, spacing: 1.6em)
 
   // 字体
   set text(lang: "zh", region: "cn", size: 12pt)
@@ -107,32 +107,26 @@
 
   // ⚠️ 重要：此 #show 规则必须放在 #show: conf 之后
   // 自动检测高公式并撑开行距
-  show math.equation.where(block: false): it => {
-    // 将公式转换为字符串，检查是否包含 display 样式
-    let eq-str = repr(it.body)
+  // show math.equation.where(block: false): it => {
+  //   // 将公式转换为字符串，检查是否包含 display 样式
+  //   let eq-str = repr(it.body)
     
-    // 如果公式中包含 display() 或 limits，说明是需要更大垂直空间的公式
-    if "display" in eq-str or "limits" in eq-str or "frac" in eq-str or "sum" in eq-str or "int" in eq-str or "prod" in eq-str {
-      // 对于包含 display 样式的公式，增加垂直间距并调整基线
-      context {
-        let size = measure(it)
-        // 根据实际高度动态调整 baseline
-        // 较高的公式使用较小的 baseline 百分比，以获得更好的视觉对齐
-        let baseline-percent = if size.height > 15pt {
-          30%
-        } else if size.height > 10pt {
-          35%
-        } else {
-          35%
-        }
-        // [#size.height, #box(it, inset: (y: 0.5em), baseline: baseline-percent)]
-        box(it, inset: (y: 0.5em), baseline: baseline-percent)
-      }
-    } else {
-      // 普通行内公式保持原样
-      it
-    }
-  }
+  //   // 如果公式中包含 display() 或 limits，说明是需要更大垂直空间的公式
+  //   if "display" in eq-str or "limits" in eq-str or "frac" in eq-str or "sum" in eq-str or "int" in eq-str or "prod" in eq-str {
+  //     // 对于包含 display 样式的公式，增加垂直间距并调整基线
+  //     context {
+  //       let size = measure(it)
+  //       // 根据实际高度动态调整 baseline
+  //       // 较高的公式使用较小的 baseline 百分比，以获得更好的视觉对齐
+  //       let baseline-percent = (1.0 - 0.5 * 8.196pt / size.height) * 50%
+  //       // [#size.height, #baseline-percent, #box(it, inset: (y: 0.5em), baseline: baseline-percent)]
+  //       box(it, inset: (y: 0.5em), baseline: baseline-percent)
+  //     }
+  //   } else {
+  //     // 普通行内公式保持原样
+  //     it
+  //   }
+  // }
 
   doc
 }

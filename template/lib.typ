@@ -1,5 +1,5 @@
 // 模板
-#import "conf.typ": conf, indent
+#import "conf.typ": conf, tab
 
 // 目录
 #import "util/tool.typ": default-cover, default-outline
@@ -8,7 +8,7 @@
 #import "math/math-fun-def.typ": definition
 #import "math/math-fun-def.typ": axiom, corollary, lemma, postulate, theorem
 #import "math/math-fun-def.typ": proposition
-#import "math/math-fun-def.typ": think
+#import "math/math-fun-def.typ": think, extend, method
 
 // 示例类环境
 #import "math/math-fun-exam.typ": example, exercise, problem

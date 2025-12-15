@@ -24,7 +24,7 @@
       ),
       move(
         dx: 2em,
-        dy: 0.8em,
+        dy: 0.5em,
         block(
           stroke: none,
           fill: main-color,

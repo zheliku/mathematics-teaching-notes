@@ -63,7 +63,13 @@
 }
 
 // ==================== 选择题排版 ====================
-#let _choice-renderer(args, indent: 0em, columns: 1, strong_label: false) = {
+#let _choice-renderer(
+  args,
+  indent: 0em,
+  columns: 1,
+  strong_label: false,
+  row-gutter: 1em,
+) = {
   // 1. 处理缩进值：如果是布尔值 true，则给默认 2em，否则使用传入的长度
   let indent-val = if type(indent) == bool and indent == true { 2em } else { indent }
 
@@ -71,9 +77,9 @@
   let opts = args.pos()
 
   // 3. 生成 Grid
-  pad(left: indent-val, y: 0.5em, grid(
+  pad(left: indent-val, y: 0em, grid(
     columns: columns, // 列数由外部决定
-    row-gutter: 1em, // 行间距
+    row-gutter: row-gutter, // 行间距
     column-gutter: 1em, // 列间距
     // 4. 遍历选项，自动添加 A. B. C. ...
     ..opts
@@ -89,18 +95,30 @@
 // ==================== 修改后的三大函数 ====================
 
 // 1. 双列布局 (2*2) - 最常用
-#let choices22(indent: 2em, ..args) = {
-  _choice-renderer(args, indent: indent, columns: (1fr, 1fr))
+#let choices22(
+  indent: 2em,
+  row-gutter: 1em,
+  ..args,
+) = {
+  _choice-renderer(args, indent: indent, columns: (1fr, 1fr), row-gutter: row-gutter)
 }
 
 // 2. 单行布局 (1*4) - 选项很短时用
-#let choices14(indent: 2em, ..args) = {
-  _choice-renderer(args, indent: indent, columns: (1fr, 1fr, 1fr, 1fr))
+#let choices14(
+  indent: 2em,
+  row-gutter: 1em,
+  ..args,
+) = {
+  _choice-renderer(args, indent: indent, columns: (1fr, 1fr, 1fr, 1fr), row-gutter: row-gutter)
 }
 
 // 3. 单列布局 (4*1) - 选项很长时用
-#let choices41(indent: 2em, ..args) = {
-  _choice-renderer(args, indent: indent, columns: 1fr)
+#let choices41(
+  indent: 2em,
+  row-gutter: 1em,
+  ..args,
+) = {
+  _choice-renderer(args, indent: indent, columns: 1fr, row-gutter: row-gutter)
 }
 
 // --- B. 填空题下划线 ---
