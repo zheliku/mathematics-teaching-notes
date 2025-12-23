@@ -86,8 +86,14 @@
       .enumerate()
       .map(((index, content)) => {
         let label = numbering("A.", index + 1)
-        if strong_label [#strong(label) #content] // 加粗标号
-        else [#label #content]
+        let lbl = if strong_label { strong(label) } else { label }
+        grid(
+          columns: (auto, 1fr),
+          column-gutter: 0.3em,
+          align: (left + horizon, left + horizon),  // 水平+垂直居中
+          lbl,
+          content,
+        )
       })
   ))
 }

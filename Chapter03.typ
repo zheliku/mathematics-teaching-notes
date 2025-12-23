@@ -134,11 +134,24 @@
   choices: choices22(
     canvas({
       import draw: *
-      line((0, 0), (2, 2), stroke: 2pt);
+      xy-axis()
+      circle((0, 0), radius: (1, 1.2))
     }),
-    [B],
-    [C],
-    [D],
+    canvas({
+      import draw: *
+      xy-axis()
+      line((-0.5, -1.5), (0.5, -0.5), (0.5, 1), (1.5, 2))
+    }),
+    canvas({
+      import draw: *
+      xy-axis()
+      bezier-through((-1.5, 1), (0, 0), (-1.5, -1))
+    }),
+    canvas({
+      import draw: *
+      xy-axis()
+      catmull((-1.5, -0.2), (-0.5, 1), (1, -1), (1.5, -0.5))
+    }),
   ),
   answer: [#tab *D*],
 )
@@ -162,7 +175,7 @@
   question: [
     已知函数 $f(2 x - 1)$ 的定义域为 $(0, 1)$，则函数 $f(1 - 3 x)$ 的定义域为 #blank()。
   ],
-  answer: [#tab *$(0, 2/3)$*],
+  answer: [#tab *$(0, display(2/3))$*],
 )
 
 == 值域求解
@@ -170,30 +183,48 @@
 #example(
   question: [
     【2024全国高三练习】求下列函数的值域。
+    #pad(left: 2em)[
+      #grid(
+        columns: (1fr, 1fr, 1fr),
+        column-gutter: 2em,
+        [(1) $y = sqrt(-x^2 - 6 x - 5)$],
 
-    (1) $y = sqrt(-x^2 - 6 x - 5)$
-    #tab
-    (2) $y = 4 - sqrt(3 + 2 x - x^2)$
+        [(2) $y = 4 - sqrt(3 + 2 x - x^2)$],
+
+        [(3) $y = display(5/(2 x^2 - 4 x + 3))$],
+      )
+    ]
   ],
   answer: [
     *(1) $[0, 2]$*
 
     *(2) $[2, 4]$*
+
+    *(3) $(0, 5]$*
   ],
 )
 
 #example(
   question: [
     【2024全国高三练习】求下列函数的值域。
+    #pad(left: 2em)[
+      #grid(
+        columns: (1fr, 1fr, 1fr),
+        column-gutter: 2em,
+        [(1) $y = display((x + 2)/(3 x - 4))$],
 
-    (1) $y = (x + 2)/(3 x - 4)$
+        [(2) $y = display((3 + x)/(4 - x))$],
 
-    (2) $y = (3 + x)/(4 - x)$
+        [(3) $y = display((3 x + 1)/(x - 2))$],
+      )
+    ]
   ],
   answer: [
-    *(1) $(-infinity, 1/3) union (1/3, +infinity)$*
+    *(1) $(-infinity, display(1/3)) union (display(1/3), +infinity)$*
 
     *(2) $(-infinity, -1) union (-1, +infinity)$*
+
+    *(3) $(-infinity, 3) union (3, +infinity)$*
   ],
 )
 
@@ -201,18 +232,24 @@
   question: [
     【2024全国高三练习】求下列函数的值域。
 
-    (1) $y = sqrt(1 - 2 x) - x$
+    #pad(left: 2em)[
+      #grid(
+        columns: (1fr, 1fr),
+        row-gutter: 1em,
+        [(1) $y = sqrt(1 - 2 x) - x$],
 
-    (2) $y = x + sqrt(1 - 2 x)$
+        [(2) $y = x + sqrt(1 - 2 x)$],
 
-    (3) $y = x + sqrt(1 - x^2)$
+        [(3) $y = x + sqrt(1 - x^2)$],
 
-    (4) $y = sqrt(x - 3) + sqrt(5 - x)$
+        [(4) $y = sqrt(x - 3) + sqrt(5 - x)$],
+      )
+    ]
   ],
   answer: [
-    *(1) $[-1/2, +infinity)$*
+    *(1) $[display(-1/2), +infinity)$*
 
-    *(2) $(-infinity, 1]$ (注：原答案为 $(100, -1]$ 可能有误或为特定区间题，此处按常规自然定义域计算)*
+    *(2) $(-infinity, -1]$*
 
     *(3) $[-1, sqrt(2)]$*
 
@@ -224,26 +261,24 @@
   question: [
     【2024全国高三练习】求下列函数的值域。
 
-    (1) $y = (2 x^2 - x + 1)/(2 x - 1) (x > 1/2)$
+    #pad(left: 2em)[
+      #grid(
+        columns: (1fr, 1fr),
+        row-gutter: 2em,
+        [(1) $y = display((2 x^2 - x + 1)/(2 x - 1) (x > 1/2))$],
 
-    (2) $y = (x^2 + 4 x + 3)/(x^2 + x - 6)$
+        [(2) $y = display((x^2 + 4 x + 3)/(x^2 + x - 6))$],
 
-    (3) $y = (x^2 + 1)/(x^2 - x - 1)$
-
-    (4) $y = 5/(2 x^2 - 4 x + 3)$
-
-    (5) $y = (3 x + 1)/(x - 2)$
+        [(3) $y = display((x^2 + 1)/(x^2 - x - 1))$],
+      )
+    ]
   ],
   answer: [
-    *(1) $[sqrt(2) + 1/2, +infinity)$*
+    *(1) $display([sqrt(2) + 1/2, +infinity))$*
 
-    *(2) ${y | y eq.not 1, y eq.not 2/5}$*
+    *(2) $display({y | y eq.not 1, y eq.not 2/5})$*
 
-    *(3) $(-infinity, -(2 sqrt(5))/5] union [(2 sqrt(5))/5, +infinity)$*
-
-    *(4) $(0, 5]$*
-
-    *(5) $(-infinity, 3) union (3, +infinity)$*
+    *(3) $display((-infinity, -(2 sqrt(5))/5] union [(2 sqrt(5))/5, +infinity))$*
   ],
 )
 
@@ -253,9 +288,15 @@
   question: [
     【2024全国高三练习】求解下列函数的表达式
 
-    (1) $f(x^2 - 2) = x^4 + 3 x^2 - 4$
+    #pad(left: 2em)[
+      #grid(
+        columns: (1fr, 1fr),
+        row-gutter: 2em,
+        [(1) $display(f(x^2 - 2) = x^4 + 3 x^2 - 4)$],
 
-    (2) $f(1 + 1/x) = 1/x^2 - 1$
+        [(2) $display(f(1 + 1/x) = 1/x^2 - 1)$],
+      )
+    ]
   ],
   answer: [
     *(1) $f(x) = x^2 + 7 x + 6 (x gt.eq -2)$*
@@ -268,18 +309,24 @@
   question: [
     【2024全国高三练习】求解下列函数的表达式
 
-    (1) $f(x - 1) + 2 f(1 - x) = 2 x - 3$
+    #pad(left: 2em)[
+      #grid(
+        columns: (1fr, 1fr),
+        row-gutter: 2em,
+        [(1) $f(x - 1) + 2 f(1 - x) = 2 x - 3$],
 
-    (2) $f(x) + 2 f(1/x) = x + 1$
+        [(2) $display(f(x) + 2 f(1/x) = x + 1)$],
 
-    (3) $f(x) = 2 x dot f(1/x) - 3 x$
+        [(3) $display(f(x) = 2 x dot f(1/x) - 3 x)$],
+      )
+    ]
   ],
   answer: [
-    *(1) $f(x) = -2 x - 1/3$*
+    *(1) $display(f(x) = -2 x - 1/3)$*
 
-    *(2) $f(x) = 2/(3 x) - x/3 + 1/3$*
+    *(2) $display(f(x) = 2/(3 x) - x/3 + 1/3)$*
 
-    *(3) $f(x) = x + 2$*
+    *(3) $display(f(x) = x + 2)$*
   ],
 )
 
@@ -287,10 +334,10 @@
   question: [
     【2024全国高三练习】求解下列函数的表达式
 
-    (1) $f(x) + f(1 - 1/x) = x + 1$
+    (1) $display(f(x) + f(1 - 1/x) = x + 1)$
   ],
   answer: [
-    *(1) $f(x) = (x^3 - x^2 - 1)/(2 x(x - 1))$*
+    *(1) $display(f(x) = (x^3 - x^2 - 1)/(2 x(x - 1)))$*
   ],
 )
 
@@ -307,17 +354,19 @@
 
 *等价表示*：
 + $f(x) arrow.t <==> x_1 - x_2$ 与 $f(x_1) - f(x_2)$ 同号
+
 + $f(x) arrow.b <==> x_1 - x_2$ 与 $f(x_1) - f(x_2)$ 异号
-+ $f(x) arrow.t <==> (f(x_1) - f(x_2))/(x_1 - x_2) > 0$
+
++ $f(x) arrow.t <==> display((f(x_1) - f(x_2))/(x_1 - x_2)) > 0$
 
 #think[
-  1. $f(x) = 1/x$ 在 $(-infinity, 0)$ 和 $(0, +infinity)$ 上均单调递减，能说 $f(x)$ 在 $(-infinity, 0) union (0, +infinity)$ 上单调递减吗？
+  1. $display(f(x) = 1/x)$ 在 $(-infinity, 0)$ 和 $(0, +infinity)$ 上均单调递减，能说 $f(x)$ 在 $(-infinity, 0) union (0, +infinity)$ 上单调递减吗？
 
   2. 增函数与增函数相加，结果还是增函数吗？
-    - (1) 增 + 增 = \_\_\_\_\_\_
-    - (2) 增 - 减 = \_\_\_\_\_\_
-    - (3) 增 $times$ 增 = \_\_\_\_\_\_
-    - (4) 增 / 减 = \_\_\_\_\_\_
+    - 增 + 增 = #blank()
+    - 增 - 减 = #blank()
+    - 增 $times$ 增 = #blank()
+    - 增 / 减 = #blank()
 ]
 
 #example(
@@ -328,7 +377,7 @@
 
     (2) $f(x) = x^2$
 
-    (3) $f(x) = x + a/x (a in bb(R))$
+    (3) $display(f(x) = x + a/x (a in bb(R)))$
   ],
   answer: [
     *略*
@@ -337,13 +386,18 @@
 
 #example(
   question: [
-    (多选) 如果函数 $f(x)$ 在 $[a, b]$ 上单调递增，$forall x_1, x_2 \in [a, b]$，下列结论中正确的是（#h(3em)）
+    (多选) 如果函数 $f(x)$ 在 $[a, b]$ 上单调递增，$forall x_1, x_2 in [a, b]$，下列结论中正确的是（#h(3em)）
   ],
   choices: choices22(
-    [$(f(x_1) - f(x_2))/(x_1 - x_2) > 0$],
-    [$(x_1 - x_2)[f(x_1) - f(x_2)] > 0$],
-    [$f(a) \le f(x_1) \le f(x_2) \le f(b)$],
-    [$f(x_1) > f(x_2)$],
+    row-gutter: 1.5em,
+
+    [$display((f(x_1) - f(x_2))/(x_1 - x_2) > 0)$],
+
+    [$display((x_1 - x_2)[f(x_1) - f(x_2)] > 0)$],
+
+    [$display(f(a) lt.eq f(x_1) lt.eq f(x_2) lt.eq f(b))$],
+
+    [$display(f(x_1) > f(x_2))$],
   ),
   answer: [#tab *AB*],
 )
@@ -352,12 +406,12 @@
   question: [
     【2022陕西安康六校高一期末联考】已知函数 $f(x)$ 在定义域 $(-1, 1)$ 上单调递减，且 $f(1 - a) < f(2 a - 1)$，则实数 $a$ 的取值范围是 #blank()。
   ],
-  answer: [#tab *$(0, 2/3)$*],
+  answer: [#tab *$display((0, 2/3))$*],
 )
 
 #example(
   question: [
-    【2025北京6年高考3年模拟】已知 $f(x) = cases(x^2 + 4 x \, & x \ge 0, 4 x - x^2 \, & x < 0)$，若 $f(2 - a^2) > f(a)$，则实数 $a$ 的取值范围是（#h(3em)）
+    【2025北京6年高考3年模拟】已知 $f(x) = display(cases(x^2 + 4 x\, & x gt.eq 0, 4 x - x^2 \, & x < 0))$，若 $f(2 - a^2) > f(a)$，则实数 $a$ 的取值范围是（#h(3em)）
   ],
   choices: choices22(
     [$(-infinity, -1) union (2, +infinity)$],
@@ -371,10 +425,10 @@
 #example(
   question: [
     【2022 安徽江淮十校高一联考】已知函数
-    $ f(x) = cases(1/2 x^2 - m x \, & x \ge 2, -m/x \, & 1 \le x < 2) $
-    对于 $forall x_1, x_2 \in [1, +infinity)$，都有 $(x_1 - x_2)[f(x_1) - f(x_2)] \ge 0$，则实数 $m$ 的取值范围是 #blank()。
+    $f(x) = display(cases(display(1/2 x^2 - m x \, & x gt.eq 2), display(-m/x \, & 1 lt.eq x < 2)))$
+    对于 $forall x_1, x_2 in [1, +infinity)$，都有 $(x_1 - x_2)[f(x_1) - f(x_2)] gt.eq 0$，则实数 $m$ 的取值范围是 #blank()。
   ],
-  answer: [#tab *$(0, 4/3]$*],
+  answer: [#tab *$display((0, 4/3])$*],
 )
 
 == 奇偶性
@@ -382,7 +436,7 @@
 #align(center)[
   #table(
     columns: (auto, 1fr, 1fr),
-    stroke: 0.5pt,
+    // stroke: 0.5pt,
     align: horizon + center,
     inset: 0.5em,
     table.header([], [*奇函数*], [*偶函数*]),
@@ -394,21 +448,29 @@
 
 #think[
   1. 下列函数是奇函数还是偶函数？还是都不是？
-    - (1) $f(x) = (2^x - 1)/(2^x + 1)$
-    - (2) $f(x) = 3^x/(3^x + 1)$
-    - (3) $f(x) = (2 - x)/(2 + x)$
+    #pad(left: 2em)[
+      #grid(
+        columns: (1fr, 1fr, 1fr),
+        row-gutter: 2em,
+        [(1) $display(f(x) = (2^x - 1)/(2^x + 1))$],
+
+        [(2) $display(f(x) = 3^x/(3^x + 1))$],
+
+        [(3) $display(f(x) = (2 - x)/(2 + x))$],
+      )
+    ]
 
   2. 奇偶函数相运算得到的函数有什么性质？
-    - 奇 $\pm$ 奇 = \_\_\_\_\_\_ ; 奇 $\cdot$ 奇 = \_\_\_\_\_\_ ; 奇 / 奇 = \_\_\_\_\_\_
-    - 偶 $\pm$ 偶 = \_\_\_\_\_\_ ; 偶 $\cdot$ 偶 = \_\_\_\_\_\_ ; 偶 / 偶 = \_\_\_\_\_\_
-    - 奇 $\pm$ 偶 = \_\_\_\_\_\_ ; 奇 $\cdot$ 偶 = \_\_\_\_\_\_ ; 奇 / 偶 = \_\_\_\_\_\_
+    - 奇 $plus.minus$ 奇 = #blank() ; 奇 $times$ 奇 = #blank() ; 奇 / 奇 = #blank()
+    - 偶 $plus.minus$ 偶 = #blank() ; 偶 $times$ 偶 = #blank() ; 偶 / 偶 = #blank()
+    - 奇 $plus.minus$ 偶 = #blank() ; 奇 $times$ 偶 = #blank() ; 奇 / 偶 = #blank()
 
   3. 如何将一个定义域对称的函数写成一个奇函数与一个偶函数之和？
 ]
 
 #example(
   question: [
-    【2020河南实验中学月考】设函数 $f(x)$、$g(x)$ 的定义域都为 $R$， $f(x)$ 为奇函数，$g(x)$ 为偶函数，则下列结论正确的是（#h(3em)）
+    【2020河南实验中学月考】设函数 $f(x)$、$g(x)$ 的定义域都为 $bb(R)$， $f(x)$ 为奇函数，$g(x)$ 为偶函数，则下列结论正确的是（#h(3em)）
   ],
   choices: choices22(
     [$f(x) dot g(x)$ 是偶函数],
@@ -428,20 +490,20 @@
 
 #example(
   question: [
-    【宁夏银川一中、昆明一中2024届高三联合二模】已知函数 $f(x) = a x^3 + b sin x + c$，若 $f(-1) + f(1) = 2$，则 $c$ 的值为（#h(3em)）
+    【宁夏银川一中、昆明一中2024届高三联合二模】已知函数 $f(x) = a x^5 + b sin x + c$，若 $f(-1) + f(1) = 2$，则 $c$ 的值为（#h(3em)）
   ],
   choices: choices14(
     [$-1$],
     [$0$],
     [$1$],
-    [$2/3$],
+    [$display(2/3)$],
   ),
   answer: [#tab *C*],
 )
 
 #example(
   question: [
-    【2020贵州贵阳一中月考】设函数 $f(x) = 3 + x + sqrt(1 - x^2) dot (2^x - 1)/(2^x + 1)$ 的最大值为 $M$，最小值为 $N$，则 $M + N$ 的值为（#h(3em)）
+    【2020贵州贵阳一中月考】设函数 $display(f(x) = 3 + x + sqrt(1 - x^2) dot (2^x - 1)/(2^x + 1))$ 的最大值为 $M$，最小值为 $N$，则 $M + N$ 的值为（#h(3em)）
   ],
   choices: choices14(
     [$3$],
@@ -458,17 +520,28 @@
 
 #align(center)[
   #table(
-    columns: (auto, 2fr, 1fr),
+    columns: (auto, 2.5fr, 1fr),
     stroke: 0.5pt,
-    align: horizon,
-    inset: 0.5em,
+    align: horizon + center,
+    inset: 1.2em,
     table.header([序号], [条件], [周期]),
-    [1], [$f(x + a) = f(x - a)$ \ $f(x + a) + f(x) = k$], [$T = 2a$],
+    [1], [$f(x + a) = f(x - a), quad quad f(x + a) + f(x) = k$], [$T = 2a$],
     [2],
-    [$f(x + a) = (1 - f(x))/(1 + f(x))$ \ $f(x + a) = plus.minus 1/f(x)$ \ $f(x + a) = 1/(1 - f(x))$ \ $f(x) = 1 - 1/(f(x + a))$],
+    grid(
+      columns: (1fr, 1fr),
+      row-gutter: 2em,
+      [$display(f(x + a) = (1 - f(x))/(1 + f(x))),$],
+
+      [$display(f(x + a) = plus.minus 1/f(x))$],
+
+      [$display(f(x + a) = 1/(1 - f(x))),$],
+
+      [$display(f(x) = 1 - 1/(f(x + a)))$],
+    ),
+
     [$T = 3a$ \ （部分情况）],
 
-    [3], [$f(x + a) = -(1 - f(x))/(1 + f(x))$ \ $f(x + a) = -(1 + f(x))/(1 - f(x))$], [$T = 4a$],
+    [3], [$display(f(x + a) = -(1 - f(x))/(1 + f(x))), quad quad display(f(x + a) = -(1 + f(x))/(1 - f(x)))$], [$T = 4a$],
     [4], [$f(x + a) = f(x + b)$], [$T = |a - b|$],
   )
 ]
@@ -494,20 +567,21 @@
 
 #example(
   question: [
-    已知函数 $f(x) = cases(f(x - 2) \, & x > 1, |x| - 1 \, & -1 \le x \le 1)$，关于 $x$ 的方程 $f(x) = log_a(x + 1)$ 恰有 5 个解，则实数 $a$ 的取值范围是（#h(3em)）
+    已知函数 $f(x) = cases(display(f(x - 2) \, & x > 1), display(|x| - 1 \, & -1 lt.eq x lt.eq 1))$，关于 $x$ 的方程 $f(x) = log_a(x + 1)$ 恰有 5 个解，则实数 $a$ 的取值范围是（#h(3em)）
   ],
   choices: choices22(
-    [$[1/7, 1/5)$],
-    [$(1/7, 1/5)$],
-    [$(1/6, 1/4)$],
-    [$[1/6, 1/4)$],
+    row-gutter: 2em,
+    [$display([1/7, 1/5))$],
+    [$display((1/7, 1/5))$],
+    [$display((1/6, 1/4))$],
+    [$display([1/6, 1/4))$],
   ),
   answer: [#tab *D*],
 )
 
 #example(
   question: [
-    【2023 上海同济大学第一附属中学月考】若函数 $y = f(x), x \in R$，满足 $f(x + 2) = f(x)$，且 $x \in (-1, 1]$ 时，$f(x) = |x|$，则函数 $f(x)$ 的图象与函数 $y = log_4 |x|$ 的图象的交点的个数为（#h(3em)）
+    【2023 上海同济大学第一附属中学月考】若函数 $y = f(x), x in R$，满足 $f(x + 2) = f(x)$，且 $x in (-1, 1]$ 时，$f(x) = |x|$，则函数 $f(x)$ 的图象与函数 $y = log_4 |x|$ 的图象的交点的个数为（#h(3em)）
   ],
   choices: choices14(
     [$3$],
@@ -520,7 +594,7 @@
 
 #example(
   question: [
-    定义在 $R$ 上的偶函数 $f(x)$ 满足 $f(x + 2) = -1/f(x)$，且当 $x \in [0, 2]$ 时，$f(x) = 2 x$，则 $f(-9/2)$ 的值为（#h(3em)）
+    定义在 $R$ 上的偶函数 $f(x)$ 满足 $display(f(x + 2) = -1/f(x))$，且当 $x in [0, 2]$ 时，$f(x) = 2 x$，则 $display(f(-9/2))$ 的值为（#h(3em)）
   ],
   choices: choices14(
     [$0$],
@@ -539,14 +613,14 @@
 
     (2) 若 $f(1) = 2$，求 $f(99)$ 的值。
 
-    (3) 若 $x \in [0, 2]$ 时，$f(x) = x$，试求 $x \in [4, 8]$ 时，函数 $f(x)$ 的解析式。
+    (3) 若 $x in [0, 2]$ 时，$f(x) = x$，试求 $x in [4, 8]$ 时，函数 $f(x)$ 的解析式。
   ],
   answer: [
     *(1) $T = 4$*
 
-    *(2) $13/2$*
+    *(2) $display(13/2)$*
 
-    *(3) $f(x) = cases(x - 4 \, & 4 \le x \le 6, 13/(x - 6) \, & 6 < x \le 8)$*
+    *(3) $f(x) = cases(display(x - 4 \, & 4 lt.eq x lt.eq 6), display(13/(x - 6) \, & 6 < x lt.eq 8))$*
   ],
 )
 
@@ -558,20 +632,20 @@ $ f(x + a) = lambda f(x) $
 
 #example(
   question: [
-    【2022云南保山第一次质检】已知函数 $f(x)$ 满足 $f(x + 2) = 2 f(x)$，当 $x \in [0, 2)$ 时，$f(x) = x$，那么 $f(21)$ 的值为（#h(3em)）
+    【2022云南保山第一次质检】已知函数 $f(x)$ 满足 $f(x + 2) = 2 f(x)$，当 $x in [0, 2)$ 时，$f(x) = x$，那么 $f(21)$ 的值为（#h(3em)）
   ],
   choices: choices14(
-    [$2^{10}$],
-    [$2^{11}$],
-    [$2^{20}$],
-    [$2^{21}$],
+    [$2^10$],
+    [$2^11$],
+    [$2^20$],
+    [$2^21$],
   ),
   answer: [#tab *A*],
 )
 
 #example(
   question: [
-    【2025北京6年高考3年模拟练习】定义域为 $R$ 的函数 $f(x)$ 满足 $f(x + 1) = 2 f(x)$，且当 $x \in [0, 1]$ 时，$f(x) = x^2 - x$，当 $x \in [-2, -1]$ 时，$f(x)$ 的最小值为（#h(3em)）
+    【2025北京6年高考3年模拟练习】定义域为 $R$ 的函数 $f(x)$ 满足 $f(x + 1) = 2 f(x)$，且当 $x in [0, 1]$ 时，$f(x) = x^2 - x$，当 $x in [-2, -1]$ 时，$f(x)$ 的最小值为（#h(3em)）
   ],
   choices: choices14(
     [$-1/16$],
@@ -584,20 +658,21 @@ $ f(x + a) = lambda f(x) $
 
 #example(
   question: [
-    【2022 云南保山第一次质检】已知函数 $f(x) = cases(1 - |1 - x| \, & 0 \le x \le 2, 2 f(x - 2) \, & 2 < x \le 8)$，若方程 $f(x) - k x = 0$ 恰好有 4 个实数根，则实数 $k$ 的取值范围是（#h(3em)）
+    【2022 云南保山第一次质检】已知函数 $f(x) = display(cases(1 - |1 - x| \, & 0 lt.eq x lt.eq 2, 2 f(x - 2) \, & 2 < x lt.eq 8))$，若方程 $f(x) - k x = 0$ 恰好有 4 个实数根，则实数 $k$ 的取值范围是（#h(3em)）
   ],
   choices: choices22(
-    [$(2/3, 8/7)$],
-    [$(2/3, 1)$],
-    [$(4/5, 8/7)$],
-    [$(4/5, 1)$],
+    row-gutter: 2em,
+    [$display((2/3, 8/7))$],
+    [$display((2/3, 1))$],
+    [$display((4/5, 8/7))$],
+    [$display((4/5, 1))$],
   ),
   answer: [#tab *D*],
 )
 
 #example(
   question: [
-    【2022 河北沧州一中月考】定义在 $[0, +infinity)$ 上的函数 $f(x)$ 满足 $f(x + 2) = 1/2 f(x)$，当 $x \in [0, 2)$ 时，$f(x) = x^2 - 2 x + 1$。若直线 $y = a$ 与 $f(x)$ 的图像恰有 8 个交点 $(x_1, y_1), (x_2, y_2), ..., (x_8, y_8)$，则 $x_1 + x_2 + ... + x_8$ = \_\_\_\_\_\_\_\_, $a$ 的取值范围是 \_\_\_\_\_\_\_\_。
+    【2022 河北沧州一中月考】定义在 $[0, +infinity)$ 上的函数 $f(x)$ 满足 $display(f(x + 2) = 1/2 f(x))$，当 $x in [0, 2)$ 时，$f(x) = x^2 - 2 x + 1$。若直线 $y = a$ 与 $f(x)$ 的图像恰有 8 个交点 $(x_1, y_1), (x_2, y_2), ..., (x_8, y_8)$，则 $x_1 + x_2 + ... + x_8$ = #blank(), $a$ 的取值范围是 #blank()。
   ],
   answer: [#tab *32* #tab *$(1/16, 1/8)$*],
 )
@@ -969,7 +1044,7 @@ $ f(x + a) = lambda f(x) $
 
     (2) 判断 $f(x)$ 在 $[0, +infinity)$ 上的单调性。
 
-    (3) 若 $a \ge 0, f(a + 1) \le root(3, 9)$，求 $a$ 的取值范围。
+    (3) 若 $a gt.eq 0, f(a + 1) lt.eq root(3, 9)$，求 $a$ 的取值范围。
   ],
   answer: [
     *(1) 偶函数*
@@ -986,7 +1061,7 @@ $ f(x + a) = lambda f(x) $
   ],
   answer: [
     *略*
-    (提示：令 $x=y=x/2$，得 $f(x) = f^2(x/2) \ge 0$，再证 $f(x) \ne 0$)
+    (提示：令 $x=y=x/2$，得 $f(x) = f^2(x/2) gt.eq 0$，再证 $f(x) \ne 0$)
   ],
 )
 
@@ -996,7 +1071,7 @@ $ f(x + a) = lambda f(x) $
 
     (1) 求 $f(1)$。
 
-    (2) 若 $f(x) + f(x - 8) \le 2$，求 $x$ 的取值范围。
+    (2) 若 $f(x) + f(x - 8) lt.eq 2$，求 $x$ 的取值范围。
   ],
   answer: [
     *(1) 0*
@@ -1047,7 +1122,7 @@ $ f(x + a) = lambda f(x) $
 )
 
 #think[
-  1. 满足 $f(x + y) + f(x - y) = 2 f(x) f(y) (forall x, y \in R)$ 的 $f(x)$ 是偶函数吗？
+  1. 满足 $f(x + y) + f(x - y) = 2 f(x) f(y) (forall x, y in R)$ 的 $f(x)$ 是偶函数吗？
 ]
 
 // ==================== 在文档末尾显示所有答案 ====================

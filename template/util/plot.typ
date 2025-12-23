@@ -1,7 +1,7 @@
 #import "@preview/cetz:0.4.2": canvas, draw
 
 /// Venn 图绘制函数（双圆）
-/// 
+///
 /// 参数说明：
 /// - padding: 外边框的内边距
 /// - xy-scale: 图形的缩放比例 (x, y)
@@ -46,8 +46,8 @@
 
   // 计算两圆中心点（用于交集文本定位）
   let center-pos = (
-    (a-pos.at(0) + b-pos.at(0)) / 2, 
-    (a-pos.at(1) + b-pos.at(1)) / 2
+    (a-pos.at(0) + b-pos.at(0)) / 2,
+    (a-pos.at(1) + b-pos.at(1)) / 2,
   )
 
   // 计算外边框的左下角和右上角坐标
@@ -61,16 +61,16 @@
       calc.max(a-pos.at(1) + a-radius, b-pos.at(1) + b-radius) + padding.at(1),
     ),
   )
-  
+
   // 绘制外边框（全集 U）
   rect(lb, rt, fill: rect-fill, stroke: rect-style)
-  
+
   // 绘制全集文本标签
   if rect-text != none {
     content(
-      (lb.at(0) + rect-text-offset.at(0), rt.at(1) + rect-text-offset.at(1)), 
-      anchor: "center", 
-      rect-text
+      (lb.at(0) + rect-text-offset.at(0), rt.at(1) + rect-text-offset.at(1)),
+      anchor: "center",
+      rect-text,
     )
   }
 
@@ -98,8 +98,7 @@
 
   // 计算两圆心之间的距离
   let d = calc.sqrt(
-    calc.pow(b-pos.at(0) - a-pos.at(0), 2) + 
-    calc.pow(b-pos.at(1) - a-pos.at(1), 2)
+    calc.pow(b-pos.at(0) - a-pos.at(0), 2) + calc.pow(b-pos.at(1) - a-pos.at(1), 2),
   )
 
   // 根据两圆的位置关系处理不同情况
@@ -109,10 +108,9 @@
     if ab-text != none {
       content(center-pos, anchor: "center", ab-text)
     }
-    
   } else if d < a-radius + b-radius and d > calc.abs(a-radius - b-radius) {
     // === 情况2：两圆相交 ===
-    
+
     // 计算交点相关参数
     // a: 圆心 A 到交点中点在连心线上的投影长度
     let a = (calc.pow(a-radius, 2) - calc.pow(b-radius, 2) + calc.pow(d, 2)) / (2 * d)
@@ -125,12 +123,12 @@
 
     // 计算两个交点坐标
     let intersect1 = (
-      px + h * (b-pos.at(1) - a-pos.at(1)) / d, 
-      py - h * (b-pos.at(0) - a-pos.at(0)) / d
+      px + h * (b-pos.at(1) - a-pos.at(1)) / d,
+      py - h * (b-pos.at(0) - a-pos.at(0)) / d,
     )
     let intersect2 = (
-      px - h * (b-pos.at(1) - a-pos.at(1)) / d, 
-      py + h * (b-pos.at(0) - a-pos.at(0)) / d
+      px - h * (b-pos.at(1) - a-pos.at(1)) / d,
+      py + h * (b-pos.at(0) - a-pos.at(0)) / d,
     )
 
     // 计算圈弧的中间点（用于绘制圆滑的圈弧）
@@ -175,19 +173,17 @@
     if ab-text != none {
       content(center-pos, anchor: "center", ab-text)
     }
-    
   } else if d >= a-radius + b-radius {
     // === 情况3：两圆分离（不相交） ===
     // 文本位置保持在各自圆心
     text-a-pos = a-pos
     text-b-pos = b-pos
-    
   } else {
     // === 情况4：一个圆完全在另一个圆内部 ===
-    
+
     if a-radius < b-radius {
       // 圆 A 在圆 B 内部
-      text-a-pos = a-pos  // A 的文本在圆心
+      text-a-pos = a-pos // A 的文本在圆心
       text-b-pos = (
         // B 的文本放在远离 A 的方向
         b-pos.at(0) + (b-pos.at(0) - a-pos.at(0)) / d * b-radius * 0.5,
@@ -200,9 +196,9 @@
         a-pos.at(0) - (b-pos.at(0) - a-pos.at(0)) / d * a-radius * 0.5,
         a-pos.at(1) - (b-pos.at(1) - a-pos.at(1)) / d * a-radius * 0.5,
       )
-      text-b-pos = b-pos  // B 的文本在圆心
+      text-b-pos = b-pos // B 的文本在圆心
     }
-    
+
     // 绘制交集文本标签
     if ab-text != none {
       content(center-pos, anchor: "center", ab-text)
@@ -218,9 +214,9 @@
 }
 
 /// 区间线绘制函数
-/// 
+///
 /// 用于在数轴上绘制一个或多个区间
-/// 
+///
 /// 参数说明：
 /// - start: 数轴起始值
 /// - end: 数轴结束值
@@ -285,7 +281,7 @@
     }
 
     let x = i * unit-scale
-    
+
     // 绘制刻度线
     line(
       (x, -0.1cm),
@@ -347,17 +343,17 @@
     // 绘制区间标签
     if show-interval-labels {
       let text-pos = ((start-x + end-x) / 2, height + 0.25cm)
-      
+
       // 构造左边界文本
       let left-bracket = if l.start.open { "(" } else { "[" }
       let left-value = if l.start.inf { [$-infinity$] } else { [#str(l.start.index)] }
       let left-text = left-bracket + left-value
-      
+
       // 构造右边界文本
       let right-value = if l.end.inf { [$+infinity$] } else { [#str(l.end.index)] }
       let right-bracket = if l.end.open { ")" } else { "]" }
       let right-text = right-value + right-bracket
-      
+
       // 完整区间表示
       let all-text = left-text + ", " + right-text
 
@@ -367,6 +363,25 @@
     // 下一个区间线向上偏移
     height += height
   }
+}
+
+#let xy-axis(
+  x-part: (2, 2),
+  y-part: (2, 2),
+  labels: (
+    x: (anchor: "north", padding: 0.1, text: [$x$]),
+    y: (anchor: "west", padding: 0.2, text: [$y$]),
+    o: (anchor: "north-east", padding: 0.1, text: [$O$]),
+  ),
+) = {
+  import draw: *
+
+  line((-x-part.at(0), 0), (x-part.at(1), 0), mark: (end: ">"), name: "x-axis")
+  content("x-axis.end", anchor: labels.x.anchor, padding: labels.x.padding, labels.x.text)
+  line((0, -y-part.at(0)), (0, y-part.at(1)), mark: (end: ">"), name: "y-axis")
+  content("y-axis.end", anchor: labels.y.anchor, padding: labels.y.padding, labels.y.text)
+
+  content((0, 0), anchor: labels.o.anchor, padding: labels.o.padding, labels.o.text)
 }
 
 // 示例：同时绘制 Venn 图和区间线

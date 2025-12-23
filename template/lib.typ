@@ -28,6 +28,6 @@
 
 #import "util/problemset.typ": problemset
 #import "util/introduction.typ": introduction
-#import "util/plot.typ": interval-line, venn2
+#import "util/plot.typ": interval-line, venn2, xy-axis
 
 // #import "util/choice.typ": choices14, choices22, choices41
