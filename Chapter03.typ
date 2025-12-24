@@ -1,5 +1,6 @@
 #import "template/lib.typ": *
 #import "@preview/cetz:0.4.2": canvas, draw
+#import "@preview/cetz-plot:0.1.3": plot
 #import "@preview/cuti:0.3.0": show-cn-fakebold
 #show: show-cn-fakebold
 
@@ -131,26 +132,73 @@
     // 此处原题为图像选择题，此处保留选项结构
     // TODO: 补充图像
   ],
-  choices: choices22(
+  choices: choices14(
     canvas({
-      import draw: *
-      xy-axis()
-      circle((0, 0), radius: (1, 1.2))
+      plot.plot(
+        size: (2, 2),
+        axis-style: "school-book",
+        x-tick-step: none,
+        y-tick-step: none,
+        x-min: -2,
+        x-max: 2,
+        y-min: -2,
+        y-max: 2,
+        y-equal: "x",
+        {
+          plot.add(domain: (-calc.pi, calc.pi), t => (calc.sin(t), 2 * calc.cos(t)), samples: 200)
+        },
+      )
     }),
     canvas({
-      import draw: *
-      xy-axis()
-      line((-0.5, -1.5), (0.5, -0.5), (0.5, 1), (1.5, 2))
+      plot.plot(
+        size: (2, 2),
+        axis-style: "school-book",
+        x-tick-step: none,
+        y-tick-step: none,
+        x-min: -2,
+        x-max: 2,
+        y-min: -2,
+        y-max: 2,
+        y-equal: "x",
+        {
+          plot.add(domain: (-1, 0.5), t => (t, t - 1), samples: 200, style: (stroke: blue))
+          plot.add(domain: (-0.5, 1), t => (0.5, t), samples: 200, style: (stroke: blue))
+          plot.add(domain: (0.5, 2), t => (t, t + 0.5), samples: 200, style: (stroke: blue))
+        },
+      )
     }),
     canvas({
-      import draw: *
-      xy-axis()
-      bezier-through((-1.5, 1), (0, 0), (-1.5, -1))
+      plot.plot(
+        size: (2, 2),
+        axis-style: "school-book",
+        x-tick-step: none,
+        y-tick-step: none,
+        x-min: -2,
+        x-max: 2,
+        y-min: -2,
+        y-max: 2,
+        y-equal: "x",
+        {
+          let sign = it => if it < 0 { -1 } else { 1 }
+          plot.add(domain: (-2, 2), t => (calc.abs(t), sign(t) * calc.sqrt(calc.abs(t))), samples: 200)
+        },
+      )
     }),
     canvas({
-      import draw: *
-      xy-axis()
-      catmull((-1.5, -0.2), (-0.5, 1), (1, -1), (1.5, -0.5))
+      plot.plot(
+        size: (2, 2),
+        axis-style: "school-book",
+        x-tick-step: none,
+        y-tick-step: none,
+        x-min: -4,
+        x-max: 4,
+        y-min: -2,
+        y-max: 2,
+        y-equal: "x",
+        {
+          plot.add(domain: (-4, 4), t => (t, 2 * calc.sin(t - 0.5) - 0.5), samples: 200)
+        },
+      )
     }),
   ),
   answer: [#tab *D*],
@@ -483,7 +531,7 @@
 
 #example(
   question: [
-    【2025北京6年高考3年模拟练习改编】已知函数 $f(x), g(x)$ 分别是定义在 $R$ 上的偶函数、奇函数，且满足 $f(x) - g(x) = x^3 + 3 x^2 + 3 x$，则 $f(-2) + g(2) =$ #blank()。
+    【2025北京6年高考3年模拟练习改编】已知函数 $f(x), g(x)$ 分别是定义在 $bb(R)$ 上的偶函数、奇函数，且满足 $f(x) - g(x) = x^3 + 3 x^2 + 3 x$，则 $f(-2) + g(2) =$ #blank()。
   ],
   answer: [#tab *-2*],
 )
@@ -541,7 +589,10 @@
 
     [$T = 3a$ \ （部分情况）],
 
-    [3], [$display(f(x + a) = -(1 - f(x))/(1 + f(x))), quad quad display(f(x + a) = -(1 + f(x))/(1 - f(x)))$], [$T = 4a$],
+    [3],
+    [$display(f(x + a) = -(1 - f(x))/(1 + f(x))), quad quad display(f(x + a) = -(1 + f(x))/(1 - f(x)))$],
+    [$T = 4a$],
+
     [4], [$f(x + a) = f(x + b)$], [$T = |a - b|$],
   )
 ]
@@ -554,7 +605,7 @@
 
 #example(
   question: [
-    定义在 $R$ 上的函数 $f(x)$ 满足下列各条件，不能得出函数 $f(x)$ 具有周期性的是（#h(3em)）
+    定义在 $bb(R)$ 上的函数 $f(x)$ 满足下列各条件，不能得出函数 $f(x)$ 具有周期性的是（#h(3em)）
   ],
   choices: choices22(
     [$f(x)f(x + 2) = 2022$],
@@ -594,7 +645,7 @@
 
 #example(
   question: [
-    定义在 $R$ 上的偶函数 $f(x)$ 满足 $display(f(x + 2) = -1/f(x))$，且当 $x in [0, 2]$ 时，$f(x) = 2 x$，则 $display(f(-9/2))$ 的值为（#h(3em)）
+    定义在 $bb(R)$ 上的偶函数 $f(x)$ 满足 $display(f(x + 2) = -1/f(x))$，且当 $x in [0, 2]$ 时，$f(x) = 2 x$，则 $display(f(-9/2))$ 的值为（#h(3em)）
   ],
   choices: choices14(
     [$0$],
@@ -645,7 +696,7 @@ $ f(x + a) = lambda f(x) $
 
 #example(
   question: [
-    【2025北京6年高考3年模拟练习】定义域为 $R$ 的函数 $f(x)$ 满足 $f(x + 1) = 2 f(x)$，且当 $x in [0, 1]$ 时，$f(x) = x^2 - x$，当 $x in [-2, -1]$ 时，$f(x)$ 的最小值为（#h(3em)）
+    【2025北京6年高考3年模拟练习】定义域为 $bb(R)$ 的函数 $f(x)$ 满足 $f(x + 1) = 2 f(x)$，且当 $x in [0, 1]$ 时，$f(x) = x^2 - x$，当 $x in [-2, -1]$ 时，$f(x)$ 的最小值为（#h(3em)）
   ],
   choices: choices14(
     [$-1/16$],
@@ -686,16 +737,59 @@ $ f(x + a) = lambda f(x) $
 
 == 幂函数
 
-形如 $y = x^a$ 的函数。
+$ y = x^k (k in bb(Q)) $
+
+
+#align(center)[
+  #canvas({
+    let xdom = (-5, 5)
+    let ydom = (-5, 5)
+
+    let x-size = xdom.at(1) - xdom.at(0)
+    let y-size = ydom.at(1) - ydom.at(0)
+
+    let ps = (-1, 1 / 2, 1, 2, 3)
+
+    plot.plot(
+      size: (x-size, y-size),
+      axis-style: "school-book",
+      x-min: xdom.at(0),
+      x-max: xdom.at(1),
+      y-min: ydom.at(0),
+      y-max: ydom.at(1),
+      // 等比例：1 个 x 单位 = 1 个 y 单位
+      y-equal: "x",
+      legend: "inner-north-east",
+      {
+        // 绘制 y = 1/x
+        plot.add(domain: (-4, -0.2), t => (t, calc.pow(t, -1)), samples: 200, label: [$y=x^(-1)$])
+
+        // 绘制 y = x^(1/2)
+        plot.add(
+          domain: (calc.max(xdom.at(0), 0), xdom.at(1)),
+          t => (t, calc.pow(t, 0.5)),
+          samples: 200,
+          label: [$y= x^(1/2)$],
+        )
+
+        // 绘制 y = x^p
+        for p in (1, 2, 3) {
+          plot.add(domain: xdom, t => (t, calc.pow(t, p)), samples: 200, label: [$y=x^#p$])
+        }
+      },
+    )
+  })
+]
+
 
 *常见幂函数特征*：
-+ $y = x, y = x^3, y = x^(-1)$ (奇函数)
-+ $y = x^2, y = x^(-2)$ (偶函数)
-+ $y = x^(1/2)$ (非奇非偶)
++ 在 $(0, + infinity)$ 上都有定义
+  + $k > 0$ 时，单调递增；
+  + $k < 0$ 时，单调递减。
 + 所有幂函数图像都经过 $(1, 1)$ 点。
-+ 在 $(0, +infinity)$ 上：
-  - $a > 0$ 时，单调递增；
-  - $a < 0$ 时，单调递减。
++ 当 $k$ 为整数时：
+  - $k$ 为奇数时，定义域为 $bb(R)$，图像关于原点对称（奇函数）；
+  - $k$ 为偶数时，定义域为 $bb(R)$，图像关于 $y$ 轴对称（偶函数）。
 
 #example(
   question: [
@@ -712,13 +806,42 @@ $ f(x + a) = lambda f(x) $
 
 #example(
   question: [
-    【2024全国高三专题练习】已知幂函数 $y = x^(p/q)$ ($p, q in bb(Z)$ 且 $p, q$ 互质) 的图象关于 $y$ 轴对称，且在 $(0, +infinity)$ 上单调递减，则（#h(3em)）
+    【2024全国高三专题练习】已知幂函数 $y = display(x^(p/q))$ ($p, q in bb(Z)$ 且 $p, q$ 互质) 的图象关于 $y$ 轴对称，且在 $(0, +infinity)$ 上单调递减，则（#h(3em)）
+
+    #align(center)[
+      #canvas({
+        let xdom = (-2, 2)
+        let ydom = (-1, 4)
+
+        plot.plot(
+          size: (4, 3),
+          axis-style: "school-book",
+          x-tick-step: none,
+          y-tick-step: none,
+          x-min: xdom.at(0),
+          x-max: xdom.at(1),
+          y-min: ydom.at(0),
+          y-max: ydom.at(1),
+
+          // 等比例：1 个 x 单位 = 1 个 y 单位
+          // y-equal: "x",
+          {
+            // 绘制 y = 1/x
+            plot.add(domain: (-2, -0.1), t => (t, calc.pow(t, -2)), samples: 200, style: (stroke: black))
+            plot.add(domain: (0.1, 2), t => (t, calc.pow(t, -2)), samples: 200, style: (stroke: black))
+          },
+        )
+      })
+    ]
+
+
   ],
   choices: choices22(
-    [$p, q$ 均为奇数，且 $p/q > 0$],
-    [$q$ 为偶数，$p$ 为奇数，且 $p/q > 0$],
-    [$q$ 为奇数，$p$ 为偶数，且 $p/q < 0$],
-    [$q$ 为奇数，$p$ 为偶数，且 $p/q < 0$],
+    row-gutter: 2em,
+    [$p, q$ 均为奇数，且 $display(p/q > 0)$],
+    [$q$ 为偶数，$p$ 为奇数，且 $display(p/q > 0)$],
+    [$q$ 为奇数，$p$ 为偶数，且 $display(p/q < 0)$],
+    [$q$ 为奇数，$p$ 为偶数，且 $display(p/q < 0)$],
   ),
   answer: [#tab *D*],
 )
@@ -805,12 +928,12 @@ $ f(x + a) = lambda f(x) $
 ]
 
 *指数函数* $y = a^x (a > 0, a eq.not 1)$
-+ 定义域 $R$，值域 $(0, +infinity)$
++ 定义域 $bb(R)$，值域 $(0, +infinity)$
 + 图像过点 $(0, 1)$
 + $a > 1$ 单调递增；$0 < a < 1$ 单调递减
 
 *对数函数* $y = log_a x (a > 0, a eq.not 1)$
-+ 定义域 $(0, +infinity)$，值域 $R$
++ 定义域 $(0, +infinity)$，值域 $bb(R)$
 + 图像过点 $(1, 0)$
 + $a > 1$ 单调递增；$0 < a < 1$ 单调递减
 + $y = a^x$ 与 $y = log_a x$ 互为反函数，图像关于 $y = x$ 对称
@@ -985,7 +1108,7 @@ $ f(x + a) = lambda f(x) $
 
 #example(
   question: [
-    【重庆市第八中学校2023-2024高一上期末】设函数 $f(x)$ 的定义域为 $R$，$f(x + 1)$ 为奇函数，$f(x + 2)$ 为偶函数，当 $x in [1, 2]$ 时，$f(x) = a x^2 + b$。若 $f(3) + f(4) = 6$，则 $f(13/3)$ 的值为（#h(3em)）
+    【重庆市第八中学校2023-2024高一上期末】设函数 $f(x)$ 的定义域为 $bb(R)$，$f(x + 1)$ 为奇函数，$f(x + 2)$ 为偶函数，当 $x in [1, 2]$ 时，$f(x) = a x^2 + b$。若 $f(3) + f(4) = 6$，则 $f(13/3)$ 的值为（#h(3em)）
   ],
   choices: choices14(
     [$-4/3$],
@@ -998,7 +1121,7 @@ $ f(x + a) = lambda f(x) $
 
 #example(
   question: [
-    【湖南长沙市长郡中学2023-2024高一上期末】(多选) 定义在 $R$ 上的函数 $f(x)$ 满足 $f(4 - x) = -f(x)$，$f(2 x + 1)$ 为偶函数，$f(1) = 2$。函数 $g(x) (x in R)$ 满足 $g(x) = g(2 - x)$，若 $y = f(x)$ 与 $y = g(x)$ 恰有 2023 个交点，从左至右依次为 $(x_1, y_1), (x_2, y_2), ..., (x_2023, y_2023)$，则下列说法正确的是（#h(3em)）
+    【湖南长沙市长郡中学2023-2024高一上期末】(多选) 定义在 $bb(R)$ 上的函数 $f(x)$ 满足 $f(4 - x) = -f(x)$，$f(2 x + 1)$ 为偶函数，$f(1) = 2$。函数 $g(x) (x in R)$ 满足 $g(x) = g(2 - x)$，若 $y = f(x)$ 与 $y = g(x)$ 恰有 2023 个交点，从左至右依次为 $(x_1, y_1), (x_2, y_2), ..., (x_2023, y_2023)$，则下列说法正确的是（#h(3em)）
   ],
   choices: choices22(
     [$f(x)$ 为奇函数],
@@ -1089,7 +1212,7 @@ $ f(x + a) = lambda f(x) $
 
 #example(
   question: [
-    【2022全国新高考II】已知 $f(x)$ 的定义域为 $R$，且 $f(x + y) + f(x - y) = f(x) f(y), f(1) = 1$，则 $sum_(k=1)^(22) f(k) =$ （#h(3em)）
+    【2022全国新高考II】已知 $f(x)$ 的定义域为 $bb(R)$，且 $f(x + y) + f(x - y) = f(x) f(y), f(1) = 1$，则 $sum_(k=1)^(22) f(k) =$ （#h(3em)）
   ],
   choices: choices14(
     [$-3$],
@@ -1102,7 +1225,7 @@ $ f(x + a) = lambda f(x) $
 
 #example(
   question: [
-    【安徽省蚌埠市2024学年高三上学期期末】已知定义在 $R$ 上的函数 $f(x), g(x)$ 满足：
+    【安徽省蚌埠市2024学年高三上学期期末】已知定义在 $bb(R)$ 上的函数 $f(x), g(x)$ 满足：
     1. $f(0) = 1$；
     2. $forall x, y in bb(R), f(x - y) = f(x) f(y) - g(x) g(y)$。
 

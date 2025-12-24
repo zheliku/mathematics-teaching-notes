@@ -366,8 +366,8 @@
 }
 
 #let xy-axis(
-  x-part: (2, 2),
-  y-part: (2, 2),
+  x-axis: (part: (-2, 2), unit: none, nums: none),
+  y-axis: (part: (-2, 2), unit: none, nums: none),
   labels: (
     x: (anchor: "north", padding: 0.1, text: [$x$]),
     y: (anchor: "west", padding: 0.2, text: [$y$]),
@@ -376,16 +376,36 @@
 ) = {
   import draw: *
 
-  line((-x-part.at(0), 0), (x-part.at(1), 0), mark: (end: ">"), name: "x-axis")
+  line((x-axis.part.at(0), 0), (x-axis.part.at(1), 0), mark: (end: "straight"), name: "x-axis")
   content("x-axis.end", anchor: labels.x.anchor, padding: labels.x.padding, labels.x.text)
-  line((0, -y-part.at(0)), (0, y-part.at(1)), mark: (end: ">"), name: "y-axis")
+  line((0, y-axis.part.at(0)), (0, y-axis.part.at(1)), mark: (end: "straight"), name: "y-axis")
   content("y-axis.end", anchor: labels.y.anchor, padding: labels.y.padding, labels.y.text)
+
+  if x-axis.unit != none {
+    // 绘制单元
+    let count = 0
+    for i in range(int(x-axis.part.at(0) / x-axis.unit), int(x-axis.part.at(1) / x-axis.unit)) {
+      let x = i * x-axis.unit
+      line((x, 0), (x, 0.15), stroke: (thickness: 1pt, paint: black), name: "x-tick-#i")
+      if x-axis.nums != none and count < x-axis.nums.len() {
+        content("x-tick-#i", anchor: "north", padding: 0.3, [#x-axis.nums.at(count)])
+      }
+      count += 1
+    }
+  }
+  if y-axis.unit != none {
+    // 绘制单元
+    let count = 0
+    for i in range(int(y-axis.part.at(0) / y-axis.unit), int(y-axis.part.at(1) / y-axis.unit)) {
+      let y = i * y-axis.unit
+      line((0, y), (0.15, y), stroke: (thickness: 1pt, paint: black), name: "y-tick-#i")
+      if y-axis.nums != none and count < y-axis.nums.len() {
+        content("y-tick-#i", anchor: "east", padding: 0.2, [#y-axis.nums.at(count)])
+      }
+      count += 1
+    }
+  }
 
   content((0, 0), anchor: labels.o.anchor, padding: labels.o.padding, labels.o.text)
 }
 
-// 示例：同时绘制 Venn 图和区间线
-#canvas({
-  venn2()
-  interval-line()
-})
