@@ -850,20 +850,25 @@ $ y = x^k (k in bb(Q)) $
 
 对于二次函数：$f(x) = a x^2 + b x + c$
 
-+ *对称轴*：$x = -b/(2 a)$
-+ *零点公式*：$x = (-b plus.minus sqrt(b^2 - 4 a c))/(2 a)$
-+ *判别式*：$Delta = b^2 - 4 a c$
-+ *韦达定理*：$x_1 + x_2 = -b/a, quad x_1 x_2 = c/a$
+1. *对称轴*：
+$ x = -b/(2 a) $
+2. *零点公式*：
+$ x = (-b plus.minus sqrt(b^2 - 4 a c))/(2 a) $
+3. *判别式*：
+$ Delta = b^2 - 4 a c $
+4. *韦达定理*：
+$ x_1 + x_2 = -b/a, quad x_1 x_2 = c/a $
 
 #example(
   question: [
     【2024全国高三专题练习】设 $a$ 为实数，若方程 $x^2 - 2 a x + a = 0$ 在区间 $(-1, 1)$ 上有两个不相等的实数解，则 $a$ 的取值范围是（#h(3em)）
   ],
   choices: choices22(
+    row-gutter: 1.5em,
     [$(-infinity, 0) union (1, +infinity)$],
     [$(-1, 0)$],
-    [$(-1/3, 0)$],
-    [$(-1/3, 0) union (1, +infinity)$],
+    [$display((-1/3, 0))$],
+    [$display((-1/3, 0) union (1, +infinity))$],
   ),
   answer: [#tab *C*],
 )
@@ -873,9 +878,10 @@ $ y = x^k (k in bb(Q)) $
     【2024全国高三专题练习】方程 $x^2 + (m - 2) x + 5 - m = 0$ 的一根在区间 $(2, 3)$ 内，另一根在区间 $(3, 4)$ 内，则 $m$ 的取值范围是（#h(3em)）
   ],
   choices: choices22(
+    row-gutter: 1.5em,
     [$(-5, -4)$],
-    [$(-13/3, -2)$],
-    [$(-13/3, -4)$],
+    [$display((-13/3, -2))$],
+    [$display((-13/3, -4))$],
     [$(-5, -2)$],
   ),
   answer: [#tab *C*],
@@ -886,29 +892,34 @@ $ y = x^k (k in bb(Q)) $
     【2024 全国高三专题练习】关于 $x$ 的方程 $a x^2 + (a + 2) x + 9 a = 0$ 有两个不相等的实数根 $x_1, x_2$，且 $x_1 < 1 < x_2$，那么 $a$ 的取值范围是（#h(3em)）
   ],
   choices: choices22(
-    [$-2/7 < a < 2/5$],
-    [$a > 2/5$],
-    [$a < -2/7$],
-    [$-2/11 < a < 0$],
+    row-gutter: 1.5em,
+    [$display(-2/7 < a < 2/5)$],
+    [$display(a > 2/5)$],
+    [$display(a < -2/7)$],
+    [$display(-2/11 < a < 0)$],
   ),
   answer: [#tab *D*],
 )
 
 #example(
   question: [
-    【2024上海高三专题练习】已知 $f(x) = a x^2 + 2 b x + 4 c quad (a, b, c in bb(R))$。
+    【2024上海高三专题练习】已知 $f(x) = a x^2 + 2 b x + 4 c. (a, b, c in bb(R))$。
 
     (1) 若 $f(0) = -1, a + 2 b = 0$，解关于 $x$ 的不等式 $f(x) < (a + 1) x - 3$。
 
-    (2) 若 $a + c = 0, f(x)$ 在 $[-2, 2]$ 上的最大值为 $2/3$，最小值为 $-1/2$，求证：$|b/a| lt.eq 2$。
+    (2) 若 $a + c = 0, f(x)$ 在 $[-2, 2]$ 上的最大值为 $display(2/3)$，最小值为 $display(-1/2)$，求证：$display(|b/a| lt.eq 2)$。
   ],
   answer: [
     *(1)*
     若 $a = 0$，解集为 $(2, +infinity)$；
-    若 $a < 0$，解集为 $(2, +infinity) union (-infinity, 1/a)$；
-    若 $0 < a < 1/2$，解集为 $(2, 1/a)$；
-    若 $a = 1/2$，解集为 $emptyset$；
-    若 $a > 1/2$，解集为 $(1/a, 2)$。
+
+    若 $a < 0$，解集为 $(2, +infinity) union (-infinity, display(1/a))$；
+
+    若 $display(0 < a < 1/2)$，解集为 $(2, display(1/a))$；
+
+    若 $display(a = 1/2)$，解集为 $emptyset$；
+
+    若 $display(a > 1/2)$，解集为 $(display(1/a), 2)$。
 
     *(2)* 略
   ],
@@ -916,27 +927,275 @@ $ y = x^k (k in bb(Q)) $
 
 == 指数函数与对数函数
 
-#align(center)[
-  #table(
-    columns: (1fr, 1fr),
-    stroke: 0.5pt,
-    inset: 0.8em,
-    table.header([*指数运算*], [*对数运算*]),
-    [$a^x dot a^y = a^(x + y)$ \ $a^x / a^y = a^(x - y)$ \ $(a^x)^y = a^(x y)$ \ $(a b)^x = a^x b^x$],
-    [$log_a m + log_a n = log_a (m n)$ \ $log_a m - log_a n = log_a (m/n)$ \ $n log_a m = log_a m^n$ \ $log_a b = (log_c b)/(log_c a)$ (换底公式)],
-  )
-]
+*指数运算*
 
-*指数函数* $y = a^x (a > 0, a eq.not 1)$
+$
+  a^x dot a^y = a^(x + y), & quad a^x / a^y = a^(x - y), & quad (a^x)^y = a^(x y) \
+      quad a^(-x) = 1/a^x, & quad a^(1/x) = root(x, a),  & quad (a b)^x = a^x b^x
+$
+
+=== 指数函数
+
+$ y = a^x (a > 0, a eq.not 1) $
+
 + 定义域 $bb(R)$，值域 $(0, +infinity)$
 + 图像过点 $(0, 1)$
 + $a > 1$ 单调递增；$0 < a < 1$ 单调递减
++ $y = a^x$ 与 $y = display((1/a))^x$ 图像关于 $y$ 轴对称
++ $f(x)f(-x) = 1$
 
-*对数函数* $y = log_a x (a > 0, a eq.not 1)$
+#align(center)[
+  #canvas({
+    let xdom = (-2.5, 2.5)
+    let ydom = (-1, 3.5)
+
+    let x-size = xdom.at(1) - xdom.at(0)
+    let y-size = ydom.at(1) - ydom.at(0)
+
+    draw.scale(0.8)
+
+    plot.plot(
+      size: (x-size, y-size),
+      axis-style: "school-book",
+      x-tick-step: none,
+      y-tick-step: none,
+      x-min: xdom.at(0),
+      x-max: xdom.at(1),
+      y-min: ydom.at(0),
+      y-max: ydom.at(1),
+
+      // 等比例：1 个 x 单位 = 1 个 y 单位
+      // y-equal: "x",
+      {
+        // 绘制 y = a^x
+        plot.add(domain: xdom, t => (t, calc.pow(2, t)), samples: 200, style: (stroke: (paint: black, thickness: 1pt)))
+        plot.add(
+          domain: xdom,
+          t => (t, 1),
+          samples: 200,
+          style: (stroke: (paint: black, thickness: 1pt, dash: "dashed")),
+        )
+      },
+    )
+
+    draw.content(
+      (0.8, 3.5),
+      align(center, text(size: 12pt, [$y = a^x (a > 1)$])),
+      anchor: "center",
+    )
+
+    draw.translate(x: 8, y: 0)
+
+    plot.plot(
+      size: (x-size, y-size),
+      axis-style: "school-book",
+      x-tick-step: none,
+      y-tick-step: none,
+      x-min: xdom.at(0),
+      x-max: xdom.at(1),
+      y-min: ydom.at(0),
+      y-max: ydom.at(1),
+
+      // 等比例：1 个 x 单位 = 1 个 y 单位
+      // y-equal: "x",
+      {
+        // 绘制 y = a^x
+        plot.add(domain: xdom, t => (t, calc.pow(2, -t)), samples: 200, style: (stroke: (paint: black, thickness: 1pt)))
+        plot.add(
+          domain: xdom,
+          t => (t, 1),
+          samples: 200,
+          style: (stroke: (paint: black, thickness: 1pt, dash: "dashed")),
+        )
+      },
+    )
+
+    draw.content(
+      (4.8, 3.5),
+      align(
+        center,
+        text(size: 12pt, [$y = a^x (0 < a < 1)$]),
+      ),
+      anchor: "center",
+    )
+  })
+]
+
+#think[#tab 为什么 $a$ 不能小于 0？]
+
+*对数运算*
+
+$
+      log_a m + log_a n = log_a (m n), & quad log_a m - log_a n = log_a (m/n) \
+                n log_a m = log_a m^n, & quad 1/n log_a m = log_(a^n) m \
+  -log_a m = log_(1/a) m = log_(1/a) m \
+$
+
+*换底公式*
+
+$
+  log_a b = (log_c b)/(log_c a)\
+  log_n m = 1/(log_m n) \
+$
+
+=== 对数函数
+$ y = log_a x (a > 0, a eq.not 1) $
+
 + 定义域 $(0, +infinity)$，值域 $bb(R)$
 + 图像过点 $(1, 0)$
 + $a > 1$ 单调递增；$0 < a < 1$ 单调递减
-+ $y = a^x$ 与 $y = log_a x$ 互为反函数，图像关于 $y = x$ 对称
++ $y = log_a x$ 与 $y = log_(1/a) x$ 图像关于 $x$ 轴对称
+
+#align(center)[
+  #canvas({
+    let xdom = (-1, 4)
+    let ydom = (-2, 2)
+
+    let x-size = xdom.at(1) - xdom.at(0)
+    let y-size = ydom.at(1) - ydom.at(0)
+
+    draw.scale(0.8)
+
+    plot.plot(
+      size: (x-size, y-size),
+      axis-style: "school-book",
+      x-tick-step: none,
+      y-tick-step: none,
+      x-min: xdom.at(0),
+      x-max: xdom.at(1),
+      y-min: ydom.at(0),
+      y-max: ydom.at(1),
+
+      // 等比例：1 个 x 单位 = 1 个 y 单位
+      // y-equal: "x",
+      {
+        let dom = (0.1, xdom.at(1))
+        plot.add(
+          domain: dom,
+          t => (t, calc.log(t, base: 3)),
+          samples: 200,
+          style: (stroke: (paint: black, thickness: 1pt)),
+        )
+        plot.add(
+          domain: ydom,
+          t => (1, t),
+          samples: 200,
+          style: (stroke: (paint: black, thickness: 1pt, dash: "dashed")),
+        )
+      },
+    )
+
+    draw.content(
+      (4.2, 0.8),
+      align(center, text(size: 12pt, [$y = log_a x (a > 1)$])),
+      anchor: "center",
+    )
+
+    draw.translate(x: 8, y: 0)
+
+    plot.plot(
+      size: (x-size, y-size),
+      axis-style: "school-book",
+      x-tick-step: none,
+      y-tick-step: none,
+      x-min: xdom.at(0),
+      x-max: xdom.at(1),
+      y-min: ydom.at(0),
+      y-max: ydom.at(1),
+
+      // 等比例：1 个 x 单位 = 1 个 y 单位
+      // y-equal: "x",
+      {
+        let dom = (0.1, xdom.at(1))
+        plot.add(
+          domain: dom,
+          t => (t, calc.log(t, base: 1 / 3)),
+          samples: 200,
+          style: (stroke: (paint: black, thickness: 1pt)),
+        )
+        plot.add(
+          domain: ydom,
+          t => (1, t),
+          samples: 200,
+          style: (stroke: (paint: black, thickness: 1pt, dash: "dashed")),
+        )
+      },
+    )
+
+    draw.content(
+      (4.8, 3),
+      align(
+        center,
+        text(size: 12pt, [$y = log_a x (0 < a < 1)$]),
+      ),
+      anchor: "center",
+    )
+  })
+]
+
+#extend[
+  1. $a$ 与图像陡峭程度的关系。
+  #align(center)[
+    #canvas({
+      let xdom = (-1, 5)
+      let ydom = (-2, 2)
+
+      let x-size = xdom.at(1) - xdom.at(0)
+      let y-size = ydom.at(1) - ydom.at(0)
+
+      draw.scale(0.8)
+
+      plot.plot(
+        size: (x-size, y-size),
+        axis-style: "school-book",
+        x-tick-step: none,
+        y-tick-step: none,
+        x-min: xdom.at(0),
+        x-max: xdom.at(1),
+        y-min: ydom.at(0),
+        y-max: ydom.at(1),
+
+        // 等比例：1 个 x 单位 = 1 个 y 单位
+        // y-equal: "x",
+        {
+          // 绘制 y = a^x
+          for a in (2, 5, 1 / 5, 1 / 2) {
+            let dom = (0.1, xdom.at(1))
+            plot.add(
+              domain: dom,
+              t => (t, calc.log(t, base: a)),
+              samples: 200,
+              label: [$y=log_#a x$],
+            )
+          }
+          plot.add(
+            domain: ydom,
+            t => (1, t),
+            samples: 200,
+            style: (stroke: (paint: black, thickness: 1pt, dash: "dashed")),
+          )
+        },
+      )
+
+      draw.content(
+        (-1.2, 2.5),
+        align(
+          center,
+          text(size: 12pt, [$a$ 增大]),
+        ),
+        anchor: "center",
+      )
+
+      draw.line((-0.3, 3.5), (-0.3, 0.5), mark: (end: ">>"))
+    })
+  ]
+
+  2. 常见对数值
+  $
+    ln 2 approx 0.693, quad ln 3 approx 1.098, quad ln 5 approx 1.609 \
+    log_10 2 approx 0.301, quad log_10 3 approx 0.477
+  $
+]
 
 #example(
   question: [
@@ -953,12 +1212,12 @@ $ y = x^k (k in bb(Q)) $
 
 #example(
   question: [
-    【2024 全国高三专题练习】若 $x_1$ 满足 $e^x = 3 - x$，$x_2$ 满足 $x + log_2 x = 3$，令 $a + b = x_1 + x_2$，其中 $a, b > 0$，则 $(7 b^2 + 1)/(a b)$ 的最小值为（#h(3em)）
+    【2024 全国高三专题练习】若 $x_1$ 满足 $e^x = 3 - x$，$x_2$ 满足 $x + log_2 x = 3$，令 $a + b = x_1 + x_2$，其中 $a, b > 0$，则 $display((7 b^2 + 1)/(a b))$ 的最小值为（#h(3em)）
   ],
   choices: choices14(
     [$1$],
-    [$7/3$],
-    [$67/9$],
+    [$display(7/3)$],
+    [$display(67/9)$],
     [$2$],
   ),
   answer: [#tab *D*],
@@ -970,13 +1229,118 @@ $ y = x^k (k in bb(Q)) $
 + *条件*：原函数为一一映射。
 + *特点*：定义域和值域互换；图像关于 $y = x$ 对称。
 
+举例：指数函数 $y = a^x$ 的反函数为对数函数 $y = log_a x$。
+
+#align(center)[
+  #canvas({
+    let xdom = (-2.5, 5)
+    let ydom = (-2.5, 5)
+
+    let x-size = xdom.at(1) - xdom.at(0)
+    let y-size = ydom.at(1) - ydom.at(0)
+
+    draw.scale(0.6)
+
+    plot.plot(
+      size: (x-size, y-size),
+      axis-style: "school-book",
+      x-tick-step: none,
+      y-tick-step: none,
+      x-min: xdom.at(0),
+      x-max: xdom.at(1),
+      y-min: ydom.at(0),
+      y-max: ydom.at(1),
+
+      // 等比例：1 个 x 单位 = 1 个 y 单位
+      // y-equal: "x",
+      {
+        // 绘制 y = a^x
+        plot.add(
+          domain: xdom,
+          t => (t, calc.pow(2, t)),
+          samples: 200,
+          style: (stroke: (paint: blue, thickness: 1pt)),
+          label: [$y=2^x$],
+        )
+        // 绘制 y = log_a x
+        let dom = (0.1, xdom.at(1))
+        plot.add(
+          domain: dom,
+          t => (t, calc.log(t, base: 2)),
+          samples: 200,
+          style: (stroke: (paint: red, thickness: 1pt)),
+          label: [$y=log_2 x$],
+        )
+        // 绘制 y = x
+        plot.add(
+          domain: xdom,
+          t => (t, t),
+          samples: 200,
+          style: (stroke: (paint: gray, thickness: 1pt, dash: "dashed")),
+          label: [$y=x$],
+        )
+      },
+    )
+
+    draw.translate(x: 15, y: 0)
+
+    plot.plot(
+      size: (x-size, y-size),
+      axis-style: "school-book",
+      x-tick-step: none,
+      y-tick-step: none,
+      x-min: xdom.at(0),
+      x-max: xdom.at(1),
+      y-min: ydom.at(0),
+      y-max: ydom.at(1),
+
+      // 等比例：1 个 x 单位 = 1 个 y 单位
+      // y-equal: "x",
+      {
+        // 绘制 y = a^x
+        plot.add(
+          domain: xdom,
+          t => (t, calc.pow(1 / 2, t)),
+          samples: 200,
+          style: (stroke: (paint: blue, thickness: 1pt)),
+          label: [$y=(1/2)^x$],
+        )
+        // 绘制 y = log_a x
+        let dom = (0.1, xdom.at(1))
+        plot.add(
+          domain: dom,
+          t => (t, calc.log(t, base: 1 / 2)),
+          samples: 200,
+          style: (stroke: (paint: red, thickness: 1pt)),
+          label: [$y=log_(1/2) x$],
+        )
+        // 绘制 y = x
+        plot.add(
+          domain: xdom,
+          t => (t, t),
+          samples: 200,
+          style: (stroke: (paint: gray, thickness: 1pt, dash: "dashed")),
+          label: [$y=x$],
+        )
+      },
+    )
+  })
+]
+
 == 特殊函数
 
 *指对中的奇/偶函数*：
-+ $f(x) = (a^x - 1)/(a^x + 1) (a > 0)$ (奇函数)
++ $f(x) = display((a^x - 1)/(a^x + 1)) (a > 0)$ (奇函数)
+
 + $f(x) = ln(sqrt(x^2 + 1) + x)$ (奇函数)
-+ $f(x) = ln((a - x)/(a + x)) (a > 0)$ (奇函数)
+
++ $f(x) = display(ln((a - x)/(a + x))) (a > 0)$ (奇函数)
+
 + $f(x) = ln(e^(2 a x) + 1) - a x (a > 0)$ (偶函数)
+
+*指对中的对称函数*
+
++ $f(x) = display((a^x)/(a^x + 1)) (a > 0)$
 
 #pagebreak()
 
