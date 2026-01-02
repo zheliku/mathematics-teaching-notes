@@ -1,7 +1,7 @@
 #import "template/lib.typ": *
 #import "@preview/cetz:0.4.2": canvas, draw
 #import "@preview/cetz-plot:0.1.3": plot
-#import "@preview/cuti:0.3.0": show-cn-fakebold
+#import "@preview/cuti:0.4.0": show-cn-fakebold
 #show: show-cn-fakebold
 
 // 为代码块添加背景色、圆角，并给每一行代码添加行号
@@ -1368,7 +1368,7 @@ $ f(m - x) = f(n + x) $
   + 为什么没有 $f(x)$ 关于直线 $y=a$ 对称的情况？
   + 对称性与周期性的特点有什么不同？
   + 寻找下列函数的中心对称点：
-  （1）$f(x) = display(3^x/(3^x+1))$ #h(2em) （2）$f(x) = display((2-x)/(2+x))$ #h(2em) （3）$f(x)=display(1/(x-1))$
+  （1）$f(x) = display(3^x/(3^x+1))$ #tab （2）$f(x) = display((2-x)/(2+x))$ #tab （3）$f(x)=display(1/(x-1))$
 
 ]
 
@@ -1562,7 +1562,7 @@ $ f(m - x) = f(n + x) $
 = 抽象函数
 
 #definition("抽象函数")[
-  #h(2em) 只告诉了函数的关系式，而没有告诉具体的表达式。
+  #tab 只告诉了函数的关系式，而没有告诉具体的表达式。
 ]
 
 

@@ -1,6 +1,6 @@
 #import "template/lib.typ": *
 #import "@preview/cetz:0.4.2": canvas, draw
-#import "@preview/cuti:0.3.0": show-cn-fakebold
+#import "@preview/cuti:0.4.0": show-cn-fakebold
 #show: show-cn-fakebold
 
 // 为代码块添加背景色、圆角，并给每一行代码添加行号
