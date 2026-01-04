@@ -323,9 +323,9 @@
   ],
   answer: [
     *(1) $display([sqrt(2) + 1/2, +infinity))$*
-
+    #v(0.5em)
     *(2) $display({y | y eq.not 1, y eq.not 2/5})$*
-
+    #v(0.5em)
     *(3) $display((-infinity, -(2 sqrt(5))/5] union [(2 sqrt(5))/5, +infinity))$*
   ],
 )
@@ -384,9 +384,7 @@
 
     (1) $display(f(x) + f(1 - 1/x) = x + 1)$
   ],
-  answer: [
-    *(1) $display(f(x) = (x^3 - x^2 - 1)/(2 x(x - 1)))$*
-  ],
+  answer: [#tab *(1) $display(f(x) = (x^3 - x^2 - 1)/(2 x(x - 1)))$*],
 )
 
 #pagebreak()
@@ -427,9 +425,7 @@
 
     (3) $display(f(x) = x + a/x (a in bb(R)))$
   ],
-  answer: [
-    *略*
-  ],
+  answer: [#tab *略*],
 )
 
 #example(
@@ -725,7 +721,7 @@ $ f(x + a) = lambda f(x) $
   question: [
     【2022 河北沧州一中月考】定义在 $[0, +infinity)$ 上的函数 $f(x)$ 满足 $display(f(x + 2) = 1/2 f(x))$，当 $x in [0, 2)$ 时，$f(x) = x^2 - 2 x + 1$。若直线 $y = a$ 与 $f(x)$ 的图像恰有 8 个交点 $(x_1, y_1), (x_2, y_2), ..., (x_8, y_8)$，则 $x_1 + x_2 + ... + x_8$ = #blank(), $a$ 的取值范围是 #blank()。
   ],
-  answer: [#tab *32* #tab *$(1/16, 1/8)$*],
+  answer: [#tab *32* #tab *$display((1/16, 1/8))$*],
 )
 
 #pagebreak()
@@ -1601,10 +1597,7 @@ $ f(m - x) = f(n + x) $
   question: [
     已知非常数函数 $f(x)$ 满足 $forall x, y in R, f(x + y) = f(x) f(y)$。求证：$f(x) > 0$。
   ],
-  answer: [
-    *略*
-    (提示：令 $x=y=x/2$，得 $f(x) = f^2(x/2) gt.eq 0$，再证 $f(x) \ne 0$)
-  ],
+  answer: [#tab *略*],
 )
 
 #example(

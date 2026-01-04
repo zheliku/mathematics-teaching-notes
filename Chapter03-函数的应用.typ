@@ -800,4 +800,286 @@ $ h(x) = f(t) \ t = g(x) $
   answer: [#tab *B*],
 )
 
+#pagebreak()
+
+= 特殊问题
+
+#introduction[比较大小][抽象函数]
+
+== 比较大小
+
+*基本方式：*
++ 作差。
++ 作商。
++ 单调性。
+
+
+=== 区间比较问题
+
+#method("")[
+  #tab 判断数的大致区间，依据区间位置比较大小。
+]
+
+#example(
+  question: [
+    【2023 山东临沂平邑一中高一期末】已知 $a = log_2 0.3, b = 2^0.2, c = 0.2^0.3$，则（#h(3em)）
+  ],
+  choices: choices14(
+    [$a < b < c$],
+    [$b < c < a$],
+    [$c < a < b$],
+    [$a < c < b$],
+  ),
+  answer: [#tab *D*],
+)
+
+#example(
+  question: [
+    【2024广东省华南师范大学附属中学高一上期末次压轴】已知 $a = ln 2, b = sin display((6 pi)/7), c = 3^(1/2)$，则 $a, b, c$ 的大小关系是（#h(3em)）
+  ],
+  choices: choices14(
+    [$a > b > c$],
+    [$a > c > b$],
+    [$c > b > a$],
+    [$c > a > b$],
+  ),
+  answer: [#tab *D*],
+)
+
+#example(
+  question: [
+    【2024 北京西城二模, 5】设 $a = lg display(2/3), b = sqrt(lg 3 dot lg 2), c = display(1/2) lg 6$，则（#h(3em)）
+  ],
+  choices: choices14(
+    [$a < b < c$],
+    [$b < a < c$],
+    [$a < c < b$],
+    [$b < c < a$],
+  ),
+  answer: [#tab *A*],
+)
+
+#example(
+  question: [
+    【2024 广东省深圳市南山区高一上期末质量监测】已知 $a = sin 1 + cos 1, b = log_(cos 1) sin 1, c = 2^(cos 1)$，则（#h(3em)）
+  ],
+  choices: choices14(
+    [$c > a > b$],
+    [$a > b > c$],
+    [$c > b > a$],
+    [$a > c > b$],
+  ),
+  answer: [#tab *A*],
+)
+
+=== 单调性比较问题
+
+#method("")[
+  #tab 相同结构的两个数，构造函数依据单调性比较大小。
+]
+
+#example(
+  question: [
+    【2024广东省佛山市高一上期末单选压轴】已知 $2^a = 5,3^b = 10,4^c = 17$，则 $a, b, c$ 的大小关系为（#h(3em)）
+  ],
+  choices: choices14(
+    [$a < b < c$],
+    [$b < c < a$],
+    [$c < a < b$],
+    [$c < b < a$],
+  ),
+  answer: [#tab *D*],
+)
+
+#example(
+  question: [
+    【2024 重庆市南开中学校高一上期末单选压轴】已知 $5-a = ln a, b = log_4 3 + log_9 17, 7^b + 24^b = 25^c$，则以下关于 $a, b, c$ 的大小关系正确的是（#h(3em)）
+  ],
+  choices: choices14(
+    [$b > c > a$],
+    [$a > c > b$],
+    [$b > a > c$],
+    [$a > b > c$],
+  ),
+  answer: [#tab *D*],
+)
+
+=== 数形结合问题
+
+#method("")[
+  #tab 做出图像，依据交点位置比较大小。
+]
+
+#example(
+  question: [
+    【2023 天津部分区期中】已知 $a, b, c$ 均为正数，且 $2^a = log_(1/2) a, display((1/2))^b = log_(1/2) b, display((1/2))^c = log_2 c$，则（#h(3em)）
+  ],
+  choices: choices14(
+    [$a < b < c$],
+    [$c < b < a$],
+    [$c < a < b$],
+    [$b < a < c$],
+  ),
+  answer: [#tab *A*],
+)
+
+#example(
+  question: [
+    【2024湖南省长沙市湖南师大附中高一上期末单选压轴】设方程 $log_2 x - display((1/2))^x = 0$，$log_(1/2) x - display((1/2))^x = 0$ 的根分别为 $x_1, x_2$，则（#h(3em)）
+  ],
+  choices: choices14(
+    [$x_1 x_2 = 1$],
+    [$0 < x_1 x_2 < 1$],
+    [$1 < x_1 x_2 < 2$],
+    [$x_1 x_2 gt.eq 2$],
+  ),
+  answer: [#tab *B*],
+)
+
+== 抽象函数
+
+#method("")[
+  #tab 寻找已学过的函数模型进行匹配，探究其函数特征。或寻找特殊值带入。
+]
+
+#example(
+  question: [
+    【2024广东深圳高三深圳外国语学校校考阶段练习】写出一个满足 $f(x+y) = f(x) + f(y) + 2 x y$ 的函数解析式：#blank()。
+  ],
+  answer: [#tab *$f(x) = x^2$*],
+)
+
+#example(
+  question: [
+    【2023 重庆一诊】已知定义域为 $(0, +infinity)$ 的减函数 $f(x)$ 满足 $f(x y) = f(x) + f(y)$，且 $f(2) = -1$，则不等式 $f(x+2) + f(x+4) > -3$ 的解集为 #blank()。
+  ],
+  answer: [#tab *$(-2, 0)$*],
+)
+
+#example(
+  question: [
+    【2024四川省遂宁市学年高三上学期期末】定义在 $bb(R)$ 上的函数 $f(x)$，对任意 $x_1, x_2 in bb(R)$，满足下列条件：
+
+    #text(font: "KaiTi")[①] $f(x_1 + x_2) = f(x_1) + f(x_2) - 2$
+
+    #text(font: "KaiTi")[②] $f(2) = 4$
+
+    (1) 是否存在一次函数 $f(x)$ 满足条件#text(font: "KaiTi")[②]，若存在，求出 $f(x)$ 的解析式；若不存在，说明理由。
+
+    (2) 证明：$g(x) = f(x) - 2$ 为奇函数。
+  ],
+  answer: [
+    *(1) $f(x) = x + 2$*
+
+    *(2) 略*
+  ],
+)
+
+#example(
+  question: [
+    【2024北京丰台一模, 14】已知函数 $f(x)$ 具有下列性质：
+
+    #text(font: "KaiTi")[①] 当 $x_1, x_2 in [0, +infinity)$ 时，都有 $f(x_1 + x_2) = f(x_1) + f(x_2) + 1$；
+
+    #text(font: "KaiTi")[②] 在区间 $(0, +infinity)$ 上 $f(x)$ 单调递增；
+
+    #text(font: "KaiTi")[③] $f(x)$ 是偶函数。
+
+    则 $f(0) =$ #blank()；函数 $f(x)$ 可能的一个解析式为 $f(x) =$ #blank()。
+  ],
+  answer: [#tab *$-1$* #tab *$|x|-1$*],
+)
+
+#example(
+  question: [
+    定义在 $bb(R)$ 上的函数 $f(x)$ 满足对任意 $x, y in bb(R)$，有 $f(x-y) = f(x) - f(y)$，$f(3) = 1013$。
+
+    (1) 求 $f(0), f(6)$ 的值。
+
+    (2) 判断 $f(x)$ 的奇偶性，并证明你的结论。
+
+    (3) 当 $x > 0$ 时，$f(x) > 0$，解不等式 $f(2x-4) > 2026$。
+  ],
+  answer: [
+    *(1) $f(0) = 0, f(6) = 2026$*
+
+    *(2) 奇函数*
+
+    *(3) $(5, +infinity)$*
+  ],
+)
+
+#example(
+  question: [
+    【2023福建福州高一期中】(多选) 定义在 $(-1, 1)$ 上的函数 $f(x)$ 满足 $f(x) - f(y) = f(display((x-y)/(1- x y)))$ 且当 $x in (-1, 0)$ 时，$f(x) < 0$，则下列说法正确的有（#h(3em)）
+  ],
+  choices: choices22(
+    [$f(0) = 0$],
+    [$f(x)$ 为奇函数],
+    [$f(x)$ 为减函数],
+    [$f(x)$ 可能为 $f(x) = ln display((1+x)/(1-x))$],
+  ),
+  answer: [#tab *ABD*],
+)
+
+#example(
+  question: [
+    【2024湖南省岳阳市高一上期末】(多选) 已知函数 $f(x)(x in bb(R))$ 满足当 $x > 0$ 时，$f(x) > 1$，且对任意实数 $x_1, x_2$ 满足 $f(x_1 + x_2) = f(x_1) f(x_2)$，当 $x_1 eq.not x_2$ 时，$f(x_1) eq.not f(x_2)$，则下列说法正确的是（#h(3em)）
+  ],
+  choices: choices41(
+    [函数 $f(x)$ 在 $bb(R)$ 上单调递增],
+    [$f(0) = 0$ 或 $1$],
+    [函数 $f(x)$ 为非奇非偶函数],
+    [对任意实数 $x_1, x_2$ 满足 $display(1/2 [f(x_1) + f(x_2)] gt.eq f((x_1+x_2)/2))$],
+  ),
+  answer: [#tab *ACD*],
+)
+
+#example(
+  question: [
+    【2024福建师范大学附属中学高一上期末】(多选) 已知函数 $f(x)$ 的定义域为 $(0, +infinity)$，满足对任意 $x, y in (0, +infinity)$，都有 $f(x y) = f(x) dot f(y) - f(x) - f(y) + 2$，且 $x > 1$ 时，$f(x) > 2$。则下列说法正确的是（#h(3em)）
+  ],
+  choices: choices41(
+    [$f(1) = 2$],
+    [当 $x in (0, 1)$ 时，$f(x) < 2$],
+    [$f(x)$ 在 $(0, 1)$ 是减函数],
+    [存在实数 $k$ 使得函数 $y = |f(x) + k|$ 在 $(0, 1)$ 是减函数],
+  ),
+  answer: [#tab *ABD*],
+)
+
+#pagebreak()
+
+= 思维训练
+
+// #introduction[思维训练]
+
+#example(
+  question: [
+    【2024河南省届高三下学期仿真模拟考试数学试题】已知函数 $f(x)$ 为定义在 $bb(R)$ 上的单调函数，$f(f(x) - 2^x - 2x) = 10$，则 $f(x)$ 在 $[-2, 2]$ 上的值域为 #blank()。
+  ],
+  answer: [#tab *$display([-7/4, 10])$*],
+)
+
+#example(
+  question: [
+    【2023-2024 湖南省长沙市长郡中学高一上期末】已知定义在 $(0, +infinity)$ 上的 $f(x)$ 是单调函数，且对任意 $x in (0, +infinity)$ 恒有 $f(f(x) + log_(1/3) x) = 4$，则函数 $f(x)$ 的零点为（#h(3em)）
+  ],
+  choices: choices14(
+    [$display(1/27)$],
+    [$display(1/9)$],
+    [$9$],
+    [$27$],
+  ),
+  answer: [#tab *A*],
+)
+
+#example(
+  question: [
+    【2024 全国高三专题练习】不等式 $(x^2 - 1)^1011 + x^2022 + 2x^2 - 1 lt.eq 0$ 的解集为 #blank()。
+  ],
+  answer: [#tab *$display([-sqrt(2)/2, sqrt(2)/2])$*],
+)
+
+// ==================== 在文档末尾显示所有答案 ====================
 #show-answers()
