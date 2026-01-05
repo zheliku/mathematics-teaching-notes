@@ -33,7 +33,7 @@
   cover: image("image/cover.jpg", width: 100%), // 请确保有对应的封面图片，或替换为 none
   title: [第3章],
   subtitle: [函数的应用],
-  author: [Typst专家],
+  author: [zheliku],
   date: datetime.today().display(),
   version: version(1, 0, 0),
 )
