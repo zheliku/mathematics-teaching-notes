@@ -1,5 +1,5 @@
 #import "template/lib.typ": *
-#import "@preview/cetz:0.4.2": canvas, draw
+#import "@preview/cetz:0.4.2": angle, canvas, draw
 #import "@preview/cuti:0.4.0": show-cn-fakebold
 #show: show-cn-fakebold
 
@@ -56,22 +56,97 @@
 
 == 角与弧度制
 
-#method("角")[
-  #tab 角可以看成平面内的一条射线绕着端点从一个位置旋转到另一个位置（终边）所成的图形。
-  
-  1. 按旋转方向不同分为：正角、负角、零角。
-  #table(
-    columns: (1fr, 2fr, 1fr),
-    align: (center + horizon, left + horizon, center + horizon),
-    [正角], [一条射线绕其端点按*逆时针*方向旋转形成的角], [$> 0^compose$],
-    [负角], [一条射线绕其端点按*顺时针*方向旋转形成的角], [$< 0^compose$],
-    [零角], [一条射线没有做任何旋转], [$= 0^compose$],
-  )
+#definition("角")[
+  角可以看成平面内的一条射线绕着端点从一个位置旋转到另一个位置（终边）所成的图形。
+  #align(center)[
 
-  2. 按终边位置不同分为：象限角和轴线角。
-  
-  3. 终边相同的角：角 $alpha$ 与其终边相同的所有角，可构成一个集合 $S = { beta | beta = alpha + k dot 360^compose, k in bb(Z) }$。
+    #canvas({
+      draw.line((0, 0), (4, 0), name: "a")
+      draw.line((0, 0), (3, 2.5), name: "b")
+
+      // Draw an angle between the two lines
+      angle.angle(
+        "a.start",
+        "a.end",
+        "b.end",
+        mark: (end: ">>"),
+        label: move(dx: 2em, dy: -0.8em)[#text(black, $alpha$, size: 15pt)],
+        radius: 1,
+      )
+      draw.content((rel: (0, -0.3), to: "a"), [始边])
+      draw.content((rel: (-0.3, 0.3), to: "b"), [终边], angle: 40deg)
+    })
+  ]
 ]
+
+1. 按旋转方向不同分为：正角、负角、零角。
+#table(
+  columns: (1fr, 4fr, 2fr),
+  align: (center + horizon, center + horizon, center + horizon),
+  table.header(
+    [*名称*],
+    [*定义*],
+    [*图形*],
+  ),
+  [正角], [一条射线绕其端点按逆时针方向旋转形成的角], [
+    #canvas({
+      draw.line((0, 0), (2, 0), name: "a")
+      draw.line((0, 0), (1.8, 1), name: "b")
+
+      // Draw an angle between the two lines
+      angle.angle(
+        "a.start",
+        "a.end",
+        "b.end",
+        mark: (end: ">>"),
+        radius: 0.8,
+      )
+      draw.content((rel: (-0.2, -0.1), to: "a.start"), [$O$])
+      draw.content((rel: (0.2, 0), to: "a.end"), [$A$])
+      draw.content((rel: (0.2, 0), to: "b.end"), [$B$])
+    })
+  ],
+  [负角], [一条射线绕其端点按顺时针方向旋转形成的角], [
+    #canvas({
+      draw.line((0, 0), (2, 0), name: "a")
+      draw.line((0, 0), (1.8, 1), name: "b")
+
+      // Draw an angle between the two lines
+      angle.angle(
+        "a.start",
+        "b.end",
+        "a.end",
+        mark: (end: ">>"),
+        radius: 0.3,
+      )
+      draw.content((rel: (-0.2, -0.1), to: "a.start"), [$O$])
+      draw.content((rel: (0.2, 0), to: "a.end"), [$A$])
+      draw.content((rel: (0.2, 0), to: "b.end"), [$B$])
+    })
+  ],
+  [零角], [一条射线没有做任何旋转], [
+    #canvas({
+      draw.line((0, 0), (2, 0), name: "a")
+      draw.line((0, 0), (2, 0), name: "b")
+      draw.circle((0, 0), radius:0.05, fill: black)
+
+      // Draw an angle between the two lines
+      angle.angle(
+        "a.start",
+        "a.end",
+        "b.end",
+        mark: (end: ">>"),
+        radius: 1,
+      )
+      draw.content((rel: (-0.3, -0.1), to: "a.start"), [$O$])
+      draw.content((rel: (0.2, 0), to: "a.end"), [$A(B)$], anchor: "west")
+    })
+  ],
+)
+
+2. 按终边位置不同分为：象限角和轴线角。
+
+3. 终边相同的角：角 $alpha$ 与其终边相同的所有角，可构成一个集合 $S = { beta | beta = alpha + k dot 360^compose, k in bb(Z) }$。
 
 #method("度量")[
   1. *角度制*：把周角分成 360 等份，每一份叫做 1 度的角。
@@ -142,7 +217,16 @@
   align: center + horizon,
   stroke: none,
   table.header(
-    [角], [$0^compose$], [$30^compose$], [$45^compose$], [$60^compose$], [$90^compose$], [$120^compose$], [$135^compose$], [$150^compose$], [$180^compose$]
+    [角],
+    [$0^compose$],
+    [$30^compose$],
+    [$45^compose$],
+    [$60^compose$],
+    [$90^compose$],
+    [$120^compose$],
+    [$135^compose$],
+    [$150^compose$],
+    [$180^compose$],
   ),
   table.hline(),
   [弧度], [$0$], [$pi/6$], [$pi/4$], [$pi/3$], [$pi/2$], [$(2pi)/3$], [$(3pi)/4$], [$(5pi)/6$], [$pi$],
