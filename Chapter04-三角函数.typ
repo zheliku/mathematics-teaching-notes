@@ -1,6 +1,7 @@
 #import "template/lib.typ": *
 #import "@preview/cetz:0.4.2": angle, canvas, draw
 #import "@preview/cuti:0.4.0": show-cn-fakebold
+#import "@preview/cetz-plot:0.1.3": plot
 #show: show-cn-fakebold
 
 // 为代码块添加背景色、圆角，并给每一行代码添加行号
@@ -196,7 +197,7 @@
           mark: (end: ">"),
           label: move(dx: 1.5em, dy: -0.5em)[#text(size: 10pt, weight: "bold", fill: red)[1 rad]],
           radius: 0.5,
-          name: "angle"
+          name: "angle",
         )
         draw.content((rel: (x: 0.2, y: 0), to: "a.end"), [$A$])
         draw.content((rel: (x: 0.1, y: 0.2), to: "b.end"), [$B$])
@@ -207,11 +208,28 @@
   )
 ]
 
-#method("公式")[
-  设扇形半径为 $r$，弧长为 $l$，圆心角为 $alpha$ (rad)。
-  - 角度与弧度换算：$180^compose = pi "rad"$，$1^compose = pi/180 "rad"$，$1 "rad" = (180/pi)^compose approx 57.30^compose$。
-  - 弧长公式：$l = |alpha| r$
-  - 面积公式：$S = 1/2 l r = 1/2 |alpha| r^2$
+#align(center)[
+  #table(
+    columns: (auto, 1fr),
+    align: (center + horizon, left + horizon),
+    inset: 1em,
+    stroke: none,
+    table.hline(),
+    table.header([*概念*], [*说明*]),
+    table.hline(stroke: 0.5pt),
+
+    [弧度制定义], [把弧长等于半径的弧所对的圆心角叫做 $1$ 弧度的角，弧度记作 rad],
+
+    [角 $alpha$ 的弧度数公式], [$|alpha| = display(l/r)$ ($l$ 为弧长， $r$ 为半径)],
+
+    [角度与弧度的换算],
+    [$180^compose = pi "rad", quad 1^compose = display(pi/180 "rad"), quad 1 "rad" = display(180/pi)^compose approx 57.3^compose$],
+
+    [弧长公式], [$l = alpha r, quad 0 < alpha < 2 pi$],
+
+    [扇形面积公式], [$S = display(1/2) l r = display(1/2) alpha r^2, quad 0 < alpha < 2 pi$],
+    table.hline(),
+  )
 ]
 
 #example(
@@ -219,10 +237,11 @@
     【2022广东珠海高一月考】(多选) 下列转化结果正确的是（#h(3em)）
   ],
   choices: choices22(
-    [$67^compose 30'$ 化成弧度是 $(3pi)/8 "rad"$],
-    [$-(10pi)/3 "rad"$ 化成角度是 $-600^compose$],
-    [$-150^compose$ 化成弧度是 $-(7pi)/6 "rad"$],
-    [$pi/12 "rad"$ 化成角度是 $15^compose$],
+    row-gutter: 2em,
+    [$67^compose 30'$ 化成弧度是 $display((3pi)/8) "rad"$],
+    [$display(-(10pi)/3) "rad"$ 化成角度是 $-600^compose$],
+    [$-150^compose$ 化成弧度是 $display(-(7pi)/6) "rad"$],
+    [$display(pi/12) "rad"$ 化成角度是 $15^compose$],
   ),
   answer: [#tab *ABD*],
 )
@@ -242,15 +261,36 @@
 
 == 三角函数定义
 
-#method("定义")[
-  #tab 在任意角的终边上任取一点 $P(x,y)$，设 $O P = r = sqrt(x^2 + y^2)$。
-  $ sin alpha = y/r, quad cos alpha = x/r, quad tan alpha = y/x $
-]
 
-#method("符号")[
-  - *sin*: 一二正，三四负
-  - *cos*: 一四正，二三负
-  - *tan*: 一三正，二四负
+在任意角的终边上任取一点 $P(x,y)$，设 $O P = r = sqrt(x^2 + y^2)$。
+
+规定：
+$ sin alpha = y/r, quad cos alpha = x/r, quad tan alpha = y/x $
+
+#align(center)[
+  #canvas({
+    let o-pos = (1, 1)
+    let point-pos = (3, 2)
+
+
+    plot.plot(
+      size: (4, 3),
+      axis-style: "school-book",
+      x-tick-step: none,
+      y-tick-step: none,
+      x-min: -o-pos.at(0),
+      x-max: 3,
+      y-min: -o-pos.at(1),
+      y-max: 2,
+      // y-equal: "x",
+      { plot.add(domain: (0, 4), t => (t, 0.5 * t), samples: 200) },
+    )
+    draw.circle(point-pos, radius: 0.1, fill: black, name: "P")
+    draw.content((rel: (0.3, -0.5), to: "P"), [$P(x, y)$])
+    draw.line(o-pos, point-pos, name: "OP")
+    draw.content((rel: (-0.1, 0.3), to: "OP"), [$r$])
+    draw.content((5, 2.5), [角$alpha$的终边])
+  })
 ]
 
 #table(
