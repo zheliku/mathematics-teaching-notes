@@ -413,13 +413,13 @@ $ h(x) = display(g(x)/f(x)) $
   question: [
     【2024 北京平谷零模, 15】已知函数 $f(x) = display(cases(|x| \, & x lt.eq m, x^2 - 2 m x + 4 m \, & x > m))$，设 $g(x) = f(x) - b$。给出下列四个结论：
 
-    #text(font: "KaiTi")[①] 当 $m = 4$ 时，$f(x)$ 不存在最小值；
+    ① 当 $m = 4$ 时，$f(x)$ 不存在最小值；
 
-    #text(font: "KaiTi")[②] 当 $0 < m lt.eq 3$ 时，$f(x)$ 在 $(0, +infinity)$ 上为增函数；
+    ② 当 $0 < m lt.eq 3$ 时，$f(x)$ 在 $(0, +infinity)$ 上为增函数；
 
-    #text(font: "KaiTi")[③] 当 $m < 0$ 时，存在实数 $b$，使得 $g(x)$ 有三个零点；
+    ③ 当 $m < 0$ 时，存在实数 $b$，使得 $g(x)$ 有三个零点；
 
-    #text(font: "KaiTi")[④] 当 $m > 3$ 时，存在实数 $b$，使得 $g(x)$ 有三个零点。
+    ④ 当 $m > 3$ 时，存在实数 $b$，使得 $g(x)$ 有三个零点。
 
     其中正确结论的序号是 #blank()。
   ],
@@ -430,13 +430,13 @@ $ h(x) = display(g(x)/f(x)) $
   question: [
     【2024 北京西城期末, 15】设 $a in bb(R)$，函数 $f(x) = display(cases(-x^3 \, & x > a, -x^2 + a^2 \, & x lt.eq a))$。给出下列四个结论：
 
-    #text(font: "KaiTi")[①] $f(x)$ 在区间 $(0, +infinity)$ 上单调递减；
+    ① $f(x)$ 在区间 $(0, +infinity)$ 上单调递减；
 
-    #text(font: "KaiTi")[②] 当 $a gt.eq 0$ 时，$f(x)$ 存在最大值；
+    ② 当 $a gt.eq 0$ 时，$f(x)$ 存在最大值；
 
-    #text(font: "KaiTi")[③] 当 $a < 0$ 时，直线 $y = a x$ 与曲线 $y = f(x)$ 恰有 3 个交点；
+    ③ 当 $a < 0$ 时，直线 $y = a x$ 与曲线 $y = f(x)$ 恰有 3 个交点；
 
-    #text(font: "KaiTi")[④] 存在正数 $a$ 及点 $M(x_1, f(x_1)) (x_1 > a)$ 和 $N(x_2, f(x_2)) (x_2 lt.eq a)$，使 $|M N| lt.eq display(1/100)$。
+    ④ 存在正数 $a$ 及点 $M(x_1, f(x_1)) (x_1 > a)$ 和 $N(x_2, f(x_2)) (x_2 lt.eq a)$，使 $|M N| lt.eq display(1/100)$。
 
     其中正确结论的序号是 #blank()。
   ],
@@ -447,13 +447,13 @@ $ h(x) = display(g(x)/f(x)) $
   question: [
     【2021北京卷, 15】已知函数 $f(x) = |lg x| - k x - 2$，给出下列四个结论：
 
-    #text(font: "KaiTi")[①] 当 $k = 0$ 时，$f(x)$ 恰有 2 个零点；
+    ① 当 $k = 0$ 时，$f(x)$ 恰有 2 个零点；
 
-    #text(font: "KaiTi")[②] 存在负数 $k$，使得 $f(x)$ 恰有 1 个零点；
+    ② 存在负数 $k$，使得 $f(x)$ 恰有 1 个零点；
 
-    #text(font: "KaiTi")[③] 存在负数 $k$，使得 $f(x)$ 恰有 3 个零点；
+    ③ 存在负数 $k$，使得 $f(x)$ 恰有 3 个零点；
 
-    #text(font: "KaiTi")[④] 存在正数 $k$，使得 $f(x)$ 恰有 3 个零点。
+    ④ 存在正数 $k$，使得 $f(x)$ 恰有 3 个零点。
 
     其中正确结论的序号是 #blank()。
   ],
@@ -960,11 +960,11 @@ $ h(x) = f(t) \ t = g(x) $
   question: [
     【2024四川省遂宁市学年高三上学期期末】定义在 $bb(R)$ 上的函数 $f(x)$，对任意 $x_1, x_2 in bb(R)$，满足下列条件：
 
-    #text(font: "KaiTi")[①] $f(x_1 + x_2) = f(x_1) + f(x_2) - 2$
+    ① $f(x_1 + x_2) = f(x_1) + f(x_2) - 2$
 
-    #text(font: "KaiTi")[②] $f(2) = 4$
+    ② $f(2) = 4$
 
-    (1) 是否存在一次函数 $f(x)$ 满足条件#text(font: "KaiTi")[②]，若存在，求出 $f(x)$ 的解析式；若不存在，说明理由。
+    (1) 是否存在一次函数 $f(x)$ 满足条件②，若存在，求出 $f(x)$ 的解析式；若不存在，说明理由。
 
     (2) 证明：$g(x) = f(x) - 2$ 为奇函数。
   ],
@@ -979,11 +979,11 @@ $ h(x) = f(t) \ t = g(x) $
   question: [
     【2024北京丰台一模, 14】已知函数 $f(x)$ 具有下列性质：
 
-    #text(font: "KaiTi")[①] 当 $x_1, x_2 in [0, +infinity)$ 时，都有 $f(x_1 + x_2) = f(x_1) + f(x_2) + 1$；
+    ① 当 $x_1, x_2 in [0, +infinity)$ 时，都有 $f(x_1 + x_2) = f(x_1) + f(x_2) + 1$；
 
-    #text(font: "KaiTi")[②] 在区间 $(0, +infinity)$ 上 $f(x)$ 单调递增；
+    ② 在区间 $(0, +infinity)$ 上 $f(x)$ 单调递增；
 
-    #text(font: "KaiTi")[③] $f(x)$ 是偶函数。
+    ③ $f(x)$ 是偶函数。
 
     则 $f(0) =$ #blank()；函数 $f(x)$ 可能的一个解析式为 $f(x) =$ #blank()。
   ],

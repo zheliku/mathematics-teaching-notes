@@ -60,7 +60,6 @@
   $ f: A -> B $
 ]
 
-其中：
 + $b$ 称为 $a$ 在映射 $f$ 下的像，记作 $b = f(a)$。
 + $a$ 称为 $b$ 关于映射 $f$ 的原像，记作 $a = f^(-1)(b)$。
 + 集合 $A$ 中所有元素的像的集合称为映射的值域，记作 $f(A)$。
@@ -480,13 +479,17 @@
 #align(center)[
   #table(
     columns: (auto, 1fr, 1fr),
-    // stroke: 0.5pt,
+    stroke: none,
     align: horizon + center,
     inset: 0.5em,
+    table.hline(),
     table.header([], [*奇函数*], [*偶函数*]),
+    table.hline(stroke: 0.5pt),
     [图像], [关于原点对称], [关于 $y$ 轴对称],
     [定义域], [关于原点对称], [关于原点对称],
-    [特点], [$f(x) + f(-x) = 0$ \ $f(0) = 0$ (如果 $x=0$ 有意义)], [$f(x) - f(-x) = 0$],
+    [特点], [$f(x) + f(-x) = 0$], [$f(x) - f(-x) = 0$],
+    [$y$ 轴截距], [$f(0) = 0$ (如果 $x=0$ 有意义)], [无],
+    table.hline(),
   )
 ]
 
@@ -565,31 +568,32 @@
 #align(center)[
   #table(
     columns: (auto, 2.5fr, 1fr),
-    stroke: 0.5pt,
+    stroke: none,
     align: horizon + center,
-    inset: 1.2em,
+    inset: 0.5em,
+    table.hline(),
     table.header([序号], [条件], [周期]),
-    [1], [$f(x + a) = f(x - a), quad quad f(x + a) + f(x) = k$], [$T = 2a$],
+    table.hline(stroke: 0.5pt),
+    [1],
+    pad(bottom: 10pt, stack(
+      dir: ttb,
+      spacing: 1.2em, // <--- 调整这个数值来缩短间距 (默认大约是 1.2em)
+      $f(x + a) = f(x - a), quad quad f(x + a) + f(x) = k$,
+      $display(f(x + a) = (1 - f(x))/(1 + f(x))), quad quad display(f(x + a) = plus.minus 1/f(x))$,
+    )),
+    [$T = 2a$],
+
     [2],
-    grid(
-      columns: (1fr, 1fr),
-      row-gutter: 2em,
-      [$display(f(x + a) = (1 - f(x))/(1 + f(x))),$],
+    pad(y: 10pt, [$display(f(x + a) = 1/(1 - f(x))), quad quad display(f(x) = 1 - 1/(f(x + a)))$]),
 
-      [$display(f(x + a) = plus.minus 1/f(x))$],
-
-      [$display(f(x + a) = 1/(1 - f(x))),$],
-
-      [$display(f(x) = 1 - 1/(f(x + a)))$],
-    ),
-
-    [$T = 3a$ \ （部分情况）],
+    [$T = 3a$],
 
     [3],
-    [$display(f(x + a) = -(1 - f(x))/(1 + f(x))), quad quad display(f(x + a) = -(1 + f(x))/(1 - f(x)))$],
+    pad(y: 10pt, [$display(f(x + a) = -(1 - f(x))/(1 + f(x))), quad quad display(f(x + a) = -(1 + f(x))/(1 - f(x)))$]),
     [$T = 4a$],
 
     [4], [$f(x + a) = f(x + b)$], [$T = |a - b|$],
+    table.hline(),
   )
 ]
 
@@ -1441,13 +1445,13 @@ $ f(m - x) = f(n + x) $
 *平移变换*
 
 + $x$ 轴平移《左加右减》
-  
+
   探究：$f(x)=x^2$ 与 $f(x)=(x-1)^2$ 的位置关系。
   + $f(x)$ 向左平移 $a$ 个单位得到 $f(x + a)$ 的图像 ($a > 0$)。
   + $f(x)$ 向右平移 $a$ 个单位得到 $f(x - a)$ 的图像 ($a > 0$)。
 
 + $y$ 轴平移《下加上减》
-  
+
   探究：$f(x)=x^2$ 与 $f(x)+2$ 的位置关系。
   + $f(x)$ 向上平移 $a$ 个单位得到 $f(x) + a$ 的图像 ($a > 0$)。
   + $f(x)$ 向下平移 $a$ 个单位得到 $f(x) - a$ 的图像 ($a > 0$)。
@@ -1455,13 +1459,13 @@ $ f(m - x) = f(n + x) $
 *缩放变换*
 
 + $x$ 轴缩放《扩除缩乘》
-  
+
   探究：$f(x)=x^2-1$ 与 $f(x)=(2x)^2-1$ 的位置关系。
   + $f(x)$ 所有横坐标缩小为原来的 $display(1/a)$ 倍，得到 $f(a x)$ 的图像 ($a > 1$)。
   + $f(x)$ 所有横坐标扩大为原来的 $a$ 倍，得到 $display(f(x/a))$ 的图像 ($a > 1$)。
 
 + $y$ 轴缩放《扩除缩乘》
-  
+
   探究：$f(x)=x^2-1$ 与 $f(x)=2(x^2-1)$ 的位置关系。
   + $f(x)$ 所有纵坐标扩大为原来的 $a$ 倍，得到 $a f(x)$ 的图像 ($a > 1$)。
   + $f(x)$ 所有纵坐标缩小为原来的 $display(1/a)$ 倍，得到 $display(1/a)f(x)$ 的图像 ($a > 1$)。
@@ -1471,7 +1475,7 @@ $ f(m - x) = f(n + x) $
   + 下列情况中，$g(x)$ 的图像可以由 $f(x)$ 经过哪些变换得到？
     - $f(x) = sqrt(x)$，$g(x) = 3 sqrt(2 x + 1)$
     - $f(x) = x^2 - 1$，$g(x) = 2 x^2 - 4 x + 3$
-      
+
   + 如何将 $f(x)$ 变换得到 $display(g(x) = f(1/2 x + 1))$？
     + 方式一：先向 #blank() 平移 #blank() 个单位，然后将横坐标缩放为原来的 #blank()。
     + 方式二：先将横坐标缩放为原来的 #blank()，然后向 #blank() 平移 #blank() 个单位。

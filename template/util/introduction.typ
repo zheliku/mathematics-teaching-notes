@@ -21,7 +21,7 @@
       inset: (x: 2%, top: 8pt + h / 2, bottom: 8pt),
       fill: color.lighten(90%),
       {
-        set text(font: ("Times New Roman", "FZKai-Z03S"))
+        set text(font: ("Times New Roman", "KaiTi"))
         grid(
           columns: (1fr,) * 2,
           inset: (left: 1em),

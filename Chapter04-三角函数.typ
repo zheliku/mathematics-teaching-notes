@@ -79,16 +79,21 @@
   ]
 ]
 
-1. 按旋转方向不同分为：正角、负角、零角。
++ 按旋转方向不同分为：正角、负角、零角。
++ 按终边位置不同分为：象限角和轴线角。
+
+
 #table(
   columns: (1fr, 4fr, 2fr),
   align: (center + horizon, center + horizon, center + horizon),
-  table.header(
-    [*名称*],
-    [*定义*],
-    [*图形*],
-  ),
-  [正角], [一条射线绕其端点按逆时针方向旋转形成的角], [
+  stroke: none,
+  inset: 0.5em,
+  table.hline(stroke: 1.5pt),
+  table.header([*名称*], [*定义*], [*图形*]),
+  table.hline(stroke: 0.75pt),
+  [正角],
+  [一条射线绕其端点按逆时针方向旋转形成的角],
+  [
     #canvas({
       draw.line((0, 0), (2, 0), name: "a")
       draw.line((0, 0), (1.8, 1), name: "b")
@@ -106,7 +111,9 @@
       draw.content((rel: (0.2, 0), to: "b.end"), [$B$])
     })
   ],
-  [负角], [一条射线绕其端点按顺时针方向旋转形成的角], [
+  [负角],
+  [一条射线绕其端点按顺时针方向旋转形成的角],
+  [
     #canvas({
       draw.line((0, 0), (2, 0), name: "a")
       draw.line((0, 0), (1.8, 1), name: "b")
@@ -117,18 +124,20 @@
         "b.end",
         "a.end",
         mark: (end: ">>"),
-        radius: 0.3,
+        radius: 0.5,
       )
       draw.content((rel: (-0.2, -0.1), to: "a.start"), [$O$])
       draw.content((rel: (0.2, 0), to: "a.end"), [$A$])
       draw.content((rel: (0.2, 0), to: "b.end"), [$B$])
     })
   ],
-  [零角], [一条射线没有做任何旋转], [
+  [零角],
+  [一条射线没有做任何旋转],
+  [
     #canvas({
       draw.line((0, 0), (2, 0), name: "a")
       draw.line((0, 0), (2, 0), name: "b")
-      draw.circle((0, 0), radius:0.05, fill: black)
+      draw.circle((0, 0), radius: 0.05, fill: black)
 
       // Draw an angle between the two lines
       angle.angle(
@@ -142,20 +151,19 @@
       draw.content((rel: (0.2, 0), to: "a.end"), [$A(B)$], anchor: "west")
     })
   ],
+  table.hline(stroke: 1.5pt),
 )
 
-2. 按终边位置不同分为：象限角和轴线角。
+*终边相同的角*
+角 $alpha$ 与其终边相同的所有角，可构成一个集合 $S = { beta | beta = alpha + k dot 360^compose, k in bb(Z) }$。
 
-3. 终边相同的角：角 $alpha$ 与其终边相同的所有角，可构成一个集合 $S = { beta | beta = alpha + k dot 360^compose, k in bb(Z) }$。
-
-#method("度量")[
-  1. *角度制*：把周角分成 360 等份，每一份叫做 1 度的角。
-  2. *弧度制*：把弧长等于半径的弧所对的圆心角叫做 1 弧度的角，用符号 rad 表示。
+#definition("角度制")[
+  #tab 把周角分成 360 等份，每一份叫做 1 度的角。
 ]
 
 #example(
   question: [
-    (1-1-1) 下列各角中与 $60^compose$ 角的终边相同的是（#h(3em)）
+    下列各角中与 $60^compose$ 角的终边相同的是（#h(3em)）
   ],
   choices: choices14(
     [$-300^compose$],
@@ -166,8 +174,41 @@
   answer: [#tab *A*],
 )
 
+#definition("弧度制")[
+  #grid(
+    columns: (4fr, 1fr),
+    column-gutter: 2em,
+    [
+      设圆的半径为 $r$，弧长为 $l$，则圆心角 $alpha$ (rad) 所对的弧长与半径的比值 $display(l/r)$ 称为该圆心角的弧度数，用符号 rad 表示，读作弧度。
+
+      用“弧度”作为单位来度量角的单位制叫做弧度制。
+    ],
+    [
+      #canvas({
+        let r = 1.2
+        draw.circle((0, 0), radius: r, name: "circle")
+        draw.line((0, 0), (r, 0), name: "a")
+        draw.line((0, 0), (0.5 * r, calc.sqrt(3) / 2 * r), name: "b")
+        angle.angle(
+          "a.start",
+          "a.end",
+          "b.end",
+          mark: (end: ">"),
+          label: move(dx: 1.5em, dy: -0.5em)[#text(size: 10pt, weight: "bold", fill: red)[1 rad]],
+          radius: 0.5,
+          name: "angle"
+        )
+        draw.content((rel: (x: 0.2, y: 0), to: "a.end"), [$A$])
+        draw.content((rel: (x: 0.1, y: 0.2), to: "b.end"), [$B$])
+        draw.content((rel: (-0.2, -0.1), to: "a.start"), [$O$])
+        draw.content((rel: (calc.sqrt(3) / 2 * r, 0.5 * r), to: "angle"), [$1$])
+      })
+    ],
+  )
+]
+
 #method("公式")[
-  #tab 设扇形半径为 $r$，弧长为 $l$，圆心角为 $alpha$ (rad)。
+  设扇形半径为 $r$，弧长为 $l$，圆心角为 $alpha$ (rad)。
   - 角度与弧度换算：$180^compose = pi "rad"$，$1^compose = pi/180 "rad"$，$1 "rad" = (180/pi)^compose approx 57.30^compose$。
   - 弧长公式：$l = |alpha| r$
   - 面积公式：$S = 1/2 l r = 1/2 |alpha| r^2$
@@ -175,7 +216,7 @@
 
 #example(
   question: [
-    (1-1-2) 【2022广东珠海高一月考】(多选) 下列转化结果正确的是（#h(3em)）
+    【2022广东珠海高一月考】(多选) 下列转化结果正确的是（#h(3em)）
   ],
   choices: choices22(
     [$67^compose 30'$ 化成弧度是 $(3pi)/8 "rad"$],
@@ -188,7 +229,7 @@
 
 #example(
   question: [
-    (1-1-3) 【2022广东东莞高一期末】已知扇形的面积为 16，当扇形的周长最小时，扇形的圆心角为（#h(3em)）
+    【2022广东东莞高一期末】已知扇形的面积为 16，当扇形的周长最小时，扇形的圆心角为（#h(3em)）
   ],
   choices: choices14(
     [$1$],
@@ -237,7 +278,7 @@
 
 #example(
   question: [
-    (1-2-1) 【2023 重庆南开中学月考】(多选) 已知角 $alpha$ 是第二象限角，则下列不等式一定成立的是（#h(3em)）
+    【2023 重庆南开中学月考】(多选) 已知角 $alpha$ 是第二象限角，则下列不等式一定成立的是（#h(3em)）
   ],
   choices: choices22(
     [$sin alpha/2 < 0$],
@@ -250,7 +291,7 @@
 
 #example(
   question: [
-    (1-2-2) 【2023江苏扬州高一期末】已知角 $alpha$ 的终边经过点 $(m, -5)$，$cos alpha = 12/13$，则 $tan alpha =$（#h(3em)）
+    【2023江苏扬州高一期末】已知角 $alpha$ 的终边经过点 $(m, -5)$，$cos alpha = 12/13$，则 $tan alpha =$（#h(3em)）
   ],
   choices: choices14(
     [$plus.minus 12/5$],
@@ -285,7 +326,7 @@
 
 #example(
   question: [
-    (2-1-1) 【2023天津南开中学高一期末】已知 $P(1, 3)$ 为角 $alpha$ 终边上一点，则 $display((2 sin alpha - cos alpha)/(sin alpha + 2 cos alpha)) =$（#h(3em)）
+    【2023天津南开中学高一期末】已知 $P(1, 3)$ 为角 $alpha$ 终边上一点，则 $display((2 sin alpha - cos alpha)/(sin alpha + 2 cos alpha)) =$（#h(3em)）
   ],
   choices: choices14(
     [$-7$],
@@ -298,7 +339,7 @@
 
 #example(
   question: [
-    (2-1-2) 【2022黑龙江哈尔滨一中期末】若 $sin((3pi)/2 - alpha) + cos(pi - alpha) = sin alpha$，则 $2 sin^2 alpha - sin alpha cos alpha$ 的值为（#h(3em)）
+    【2022黑龙江哈尔滨一中期末】若 $sin((3pi)/2 - alpha) + cos(pi - alpha) = sin alpha$，则 $2 sin^2 alpha - sin alpha cos alpha$ 的值为（#h(3em)）
   ],
   choices: choices14(
     [$21/10$],
@@ -316,7 +357,7 @@
 
 #example(
   question: [
-    (2-1-4) 【2023 湖北重点高中协作校高一期末】若 $sin alpha + cos alpha = 7/13 (0 < alpha < pi)$，则 $tan alpha =$（#h(3em)）
+    【2023 湖北重点高中协作校高一期末】若 $sin alpha + cos alpha = 7/13 (0 < alpha < pi)$，则 $tan alpha =$（#h(3em)）
   ],
   choices: choices14(
     [$-12/5$],
@@ -329,7 +370,7 @@
 
 #example(
   question: [
-    (2-1-5) 【2020湖南师大附中】已知 $tan alpha = 3$，则 $display((1 + 2 sin alpha cos alpha)/(sin^2 alpha - cos^2 alpha))$ 的值是（#h(3em)）
+    【2020湖南师大附中】已知 $tan alpha = 3$，则 $display((1 + 2 sin alpha cos alpha)/(sin^2 alpha - cos^2 alpha))$ 的值是（#h(3em)）
   ],
   choices: choices14(
     [$1/2$],
@@ -342,7 +383,7 @@
 
 #example(
   question: [
-    (2-1-6) 【2023 山东济南期中】已知 $theta$ 为第三象限角，$sin theta - cos theta = -1/5$，则 $display((cos theta(1 - 2 sin^2 theta))/(sin theta + cos theta)) =$（#h(3em)）
+    【2023 山东济南期中】已知 $theta$ 为第三象限角，$sin theta - cos theta = -1/5$，则 $display((cos theta(1 - 2 sin^2 theta))/(sin theta + cos theta)) =$（#h(3em)）
   ],
   choices: choices14(
     [$-4/25$],
@@ -355,7 +396,7 @@
 
 #example(
   question: [
-    (2-1-7) 【2023 广东茂名高一期末】若 $sin x + cos x = 1/3, x in (-pi/2, pi/2)$，则 $sin x - cos x$ 的值为（#h(3em)）
+    【2023 广东茂名高一期末】若 $sin x + cos x = 1/3, x in (-pi/2, pi/2)$，则 $sin x - cos x$ 的值为（#h(3em)）
   ],
   choices: choices14(
     [$plus.minus sqrt(17)/3$],
@@ -368,7 +409,7 @@
 
 #example(
   question: [
-    (2-1-8) 【2023 山东临沂高一期末】若 $theta in (0, pi)$，$tan theta + 1/tan theta = 4$，则 $sin theta + cos theta =$（#h(3em)）
+    【2023 山东临沂高一期末】若 $theta in (0, pi)$，$tan theta + 1/tan theta = 4$，则 $sin theta + cos theta =$（#h(3em)）
   ],
   choices: choices14(
     [$display((2sqrt(3))/3)$],
@@ -381,7 +422,7 @@
 
 #example(
   question: [
-    (2-1-9) 【2025北京6年高考3年模拟改编】若 $sin theta, cos theta$ 是方程 $4x^2 + 2m x + m = 0$ 的两根，则 $m$ 的值为（#h(3em)）
+    【2025北京6年高考3年模拟改编】若 $sin theta, cos theta$ 是方程 $4x^2 + 2m x + m = 0$ 的两根，则 $m$ 的值为（#h(3em)）
   ],
   choices: choices14(
     [$1 + sqrt(5)$],

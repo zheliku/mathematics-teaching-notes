@@ -1,5 +1,5 @@
-#import "heading-L1.typ": find-1, last-heading-l1-update, first-heading-l1-update
-#import "heading-L2.typ": find-2, last-heading-l2-update, first-heading-l2-update
+#import "heading-L1.typ": find-1, first-heading-l1-update, last-heading-l1-update
+#import "heading-L2.typ": find-2, first-heading-l2-update, last-heading-l2-update
 
 #let header-rect(it, color) = rect(
   width: 100%,
@@ -7,7 +7,7 @@
   align(
     right,
     {
-      set text(font: ("Times New Roman", "FZKai-Z03S"))
+      set text(font: ("Times New Roman", "KaiTi"))
       it
     },
   ),

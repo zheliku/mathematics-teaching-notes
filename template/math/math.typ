@@ -18,7 +18,11 @@
         stroke: main-color,
         fill: main-color.lighten(95%),
         {
-          set text(font: ("Times New Roman", "FZKai-Z03S"))
+          set text(
+            lang: "zh",
+            region: "cn",
+            font: ("Times New Roman", "KaiTi"),
+          )
           content
         },
       ),

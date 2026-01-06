@@ -77,7 +77,7 @@
     [同向同正可乘性], [$a > b > 0, c > d > 0 => a c > b d$],
     [可乘方性], [$a > b > 0 => a^n > b^n (n in bb(N)^+, n gt.eq 2)$],
     [可开方性], [$a > b > 0 => root(n, a) > root(n, b) (n in bb(N)^+, n gt.eq 2)$],
-    table.hline(stroke: 0.5pt),
+    table.hline(),
   )
 ]
 
@@ -710,7 +710,7 @@ $
 )
 
 #extend[
-  #tab （1）$a^3 + b^3$ 与 $a^3 - b^3$
+  #tab $a^3 + b^3$ 与 $a^3 - b^3$
 ]
 
 == $display(1/a + 1/b)$ 的应用与变形
