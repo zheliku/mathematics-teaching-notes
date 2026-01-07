@@ -1,5 +1,5 @@
 #import "template/lib.typ": *
-#import "@preview/cetz:0.4.2": angle, canvas, draw
+#import "@preview/cetz:0.4.2": angle, canvas, draw, vector
 #import "@preview/cuti:0.4.0": show-cn-fakebold
 #import "@preview/cetz-plot:0.1.3": plot
 #show: show-cn-fakebold
@@ -293,54 +293,290 @@ $ sin alpha = y/r, quad cos alpha = x/r, quad tan alpha = y/x $
   })
 ]
 
-#table(
-  columns: (1.5em, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr),
-  align: center + horizon,
-  stroke: none,
-  table.header(
-    [角],
-    [$0^compose$],
-    [$30^compose$],
-    [$45^compose$],
-    [$60^compose$],
-    [$90^compose$],
-    [$120^compose$],
-    [$135^compose$],
-    [$150^compose$],
-    [$180^compose$],
-  ),
-  table.hline(),
-  [弧度], [$0$], [$pi/6$], [$pi/4$], [$pi/3$], [$pi/2$], [$(2pi)/3$], [$(3pi)/4$], [$(5pi)/6$], [$pi$],
-  [$sin$], [$0$], [$1/2$], [$sqrt(2)/2$], [$sqrt(3)/2$], [$1$], [$sqrt(3)/2$], [$sqrt(2)/2$], [$1/2$], [$0$],
-  [$cos$], [$1$], [$sqrt(3)/2$], [$sqrt(2)/2$], [$1/2$], [$0$], [$-1/2$], [$-sqrt(2)/2$], [$-sqrt(3)/2$], [$-1$],
-  [$tan$], [$0$], [$sqrt(3)/3$], [$1$], [$sqrt(3)$], [---], [$-sqrt(3)$], [$-1$], [$-sqrt(3)/3$], [$0$],
+三角函数数值在各象限的符号：
+
+#grid(
+  columns: (1fr, 1fr, 1fr),
+  align: center,
+  [
+    #canvas({
+      plot.plot(
+        size: (2.5, 2.5),
+        axis-style: "school-book",
+        x-tick-step: none,
+        y-tick-step: none,
+        x-min: -1.2,
+        x-max: 1,
+        y-min: -1.2,
+        y-max: 1,
+        y-equal: "x",
+        { plot.add(domain: (0, 0), t => (t, 0.5 * t), samples: 200) },
+      )
+      draw.content((0.6, 0.6), [$-$])
+      draw.content((2.1, 0.6), [$-$])
+      draw.content((2.1, 2.1), [$+$])
+      draw.content((0.6, 2.1), [$+$])
+    })
+  ],
+  [
+    #canvas({
+      plot.plot(
+        size: (2.5, 2.5),
+        axis-style: "school-book",
+        x-tick-step: none,
+        y-tick-step: none,
+        x-min: -1.2,
+        x-max: 1,
+        y-min: -1.2,
+        y-max: 1,
+        y-equal: "x",
+        { plot.add(domain: (0, 0), t => (t, 0.5 * t), samples: 200) },
+      )
+      draw.content((0.6, 0.6), [$-$])
+      draw.content((2.1, 0.6), [$+$])
+      draw.content((2.1, 2.1), [$+$])
+      draw.content((0.6, 2.1), [$-$])
+    })
+  ],
+  [
+    #canvas({
+      plot.plot(
+        size: (2.5, 2.5),
+        axis-style: "school-book",
+        x-tick-step: none,
+        y-tick-step: none,
+        x-min: -1.2,
+        x-max: 1,
+        y-min: -1.2,
+        y-max: 1,
+        y-equal: "x",
+        { plot.add(domain: (0, 0), t => (t, 0.5 * t), samples: 200) },
+      )
+      draw.content((0.6, 0.6), [$+$])
+      draw.content((2.1, 0.6), [$-$])
+      draw.content((2.1, 2.1), [$+$])
+      draw.content((0.6, 2.1), [$-$])
+    })
+  ],
 )
+
+三角函数与单位圆的关系与解释：
+
+$
+  sin alpha = y = M P, quad cos alpha = x = O M, quad tan alpha = (sin alpha) / (cos alpha) = y/x = (M P) / (O M)
+$
+
+#grid(
+  columns: (1fr, 1fr),
+  align: center,
+  [
+    #canvas({
+      let r = 1.5
+      let padding = 0.2
+      let o-pos = (r, r)
+      let theta = 50deg
+      let theta-r = 0.3
+
+      draw.set-style(
+        axes: (
+          shared-zero: $O$,
+          x: (label: (offset: -0.5)),
+        ),
+      )
+
+      plot.plot(
+        size: vector.scale((r, r), 2),
+        axis-style: "school-book",
+        x-tick-step: none,
+        y-tick-step: none,
+        y-equal: "x",
+        {
+          plot.add(domain: (0, 2 * calc.pi), t => vector.scale((calc.sin(t), calc.cos(t)), r), samples: 100)
+        },
+      )
+
+      let p-pos = vector.add(o-pos, (r * calc.cos(theta), r * calc.sin(theta)))
+      let t-pos1 = vector.add(o-pos, vector.scale((1, calc.tan(theta)), r + 0.2))
+      let t-pos = vector.add(o-pos, vector.scale((1, calc.tan(theta)), r))
+      let a-pos = vector.add(o-pos, (r, 0))
+      let m-pos = vector.add(o-pos, (r * calc.cos(theta), 0))
+
+      draw.arc(vector.add(o-pos, (theta-r, 0)), start: 0deg, stop: theta, radius: theta-r, name: "angle")
+      draw.content((rel: (x: 0.2, y: 0.3), to: "angle"), [$alpha$])
+
+      draw.line(o-pos, t-pos1, name: "OT")
+      draw.content((rel: (x: 0.1, y: -0.4), to: "OT.end"), $T$)
+      draw.content((rel: (x: -0.1, y: 0.2), to: "OT.end"), [$alpha$的终边])
+
+      draw.line(a-pos, t-pos, name: "AT")
+      draw.content((rel: (x: 0.6, y: -0.36), to: "AT.start"), $A(1,0)$)
+
+      draw.line(m-pos, p-pos, name: "MP")
+      draw.content((rel: (x: 0, y: 0.3), to: "MP.end"), $P$)
+      draw.content((rel: (x: 0, y: -0.3), to: "MP.start"), $M$)
+
+      draw.content(vector.add(o-pos, (0, -2.4)), [(1)])
+    })
+  ],
+  [
+    #canvas({
+      let r = 1.5
+      let padding = 0.2
+      let o-pos = (r, r)
+      let theta = 50deg
+      let theta-r = 0.3
+
+      draw.set-style(
+        axes: (
+          shared-zero: $O$,
+        ),
+      )
+
+      plot.plot(
+        size: vector.scale((r, r), 2),
+        axis-style: "school-book",
+        x-tick-step: none,
+        y-tick-step: none,
+        y-equal: "x",
+        {
+          plot.add(domain: (0, 2 * calc.pi), t => vector.scale((calc.sin(t), calc.cos(t)), r), samples: 100)
+        },
+      )
+
+      let p-pos = vector.add(o-pos, (-r * calc.cos(theta), r * calc.sin(theta)))
+      let p-pos1 = vector.add(o-pos, vector.scale((-1, calc.tan(theta)), r + 0.2))
+      let t-pos = vector.add(o-pos, vector.scale((1, -calc.tan(theta)), r))
+      let a-pos = vector.add(o-pos, (r, 0))
+      let m-pos = vector.add(o-pos, (-r * calc.cos(theta), 0))
+
+      draw.arc(vector.add(o-pos, (-theta-r, 0)), start: 180deg, stop: 180deg - theta, radius: theta-r, name: "angle")
+      draw.content((rel: (x: -0.2, y: 0.3), to: "angle"), [$alpha$])
+
+      draw.line(o-pos, p-pos1, name: "OP")
+      draw.content((rel: (x: -0.1, y: 0.2), to: "OP.end"), [$alpha$的终边])
+
+      draw.line(m-pos, p-pos, name: "MP")
+      draw.content((rel: (x: 0, y: 0.3), to: "MP.end"), $P$)
+      draw.content((rel: (x: 0, y: -0.3), to: "MP.start"), $M$)
+
+      draw.line(o-pos, t-pos, name: "OT", stroke: (dash: "dashed"))
+      draw.content((rel: (x: 0.1, y: -0.4), to: "OT.end"), $T$)
+
+      draw.line(a-pos, t-pos, name: "AT")
+      draw.content((rel: (x: 0.7, y: 0.3), to: "AT.start"), $A(1,0)$)
+
+      draw.content(vector.add(o-pos, (0, -2.4)), [(2)])
+    })
+  ],
+)
+
+因此可以得到：
+$
+  sin alpha < alpha < tan alpha, quad alpha in (0, pi/2)
+$
+
+特殊三角函数值表：
+
+#[
+  // #show math.equation.where(block: false): it => box(inset: (y: 8pt), it)
+
+  #table(
+    columns: (auto, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr),
+    align: center + horizon,
+    stroke: none,
+    // inset: 0.8em,
+    // inset: (0em, 1em),
+    table.hline(),
+    table.header(
+      [角$alpha$],
+      [$0^compose$],
+      [$30^compose$],
+      [$45^compose$],
+      [$60^compose$],
+      [$90^compose$],
+      [$120^compose$],
+      [$135^compose$],
+      [$150^compose$],
+      [$180^compose$],
+    ),
+    table.hline(stroke: 0.5pt),
+
+    table.cell(inset: (y: 15pt))[弧度],
+    [$0$],
+    [$display(pi/6)$],
+    [$display(pi/4)$],
+    [$display(pi/3)$],
+    [$display(pi/2)$],
+    [$display((2pi)/3)$],
+    [$display((3pi)/4)$],
+    [$display((5pi)/6)$],
+    [$display(pi)$],
+
+    table.cell(inset: (y: 15pt))[$sin alpha$],
+    [$0$],
+    [$display(1/2)$],
+    [$display(sqrt(2)/2)$],
+    [$display(sqrt(3)/2)$],
+    [$1$],
+    [$display(sqrt(3)/2)$],
+    [$display(sqrt(2)/2)$],
+    [$display(1/2)$],
+    [$0$],
+    
+    table.cell(inset: (y: 15pt))[$cos alpha$],
+    [$1$],
+    [$display(sqrt(3)/2)$],
+    [$display(sqrt(2)/2)$],
+    [$display(1/2)$],
+    [$0$],
+    [$display(-1/2)$],
+    [$display(-sqrt(2)/2)$],
+    [$display(-sqrt(3)/2)$],
+    [$-1$],
+
+    table.cell(inset: (y: 15pt))[$tan alpha$],
+    [$0$],
+    [$display(sqrt(3)/3)$],
+    [$1$],
+    [$display(sqrt(3))$],
+    [---],
+    [$display(-sqrt(3))$],
+    [$-1$],
+    [$display(-sqrt(3)/3)$],
+    [$0$],
+    table.hline(),
+  )
+]
+
 
 #example(
   question: [
     【2023 重庆南开中学月考】(多选) 已知角 $alpha$ 是第二象限角，则下列不等式一定成立的是（#h(3em)）
   ],
   choices: choices22(
-    [$sin alpha/2 < 0$],
-    [$tan alpha/2 > 0$],
-    [$sin alpha/2 > cos alpha/2$],
-    [$|sin alpha/2| > |cos alpha/2|$],
+    row-gutter: 2em,
+    [$display(sin alpha/2 < 0)$],
+    [$display(tan alpha/2 > 0)$],
+    [$display(sin alpha/2 > cos alpha/2)$],
+    [$display(abs(sin alpha/2) > abs(cos alpha/2))$],
   ),
   answer: [#tab *BD*],
 )
 
 #example(
   question: [
-    【2023江苏扬州高一期末】已知角 $alpha$ 的终边经过点 $(m, -5)$，$cos alpha = 12/13$，则 $tan alpha =$（#h(3em)）
+    【2023江苏扬州高一期末】已知角 $alpha$ 的终边经过点 $(m, -5)$，$cos alpha = display(12/13)$，则 $tan alpha =$（#h(3em)）
   ],
   choices: choices14(
-    [$plus.minus 12/5$],
-    [$plus.minus 5/12$],
-    [$-5/12$],
-    [$-12/5$],
+    [$display(plus.minus 12/5)$],
+    [$display(plus.minus 5/12)$],
+    [$display(-5/12)$],
+    [$display(-12/5)$],
   ),
   answer: [#tab *C*],
 )
+
+#pagebreak()
 
 = 三角诱导公式
 
