@@ -522,7 +522,7 @@ $
     [$display(sqrt(2)/2)$],
     [$display(1/2)$],
     [$0$],
-    
+
     table.cell(inset: (y: 15pt))[$cos alpha$],
     [$1$],
     [$display(sqrt(3)/2)$],
@@ -584,21 +584,20 @@ $
 
 == 同角公式
 
-#method("基本公式")[
-  $ sin^2 alpha + cos^2 alpha = 1, quad 1 + tan^2 alpha = 1/(cos^2 alpha), quad 1 + cot^2 alpha = 1/(sin^2 alpha) $
-  $ (sin alpha + cos alpha)^2 = 1 + 2 sin alpha cos alpha $
-  $ (sin alpha - cos alpha)^2 = 1 - 2 sin alpha cos alpha $
-]
+*基本公式*
+$ sin^2 alpha + cos^2 alpha = 1, quad 1 + tan^2 alpha = 1/(cos^2 alpha), quad 1 + cot^2 alpha = 1/(sin^2 alpha) $
+$ (sin alpha + cos alpha)^2 = 1 + 2 sin alpha cos alpha $
+$ (sin alpha - cos alpha)^2 = 1 - 2 sin alpha cos alpha $
 
-#method("诱导公式")[
-  - *口诀*：奇变偶不变，符号看象限。
-  $ sin(alpha + 2k pi) = sin alpha, quad cos(alpha + 2k pi) = cos alpha, quad tan(alpha + k pi) = tan alpha $
-  $ sin(-alpha) = -sin alpha, quad cos(-alpha) = cos alpha, quad tan(-alpha) = -tan alpha $
-  $ sin(pi + alpha) = -sin alpha, quad cos(pi + alpha) = -cos alpha, quad tan(pi + alpha) = tan alpha $
-  $ sin(pi - alpha) = sin alpha, quad cos(pi - alpha) = -cos alpha, quad tan(pi - alpha) = -tan alpha $
-  $ sin(pi/2 + alpha) = cos alpha, quad cos(pi/2 + alpha) = -sin alpha $
-  $ sin(pi/2 - alpha) = cos alpha, quad cos(pi/2 - alpha) = sin alpha $
-]
+
+*诱导公式*
+$ sin(alpha + 2k pi) = sin alpha, quad cos(alpha + 2k pi) = cos alpha, quad tan(alpha + k pi) = tan alpha $
+$ sin(-alpha) = -sin alpha, quad cos(-alpha) = cos alpha, quad tan(-alpha) = -tan alpha $
+$ sin(pi + alpha) = -sin alpha, quad cos(pi + alpha) = -cos alpha, quad tan(pi + alpha) = tan alpha $
+$ sin(pi - alpha) = sin alpha, quad cos(pi - alpha) = -cos alpha, quad tan(pi - alpha) = -tan alpha $
+$ sin(pi/2 + alpha) = cos alpha, quad cos(pi/2 + alpha) = -sin alpha $
+$ sin(pi/2 - alpha) = cos alpha, quad cos(pi/2 - alpha) = sin alpha $
+
 
 #example(
   question: [
